@@ -91,7 +91,7 @@ public class PlayerSkeleton {
 		
 		//Column Difference weights
 		//Used for feature 15 when calculating importance of individual column-pairs (otherwise why split calculate individual pairings?)
-		double[] colDiffWeights = new double[s.COLS-1];
+		double[] colDiffWeights = new double[State.COLS-1];
 		colDiffWeights[0] = 0.0;
 		colDiffWeights[1] = 0.0;
 		colDiffWeights[2] = 0.0;
