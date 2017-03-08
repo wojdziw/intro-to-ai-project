@@ -85,9 +85,9 @@ public class PlayerSkeleton {
 		 * TODO: maybe start our naming for features from 0 instead of 1? 
 		 * - that will make the naming of our weights more consistent
 		 */
-		weights[4] = 0.4;
-		weights[9] = 0.2;
-		weights[14] = 0.6;
+		weights[4] = 0.0;
+		weights[9] = 0.0;
+		weights[14] = 0.0;
 		
 		//Column Difference weights
 		//Used for feature 15 when calculating importance of individual column-pairs (otherwise why split calculate individual pairings?)
