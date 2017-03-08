@@ -16,7 +16,6 @@ public class PlayerSkeleton {
 	public static double calculateFeature5(State s) {
 		
 		double sumHeightDiff = 0;
-		
 		int[] top = s.getTop(); //holds the height of each column
 		
 		for (int i = 1; i<top.length; i++) {
@@ -56,9 +55,7 @@ public class PlayerSkeleton {
 	public static double calculateFeature15(State s, double[] colDiffWeights) {
 		
 		double weightedSumHeightDiff = 0;
-		
-		//top[] holds the height of each column
-		int[] top = s.getTop();
+		int[] top = s.getTop(); //holds the height of each column
 				
 		for (int i = 1; i<top.length; i++) {
 			weightedSumHeightDiff += colDiffWeights[i-1] * (top[i-1] - top[i]);
