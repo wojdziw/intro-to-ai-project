@@ -25,10 +25,21 @@ public class PlayerSkeleton {
 	}
 	
 	//FEATURE 10
-	//Well Count - The number of holes that are 3 or more blocks deep
+	//Well Count - The number of uncovered holes that are 3 or more blocks deep
 	public static int calculateFeature10(State s) {
-		int featureValue = 0;
-		return featureValue;
+		int numberOfWells = 0;
+		
+		//top[] holds the height of each column
+		int[] top = s.getTop();
+		
+		for (int i = 1; i<top.length; i++) {
+			int diff = Math.abs(top[i-1] - top[i]);
+			if (diff >= 3) {
+				numberOfWells++;
+			}
+		}
+		
+		return numberOfWells;
 	}
 	
 	//FEATURE 15
