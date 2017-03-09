@@ -1,12 +1,26 @@
+import java.util.Scanner;
 
 public class PlayerSkeleton {
 	
 	
 	/* Features
-	 * 
+	 * Woj: 3, 8, 13
 	 * Fei: 5, 10, 15
-	 * 
+	 *
 	 */
+
+	//FEATURE 3
+	//Maximum Height - The height of the tallest column on the game board
+	public static double calculateFeature3(State s) {
+		double maxHeight = 0;
+		int[] top = s.getTop(); //holds the height of each column
+
+		for (int height : top)
+			maxHeight = Math.max(maxHeight, height);
+
+		System.out.println("Maximum column height: "+maxHeight);
+		return maxHeight;
+	}
 	
 	//FEATURE 5
 	//Height differences - sum of the height differences between adjacent columns
@@ -21,8 +35,30 @@ public class PlayerSkeleton {
 		for (int i = 1; i<top.length; i++) {
 			sumHeightDiff += top[i-1] - top[i];
 		}
-		
+
+		System.out.println("Sum of the height differences: "+sumHeightDiff);
 		return sumHeightDiff;
+	}
+
+	//FEATURE 8
+	//Deepest Hole - The depth of the deepest hole (a width-1 hole with filled spots on both sides)
+	public static int calculateFeature8(State s) {
+		int[][] field = s.getField();
+
+		for(int r = 0; r < State.ROWS; r++) {
+			for(int c = 0; c < State.COLS; c++) {
+				int current = field[r][c];
+				int left = c==0 ? 1 : field[r][c-1];
+				int right = c==State.COLS-1 ? 1 : field[r][c+1];
+
+				if (current==0 && left!=0 && right!=0) {
+					System.out.println("Deepest hole row: "+r);
+					return r;
+				}
+			}
+		}
+
+		return 0;
 	}
 	
 	//FEATURE 10
@@ -41,6 +77,19 @@ public class PlayerSkeleton {
 		
 		System.out.println("Number of wells: "+numberOfWells);
 		return numberOfWells;
+	}
+
+	//FEATURE 13
+	//Column sum - Aggregated height of all the columns.
+	public static double calculateFeature13(State s) {
+		double columnSum = 0;
+		int[] top = s.getTop(); //holds the height of each column
+
+		for (int height : top)
+			columnSum += height;
+
+		System.out.println("Column sum: "+columnSum);
+		return columnSum;
 	}
 	
 	//FEATURE 15
@@ -67,9 +116,8 @@ public class PlayerSkeleton {
 	
 	//implement this function to have a working system
 	public int pickMove(State s, int[][] legalMoves) {
-		
-		return 0;
-		
+
+		return (int)(Math.random()*legalMoves.length);
 	}
 
 	public static double calculateUtility(State s) {
@@ -100,12 +148,15 @@ public class PlayerSkeleton {
 		colDiffWeights[8] = 0.0;
 		
 		//calculate feature values
+		double feature3 = calculateFeature3(s);
 		double feature5 = calculateFeature5(s);
+		double feature8 = calculateFeature8(s);
 		int feature10 = calculateFeature10(s);
+		double feature13 = calculateFeature13(s);
 		double feature15 = calculateFeature15(s, colDiffWeights);
 
 		//apply weights
-		double utility = weights[4]*feature5 + weights[9]*feature10 + weights[14]*feature15;
+		double utility = weights[2]*feature3 + weights[4]*feature5 + weights[7]*feature8 + weights[9]*feature10 + weights[12]*feature13 + weights[14]*feature15;
 		
 		return utility;
 	}
@@ -114,7 +165,10 @@ public class PlayerSkeleton {
 		State s = new State();
 		new TFrame(s);
 		PlayerSkeleton p = new PlayerSkeleton();
+		Scanner scanner = new Scanner(System.in);
 		while(!s.hasLost()) {
+			scanner.nextLine();
+
 			s.makeMove(p.pickMove(s,s.legalMoves()));
 			s.draw();
 			s.drawNext(0,0);
