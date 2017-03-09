@@ -19,7 +19,7 @@ public class PlayerSkeleton {
 		int[] top = s.getTop(); //holds the height of each column
 		
 		for (int i = 1; i<top.length; i++) {
-			sumHeightDiff += top[i-1] - top[i];
+			sumHeightDiff += Math.abs(top[i-1] - top[i]);
 		}
 		
 		return sumHeightDiff;
@@ -39,7 +39,6 @@ public class PlayerSkeleton {
 			}
 		}
 		
-		System.out.println("Number of wells: "+numberOfWells);
 		return numberOfWells;
 	}
 	
@@ -58,7 +57,7 @@ public class PlayerSkeleton {
 		int[] top = s.getTop(); //holds the height of each column
 				
 		for (int i = 1; i<top.length; i++) {
-			weightedSumHeightDiff += colDiffWeights[i-1] * (top[i-1] - top[i]);
+			weightedSumHeightDiff += colDiffWeights[i-1] * (Math.abs(top[i-1] - top[i]));
 		}
 		
 		return weightedSumHeightDiff;
@@ -103,7 +102,7 @@ public class PlayerSkeleton {
 		double feature5 = calculateFeature5(s);
 		int feature10 = calculateFeature10(s);
 		double feature15 = calculateFeature15(s, colDiffWeights);
-
+		
 		//apply weights
 		double utility = weights[4]*feature5 + weights[9]*feature10 + weights[14]*feature15;
 		
