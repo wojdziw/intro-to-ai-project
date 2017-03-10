@@ -15,6 +15,9 @@
     WOJ'S REMARKS:
         -> This works decently - manages to clear a few hundred rows each time
         -> Please tweak it however you want, it should get much much better as we implement more features
+        -> I'm thinking that a better fitness measure would be the number of rows cleared in a couple of trials
+           This would reduce the effect of random pieces as much as possible
+           That should be an easy fix in the "Individual" class
 
     WOJ'S DOUBTS:
         -> I was not quite sure how to initialize an Individual (weight vector)
@@ -85,6 +88,7 @@ public class GeneticAlgorithm {
         }
     }
 
+    // Tournament is picking a random sample of a chosen size and choosing the fittest out of that
     private static Individual tournamentSelection(Population pop) {
         // Create a tournament population
         Population tournament = new Population(tournamentSize, false, noFeatures, maxWeight);
@@ -94,8 +98,6 @@ public class GeneticAlgorithm {
         }
         return tournament.getFittest();
     }
-
-
 
     public static void main(String[] args) {
 
