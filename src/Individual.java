@@ -30,7 +30,7 @@ public class Individual {
         for (int i=0; i<n; i++)
             fitness += PlayerSkeleton.playAGame(weights, false, false);
 
-        return fitness;
+        return fitness/n;
     }
 
     public double[] getGenes() {
