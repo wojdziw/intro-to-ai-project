@@ -1,7 +1,7 @@
 public class Features {
     //Column Difference weights
     //Used for feature 15 when calculating importance of individual column-pairs (otherwise why split calculate individual pairings?)
-    private static final double[] colDiffWeights = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+    private static final double[] colDiffWeights = {1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
 
     //FEATURE 3
     //Maximum Height - The height of the tallest column on the game board

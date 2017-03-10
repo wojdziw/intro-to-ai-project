@@ -10,7 +10,7 @@ public class PlayerSkeleton {
 	 */
 	
 	//implement this function to have a working system
-	public int pickMove(State s, int[][] legalMoves) {
+	public int pickMove(State s, int[][] legalMoves, double[] weights) {
 
 		int bestMove = -1;
 		double bestUtility = Double.MIN_VALUE;
@@ -18,34 +18,34 @@ public class PlayerSkeleton {
 		int nextPiece = s.nextPiece;
 
 		for (int move=0; move<legalMoves.length; move++) {
+			// Calculate the next state and check if the game would have ended
+			SimulatedState simulatedState = UtilityHelpers.calculateSimulatedState(s, legalMoves[move], nextPiece);
 
-			int[][] newField = UtilityHelpers.calculateUpdatedField(UtilityHelpers.freshField(s), UtilityHelpers.freshTop(s), legalMoves[move], nextPiece);
-			int[] newTop = UtilityHelpers.calculateUpdatedTop(UtilityHelpers.freshField(s), UtilityHelpers.freshTop(s), legalMoves[move], nextPiece);
+			if (!simulatedState.wouldGameFinish()) {
+				// If not, simulate the move
+				int[][] newField = simulatedState.getField();
+				int[] newTop = simulatedState.getTop();
+				int rowsCleared = simulatedState.getRowsCleared();
 
-			double utility = calculateUtility(newField, newTop);
+				double utility = calculateUtility(newField, newTop, weights)+rowsCleared;
 
-			if (utility > bestUtility) {
-				bestMove = move;
-				bestUtility = utility;
+				if (utility > bestUtility) {
+					bestMove = move;
+					bestUtility = utility;
+				}
 			}
 		}
 
 		return bestMove;
 	}
 
-	public static double calculateUtility(int[][] field, int[] top) {
-		int noFeatures = 15;
-
-		double[] weights = new double[noFeatures];
+	public static double calculateUtility(int[][] field, int[] top, double[] weights) {
 		
 		//Set weights
 		/*
 		 * TODO: maybe start our naming for features from 0 instead of 1? 
 		 * - that will make the naming of our weights more consistent
 		 */
-		for (int i=0; i<weights.length; i++) {
-			weights[i] = 1.0;
-		}
 		
 		//calculate feature values
 		double feature3 = Features.calculateFeature3(top);
@@ -60,16 +60,25 @@ public class PlayerSkeleton {
 		
 		return utility;
 	}
-	
-	public static void main(String[] args) {
+
+	// Returns the score - number of rows cleared based on the strategy i.e. the weights of the utility function
+	public static int playAGame(double[] weights) {
 		State s = new State();
 		new TFrame(s);
 		PlayerSkeleton p = new PlayerSkeleton();
 		Scanner scanner = new Scanner(System.in);
-		while(!s.hasLost()) {
-			scanner.nextLine();
 
-			s.makeMove(p.pickMove(s,s.legalMoves()));
+		while(!s.hasLost()) {
+
+			// Uncomment if you want to click enter after every move
+			// scanner.nextLine();
+
+			int nextMove = p.pickMove(s,s.legalMoves(), weights);
+
+			if (nextMove==-1)
+				break;
+
+			s.makeMove(nextMove);
 			s.draw();
 			s.drawNext(0,0);
 			try {
@@ -78,9 +87,26 @@ public class PlayerSkeleton {
 				e.printStackTrace();
 			}
 
-			System.out.println("New utility is: " + calculateUtility(s.getField(), s.getTop()));
+			System.out.println("New utility is: " + calculateUtility(s.getField(), s.getTop(), weights));
 		}
-		System.out.println("You have completed "+s.getRowsCleared()+" rows.");
+		scanner.close();
+
+		return s.getRowsCleared();
+	}
+
+	public static void main(String[] args) {
+
+		// Initialise the feature weight to something
+		int noFeatures = 15;
+		double[] weights = new double[noFeatures];
+		for (int i=0; i<weights.length; i++) {
+			weights[i] = 1.0;
+		}
+
+		// Play one game
+		int rowsCleared = playAGame(weights);
+
+		System.out.println("You have completed "+rowsCleared+" rows.");
 	}
 	
 	//TESTING METHOD
