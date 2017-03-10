@@ -9,7 +9,6 @@ public class PlayerSkeleton {
 	 *
 	 */
 	
-	//implement this function to have a working system
 	public int pickMove(State s, int[][] legalMoves, double[] weights) {
 
 		int bestMove = -1;
@@ -29,6 +28,7 @@ public class PlayerSkeleton {
 
 				double utility = calculateUtility(newField, newTop, weights)+rowsCleared;
 
+				// Find the move maximizing the utility
 				if (utility > bestUtility) {
 					bestMove = move;
 					bestUtility = utility;
@@ -55,13 +55,13 @@ public class PlayerSkeleton {
 		double feature13 = Features.calculateFeature13(top);
 		double feature15 = Features.calculateFeature15(top);
 		
-		//apply weights
+		// apply weights
 		double utility = weights[2]*feature3 + weights[4]*feature5 + weights[7]*feature8 + weights[9]*feature10 + weights[12]*feature13 + weights[14]*feature15;
 		
 		return utility;
 	}
 
-	// Returns the score - number of rows cleared based on the strategy i.e. the weights of the utility function
+	// Returns the score (number of rows cleared) based on the strategy i.e. the weights of the utility function
 	public static int playAGame(double[] weights) {
 		State s = new State();
 		new TFrame(s);

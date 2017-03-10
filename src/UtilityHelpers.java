@@ -17,6 +17,8 @@ public class UtilityHelpers {
         return newTop;
     }
 
+    // simulates the next state based on the move
+    // puts it in the SimulatedState class as we can't mutate the actual state
     public static SimulatedState calculateSimulatedState(State s, int[] move, int nextPiece) {
 
         int[][] field = UtilityHelpers.freshField(s);
