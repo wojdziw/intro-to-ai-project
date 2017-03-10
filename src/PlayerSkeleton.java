@@ -43,8 +43,9 @@ public class PlayerSkeleton {
 		 * TODO: maybe start our naming for features from 0 instead of 1? 
 		 * - that will make the naming of our weights more consistent
 		 */
-		for (int i=0; i<weights.length; i++)
+		for (int i=0; i<weights.length; i++) {
 			weights[i] = 1.0;
+		}
 		
 		//calculate feature values
 		double feature3 = Features.calculateFeature3(top);
