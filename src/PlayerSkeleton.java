@@ -1,18 +1,20 @@
+/*
+
+The most recent version of stuff as I commit it (Friday 11/03) is in the GeneticAlgorithm file
+Here you can test the working of the Utility Function calculator and the move chooser
+
+LOOK AT LINE 104 FOR TESTING YOUR FUNCTIONS
+
+*/
+
 import java.util.Scanner;
 
 public class PlayerSkeleton {
 	
-	
-	/* Features
-	 * Woj: 3, 8, 13
-	 * Fei: 5, 10, 15
-	 *
-	 */
-	
 	public int pickMove(State s, int[][] legalMoves, double[] weights) {
 
-		int bestMove = -1;
-		double bestUtility = Double.MIN_VALUE;
+		int bestMove = 0;
+		double bestUtility = -Double.MAX_VALUE;
 
 		int nextPiece = s.nextPiece;
 
@@ -21,6 +23,7 @@ public class PlayerSkeleton {
 			SimulatedState simulatedState = UtilityHelpers.calculateSimulatedState(s, legalMoves[move], nextPiece);
 
 			if (!simulatedState.wouldGameFinish()) {
+
 				// If not, simulate the move
 				int[][] newField = simulatedState.getField();
 				int[] newTop = simulatedState.getTop();
@@ -41,53 +44,74 @@ public class PlayerSkeleton {
 
 	public static double calculateUtility(int[][] field, int[] top, double[] weights) {
 		
-		//Set weights
-		/*
-		 * TODO: maybe start our naming for features from 0 instead of 1? 
-		 * - that will make the naming of our weights more consistent
-		 */
-		
 		//calculate feature values
-		double feature3 = Features.calculateFeature3(top);
-		double feature5 = Features.calculateFeature5(top);
-		double feature8 = Features.calculateFeature8(field);
-		int feature10 = Features.calculateFeature10(top);
-		double feature13 = Features.calculateFeature13(top);
-		double feature15 = Features.calculateFeature15(top);
+		double feature1 = Features.calculateFeature1(top, field);
+		double feature2 = Features.calculateFeature2(top, field);
+		double feature3 = Features.calculateFeature3(top, field);
+		double feature4 = Features.calculateFeature4(top, field);
+		double feature5 = Features.calculateFeature5(top, field);
+		double feature6 = Features.calculateFeature6(top, field);
+		double feature7 = Features.calculateFeature7(top, field);
+		double feature8 = Features.calculateFeature8(top, field);
+		double feature9 = Features.calculateFeature9(top, field);
+		double feature10 = Features.calculateFeature10(top, field);
+		double feature11 = Features.calculateFeature11(top, field);
+		double feature12 = Features.calculateFeature12(top, field);
+		double feature13 = Features.calculateFeature13(top, field);
+		double feature14 = Features.calculateFeature14(top, field);
+		double feature15 = Features.calculateFeature15(top, field);
+
 		
 		// apply weights
-		double utility = weights[2]*feature3 + weights[4]*feature5 + weights[7]*feature8 + weights[9]*feature10 + weights[12]*feature13 + weights[14]*feature15;
-		
-		return utility;
+		return weights[0]
+				+ weights[1]*feature1
+				+ weights[2]*feature2
+				+ weights[3]*feature3
+				+ weights[4]*feature4
+				+ weights[5]*feature5
+				+ weights[6]*feature6
+				+ weights[7]*feature7
+				+ weights[8]*feature8
+				+ weights[9]*feature9
+				+ weights[10]*feature10
+				+ weights[11]*feature11
+				+ weights[12]*feature12
+				+ weights[13]*feature13
+				+ weights[14]*feature14
+				+ weights[15]*feature15;
 	}
 
 	// Returns the score (number of rows cleared) based on the strategy i.e. the weights of the utility function
-	public static int playAGame(double[] weights) {
+	public static int playAGame(double[] weights, boolean drawing, boolean waitForEnter) {
 		State s = new State();
-		new TFrame(s);
+		if (drawing)
+			new TFrame(s);
 		PlayerSkeleton p = new PlayerSkeleton();
+
+		// In case we want to use enter to proceed with blocks (determined by the waitForEnter input)
 		Scanner scanner = new Scanner(System.in);
 
 		while(!s.hasLost()) {
 
-			// Uncomment if you want to click enter after every move
-			// scanner.nextLine();
+			if (waitForEnter)
+				scanner.nextLine();
 
 			int nextMove = p.pickMove(s,s.legalMoves(), weights);
 
-			if (nextMove==-1)
-				break;
-
 			s.makeMove(nextMove);
-			s.draw();
-			s.drawNext(0,0);
-			try {
-				Thread.sleep(300);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 
-			System.out.println("New utility is: " + calculateUtility(s.getField(), s.getTop(), weights));
+			// YOU CAN TEST YOUR FEATURES HERE
+			//System.out.println("Feature1's value is: " + Features.calculateFeature1(s.getTop(), s.getField()));
+
+			if (drawing) {
+				try {
+					Thread.sleep(10);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				s.draw();
+				s.drawNext(0,0);
+			}
 		}
 		scanner.close();
 
@@ -97,41 +121,22 @@ public class PlayerSkeleton {
 	public static void main(String[] args) {
 
 		// Initialise the feature weight to something
+		// we have noFeatures+1 vector to have the extra bias term
+
+		// Use line 104 to test your features
+
 		int noFeatures = 15;
-		double[] weights = new double[noFeatures];
+		double maxWeight = 3;
+		double[] weights = new double[noFeatures+1];
 		for (int i=0; i<weights.length; i++) {
-			weights[i] = 1.0;
+			int plusMinus = Math.random() > 0.5 ? -1 : 1;
+			weights[i] = plusMinus * maxWeight * Math.random();
 		}
 
 		// Play one game
-		int rowsCleared = playAGame(weights);
+		int rowsCleared = playAGame(weights, true, false);
 
 		System.out.println("You have completed "+rowsCleared+" rows.");
 	}
-	
-	//TESTING METHOD
-	//prints out the values of s.top (height of each column) and s.field (game board)
-	public void testPrintBoard(State s) {
-		
-		int[] top = s.getTop();
-		int[][] field = s.getField();
-		
-		System.out.println("Printing Top:");
-		for (int i = 0; i<top.length; i++) {
-			System.out.print(top[i] + " ");
-		}
-		System.out.println();
-		
-		System.out.println("Printing field:");
-		for (int i = 0; i<field.length; i++) {
-			for(int j = 0; j<field[i].length; j++) {
-				System.out.print(field[i][j] + " ");
-			}
-			System.out.println();
-		}
-		System.out.println();
-		
-	}
-	
 	
 }

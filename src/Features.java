@@ -3,9 +3,19 @@ public class Features {
     //Used for feature 15 when calculating importance of individual column-pairs (otherwise why split calculate individual pairings?)
     private static final double[] colDiffWeights = {1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
 
+    // FEATURE 1
+    public static double calculateFeature1(int[] top, int[][] field) {
+        return 0;
+    }
+
+    // FEATURE 2
+    public static double calculateFeature2(int[] top, int[][] field) {
+        return 0;
+    }
+
     //FEATURE 3
     //Maximum Height - The height of the tallest column on the game board
-    public static double calculateFeature3(int[] top) {
+    public static double calculateFeature3(int[] top, int[][] field) {
         double maxHeight = 0;
 
         for (int height : top)
@@ -14,12 +24,17 @@ public class Features {
         return maxHeight;
     }
 
+    // FEATURE 4
+    public static double calculateFeature4(int[] top, int[][] field) {
+        return 0;
+    }
+
     //FEATURE 5
     //Height differences - sum of the height differences between adjacent columns
 	/*
 	 * TODO: can we remove this feature and just keep feature 15 instead?
 	 */
-    public static double calculateFeature5(int[] top) {
+    public static double calculateFeature5(int[] top, int[][] field) {
 
         double sumHeightDiff = 0;
 
@@ -30,9 +45,19 @@ public class Features {
         return sumHeightDiff;
     }
 
+    // FEATURE 6
+    public static double calculateFeature6(int[] top, int[][] field) {
+        return 0;
+    }
+
+    // FEATURE 7
+    public static double calculateFeature7(int[] top, int[][] field) {
+        return 0;
+    }
+
     //FEATURE 8
     //Deepest Hole - The depth of the deepest hole (a width-1 hole with filled spots on both sides)
-    public static int calculateFeature8(int[][] field) {
+    public static int calculateFeature8(int[] top, int[][] field) {
 
         for(int r = 0; r < State.ROWS; r++) {
             for(int c = 0; c < State.COLS; c++) {
@@ -48,11 +73,16 @@ public class Features {
         return 0;
     }
 
+    // FEATURE 9
+    public static double calculateFeature9(int[] top, int[][] field) {
+        return 0;
+    }
+
     //FEATURE 10
     //Well Count - The number of uncovered holes that are 3 or more blocks deep
-    public static int calculateFeature10(int[] top) {
+    public static double calculateFeature10(int[] top, int[][] field) {
 
-        int numberOfWells = 0;
+        double numberOfWells = 0;
 
         for (int i = 1; i<top.length; i++) {
             int diff = Math.abs(top[i-1] - top[i]);
@@ -64,15 +94,30 @@ public class Features {
         return numberOfWells;
     }
 
+    // FEATURE 11
+    public static double calculateFeature11(int[] top, int[][] field) {
+        return 0;
+    }
+
+    // FEATURE 12
+    public static double calculateFeature12(int[] top, int[][] field) {
+        return 0;
+    }
+
     //FEATURE 13
     //Column sum - Aggregated height of all the columns.
-    public static double calculateFeature13(int[] top) {
+    public static double calculateFeature13(int[] top, int[][] field) {
         double columnSum = 0;
 
         for (int height : top)
             columnSum += height;
 
         return columnSum;
+    }
+
+    // FEATURE 14
+    public static double calculateFeature14(int[] top, int[][] field) {
+        return 0;
     }
 
     //FEATURE 15
@@ -84,7 +129,7 @@ public class Features {
 	 * This way we can get rid of feature 5, and instead just have this weighted version of column heights instead
 	 * An additional weight for the sum of column heights can still be added in calculateUtility()
 	 */
-    public static double calculateFeature15(int[] top) {
+    public static double calculateFeature15(int[] top, int[][] field) {
 
         double weightedSumHeightDiff = 0;
 
