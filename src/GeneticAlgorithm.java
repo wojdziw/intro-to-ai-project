@@ -14,6 +14,7 @@
 
     WOJ'S REMARKS:
         -> This works decently - manages to clear a few hundred rows each time
+           Update - a few thousand rows clared each time when the fitness is averaged over several trials
         -> Please tweak it however you want, it should get much much better as we implement more features
 
     WOJ'S DOUBTS:
