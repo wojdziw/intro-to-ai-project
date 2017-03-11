@@ -4,8 +4,18 @@ public class Features {
     private static final double[] colDiffWeights = {1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
 
     // FEATURE 1
+    // Filled Spot count - The number of filled spots on the game board
     public static double calculateFeature1(int[] top, int[][] field) {
-        return 0;
+        int sum = 0;
+
+        for (int[] row : field ){
+            for (int value : row){
+                if (value > 0)
+                    sum++;
+            }
+        }
+
+        return sum;
     }
 
     // FEATURE 2
@@ -46,8 +56,18 @@ public class Features {
     }
 
     // FEATURE 6
+    // Max height difference
     public static double calculateFeature6(int[] top, int[][] field) {
-        return 0;
+        double maxHeightDiff = 0;
+        double diff;
+
+        for (int i = 1; i<top.length; i++) {
+            diff = Math.abs(top[i-1] - top[i]);
+            if(diff > maxHeightDiff)
+                maxHeightDiff = diff;
+        }
+
+        return maxHeightDiff;
     }
 
     // FEATURE 7
@@ -95,8 +115,23 @@ public class Features {
     }
 
     // FEATURE 11
+    // Sum of all well depths (Well = width-1 or not?)
+    // What about when they are not in the top? - We should define wells from scratch!
     public static double calculateFeature11(int[] top, int[][] field) {
-        return 0;
+
+        double sumOfWells = 0;
+        int diff1, diff2;
+
+        for (int i = 0; i<top.length; i++) {
+            diff1 = (i == 0 ) ? (State.ROWS - top[i]) : Math.abs(top[i-1] - top[i]);
+            diff2 = (i == top.length-1 ) ? (State.ROWS - top[i]) : Math.abs(top[i+1] - top[i]);
+
+            if (diff1 >= 3 && diff2 >= 3) {
+                sumOfWells++;
+            }
+        }
+
+        return sumOfWells;
     }
 
     // FEATURE 12
