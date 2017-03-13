@@ -22,15 +22,15 @@ public class Features {
     // Weighted Filled Spot Count - Similar to the above, but spots in row i counts i times as much as blocks in row 1 
     public static double calculateFeature2(int[] top, int[][] field) {
     	int sum = 0;
-    	int i = 1
+    	int i = 1;
     	for (int[] row : field ){
     		for (int value : row){
     			if (value > 0)
-    				sum+= 1*i;
+    				sum+= 1*i; // Just add i!? (Rewrite as a for(int i ... ))
     		}
-    		i ++
+    		i++;
     	}
-    	return sum
+    	return sum;
     }
 
     //FEATURE 3
@@ -45,6 +45,7 @@ public class Features {
     }
 
     // FEATURE 4
+
     public static double calculateFeature4(int[] top, int[][] field) {
         return 0;
     }
@@ -85,12 +86,12 @@ public class Features {
     public static double calculateFeature7(int[] top, int[][] field) {
         int holes = 0;
         
-        for(int i = 0; i<ROWS-1; i++){
-        	for(int j = 0;j<COLS; j++){
-        		for(int k = i+1; k<ROWS; k++){
+        for(int i = 0; i<State.ROWS-1; i++){
+        	for(int j = 0;j<State.COLS; j++){
+        		for(int k = i+1; k<State.ROWS; k++){
         			if(field[i][j] == 0 && field[k][j]>0){
         				holes++;
-        				k=ROWS-1;
+        				k=State.ROWS-1;
         			}
         		}
         	}
@@ -162,11 +163,11 @@ public class Features {
     // Game Status - Based on the game status, 1 for a losing state, 0 otherwise
     public static double calculateFeature12(int[] top, int[][] field) {
         for(int i : top){
-        	if (i >= COLS){
-        		return 1
+        	if (i >= State.COLS){
+        		return 1;
         	}
         }
-        return 0
+        return 0;
         	
     }
 
