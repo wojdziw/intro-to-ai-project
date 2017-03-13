@@ -1,3 +1,5 @@
+import static java.lang.Math.min;
+
 public class Features {
     //Column Difference weights
     //Used for feature 15 when calculating importance of individual column-pairs (otherwise why split calculate individual pairings?)
@@ -88,12 +90,10 @@ public class Features {
         
         for(int i = 0; i<State.ROWS-1; i++){
         	for(int j = 0;j<State.COLS; j++){
-        		for(int k = i+1; k<State.ROWS; k++){
-        			if(field[i][j] == 0 && field[k][j]>0){
-        				holes++;
-        				k=State.ROWS-1;
-        			}
-        		}
+                if (field[i][j]==0 && top[j] > i)
+                {
+                    holes++;
+                }
         	}
         }
         
@@ -101,16 +101,12 @@ public class Features {
     }
 
     //FEATURE 8
-    //Deepest Hole - The depth of the deepest hole (a width-1 hole with filled spots on both sides)
+    //Deepest Hole - The depth of the deepest hole (an unfillable spot = has at least a block above it)
     public static int calculateFeature8(int[] top, int[][] field) {
 
         for(int r = 0; r < State.ROWS; r++) {
             for(int c = 0; c < State.COLS; c++) {
-                int current = field[r][c];
-                int left = c==0 ? 1 : field[r][c-1];
-                int right = c==State.COLS-1 ? 1 : field[r][c+1];
-
-                if (current==0 && left!=0 && right!=0)
+                if (field[r][c]==0 && top[c] > r)
                     return r;
             }
         }
@@ -140,8 +136,7 @@ public class Features {
     }
 
     // FEATURE 11
-    // Sum of all well depths (Well = width-1 or not?)
-    // What about when they are not in the top? - We should define wells from scratch!
+    // Sum of all well depths
     public static double calculateFeature11(int[] top, int[][] field) {
 
         double sumOfWells = 0;
@@ -152,7 +147,7 @@ public class Features {
             diff2 = (i == top.length-1 ) ? (State.ROWS - top[i]) : Math.abs(top[i+1] - top[i]);
 
             if (diff1 >= 3 && diff2 >= 3) {
-                sumOfWells++;
+                sumOfWells += min(diff1, diff2);
             }
         }
 

@@ -101,9 +101,9 @@ public class PlayerSkeleton {
 			s.makeMove(nextMove);
 
 			// YOU CAN TEST YOUR FEATURES HERE
-			//System.out.println("Feature1's value is: " + Features.calculateFeature1(s.getTop(), s.getField()));
-			//System.out.println("Feature6's value is: " + Features.calculateFeature6(s.getTop(), s.getField()));
-			//System.out.println("Feature11's value is: " + Features.calculateFeature11(s.getTop(), s.getField()));
+			System.out.println("Feature1's value is: " + Features.calculateFeature1(s.getTop(), s.getField()));
+			System.out.println("Feature6's value is: " + Features.calculateFeature6(s.getTop(), s.getField()));
+			System.out.println("Feature11's value is: " + Features.calculateFeature11(s.getTop(), s.getField()));
 
 			if (drawing) {
 				try {
@@ -136,7 +136,7 @@ public class PlayerSkeleton {
 		}
 
 		// Play one game
-		int rowsCleared = playAGame(weights, true, false);
+		int rowsCleared = playAGame(weights, true, true);
 
 		System.out.println("You have completed "+rowsCleared+" rows.");
 	}
