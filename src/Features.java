@@ -23,10 +23,10 @@ public class Features {
     public static double calculateFeature2(int[] top, int[][] field) {
     	int sum = 0;
     	int i = 1;
-    	for (int[] row : field ){
-    		for (int value : row){
-    			if (value > 0)
-    				sum+= 1*i; // Just add i!? (Rewrite as a for(int i ... ))
+    	for (int i = 0; i < State.ROWS; i++){
+    		for (int j = 0; j < State.COLS; j++){
+    			if (field[i][j]> 0)
+    				sum+= i;
     		}
     		i++;
     	}
