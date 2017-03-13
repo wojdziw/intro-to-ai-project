@@ -10,11 +10,12 @@
     6. Repeat!
 
     Population - many different weight vectors
+    Individual - one weight vector
     Fitness - number of cleared rows when a game is played
 
     WOJ'S REMARKS:
         -> This works decently - manages to clear a few hundred rows each time
-           Update - a few hundred rows clared each time when the fitness is averaged over several trials
+           Update - a few hundred rows cleared each time when the fitness is averaged over several trials
         -> Please tweak it however you want, it should get much much better as we implement more features
 
     WOJ'S DOUBTS:
@@ -29,8 +30,8 @@ public class GeneticAlgorithm {
 
     private static final int noFeatures = 15;
     private static final double maxWeight = 3;
-    private static final int populationSize = 50;
-    private static final int noGenerations = 10;
+    private static final int populationSize = 15;
+    private static final int noGenerations = 5;
 
     private static final double uniformRate = 0.5;
     private static final double mutationRate = 0.015;
@@ -52,6 +53,7 @@ public class GeneticAlgorithm {
 
             Individual newIndiv = crossover(indiv1, indiv2);
             newPopulation.setIndividual(i, newIndiv);
+            // Remove added individual from population?
         }
 
         // Mutate population
