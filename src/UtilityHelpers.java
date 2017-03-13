@@ -1,5 +1,5 @@
 public class UtilityHelpers {
-
+	
     public static int[][] freshField(State s) {
         int[][] field = s.getField();
         int[][] newField = new int[field.length][field[0].length];
