@@ -65,7 +65,7 @@ public class PlayerSkeleton {
 
 		double[] columnHeightWeights = Arrays.copyOfRange(weights, 14, (14 + field[0].length));
 		double[] colDiffWeights = Arrays.copyOfRange(weights, (14 + field[0].length + 1), (14 + 2*field[0].length));
-		
+
 		// apply weights
 		return weights[0]
 				+ weights[1]*feature1

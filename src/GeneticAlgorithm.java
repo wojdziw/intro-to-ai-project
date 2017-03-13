@@ -100,16 +100,26 @@ public class GeneticAlgorithm {
     }
 
     public static void main(String[] args) {
+        double[][] generationsWeights = new double[noGenerations][noFeatures];
+        int[][] generationsResults =  new int[noGenerations][2];
 
         Population myPop = new Population(populationSize, true, noFeatures, maxWeight);
         for (int generation = 0; generation< noGenerations; generation++) {
 
-            System.out.println("Generation: " + generation + " Fittest: " + myPop.getFittest().getFitness());
-            System.out.println("   second calculation: " + myPop.getFittest().getFitness());
+            int fittness=myPop.getFittest().getFitness();
+            generationsResults[generation][0] = fittness;
+            System.out.println("Generation: " + generation + " Fittest: " + fittness);
+            fittness=myPop.getFittest().getFitness();
+            generationsResults[generation][1] = fittness;
+            System.out.println("   second calculation: " + fittness);
             System.out.println("- - - - - - - - - - - - - -");
-
+            myPop.getFittest().printGenes();
+            generationsWeights[generation]=myPop.getFittest().getGenes();
             myPop = evolvePopulation(myPop);
         }
+
+        System.out.println("Writing over results and weights to geneticRun.csv");
+        saveToCsv.writeCsvFile("geneticRun.csv", generationsResults, generationsWeights);
 
         int rowsCleared = PlayerSkeleton.playAGame(myPop.getFittest().getGenes(), true, false);
         System.out.println("Rows cleared: " + rowsCleared);

@@ -38,8 +38,15 @@ public class Individual {
     }
 
     public void printGenes() {
-        for (double gene : getGenes())
-            System.out.print(gene + " ");
+        int i = 0;
+        for (double gene : getGenes()) {
+            System.out.print(i + ": " + String.format("%.2f", gene) + " ");
+            i++;
+            if (i == 14) {
+                System.out.println();
+            }
+        }
         System.out.println("");
     }
+
 }
