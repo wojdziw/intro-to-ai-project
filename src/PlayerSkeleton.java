@@ -7,6 +7,7 @@ LOOK AT LINE 104 FOR TESTING YOUR FUNCTIONS
 
 */
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class PlayerSkeleton {
@@ -58,10 +59,10 @@ public class PlayerSkeleton {
 		double feature11 = Features.calculateFeature11(top, field);
 		double feature12 = Features.calculateFeature12(top, field);
 		double feature13 = Features.calculateFeature13(top, field);
-		double feature14 = Features.calculateFeature14(top, field);
-		double feature15 = Features.calculateFeature15(top, field);
+		double[] feature14 = Features.calculateFeature14(top, field);
 
-		
+
+		double[] columnHeightWeights = Arrays.copyOfRange(weights, 14, (14+ field[0].length));
 		// apply weights
 		return weights[0]
 				+ weights[1]*feature1
@@ -77,8 +78,8 @@ public class PlayerSkeleton {
 				+ weights[11]*feature11
 				+ weights[12]*feature12
 				+ weights[13]*feature13
-				+ weights[14]*feature14
-				+ weights[15]*feature15;
+				+ Features.dotProduct(columnHeightWeights, feature14);
+
 	}
 
 	// Returns the score (number of rows cleared) based on the strategy i.e. the weights of the utility function
@@ -95,8 +96,7 @@ public class PlayerSkeleton {
 
 			if (waitForEnter)
 				scanner.nextLine();
-
-			int nextMove = p.pickMove(s,s.legalMoves(), weights);
+            int nextMove = p.pickMove(s,s.legalMoves(), weights);
 
 			s.makeMove(nextMove);
 
@@ -128,8 +128,9 @@ public class PlayerSkeleton {
 		// Use line 104 to test your features
 
 		int noFeatures = 15;
+		int noColumns = State.COLS;
 		double maxWeight = 3;
-		double[] weights = new double[noFeatures+1];
+		double[] weights = new double[noFeatures+1+(noColumns-1)];
 		for (int i=0; i<weights.length; i++) {
 			int plusMinus = Math.random() > 0.5 ? -1 : 1;
 			weights[i] = plusMinus * maxWeight * Math.random();

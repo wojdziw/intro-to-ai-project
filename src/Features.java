@@ -19,16 +19,14 @@ public class Features {
     }
 
     // FEATURE 2
-    // Weighted Filled Spot Count - Similar to the above, but spots in row i counts i times as much as blocks in row 1 
     public static double calculateFeature2(int[] top, int[][] field) {
     	int sum = 0;
-    	int i = 1;
     	for (int i = 0; i < State.ROWS; i++){
     		for (int j = 0; j < State.COLS; j++){
-    			if (field[i][j]> 0)
+    			if (field[i][j]> 0){
     				sum+= i;
+    			}
     		}
-    		i++;
     	}
     	return sum;
     }
@@ -44,26 +42,36 @@ public class Features {
         return maxHeight;
     }
 
-    // FEATURE 4
-
-    public static double calculateFeature4(int[] top, int[][] field) {
-        return 0;
+    //FEATURE 4
+    // Min heights - minimum height of the boards columns, Min(ColumnHeight[0], .. ,ColumnHeight[n])
+    public static Integer calculateFeature4(int[] top, int[][] field) {
+        Integer minHeight = field.length;  // sets the minvalue to the maxvalue in the beginning
+        for (int columnHeight: top) {
+            if (columnHeight < minHeight) {
+                minHeight = columnHeight;
+            }
+        }
+        return minHeight;
     }
 
     //FEATURE 5
-    //Height differences - sum of the height differences between adjacent columns
+    //Column difference - height difference between each pair of adjacent columns
 	/*
-	 * TODO: can we remove this feature and just keep feature 15 instead?
+	 * TODO: do we really need both sum height differences and individual column differences?
+	 * Instead of returning 15 distinct values, I have applied the individual column weights directly in this function, and opted to return the sum
+	 * i.e. This function will return the weighted sum of column weights (instead of 9 unique column height differences)
+	 * This way we can get rid of feature 5, and instead just have this weighted version of column heights instead
+	 * An additional weight for the sum of column heights can still be added in calculateUtility()
 	 */
     public static double calculateFeature5(int[] top, int[][] field) {
 
-        double sumHeightDiff = 0;
+        double weightedSumHeightDiff = 0;
 
         for (int i = 1; i<top.length; i++) {
-            sumHeightDiff += Math.abs(top[i-1] - top[i]);
+            weightedSumHeightDiff += colDiffWeights[i-1] * (Math.abs(top[i-1] - top[i]));
         }
 
-        return sumHeightDiff;
+        return weightedSumHeightDiff;
     }
 
     // FEATURE 6
@@ -82,21 +90,23 @@ public class Features {
     }
 
     // FEATURE 7
-    //Hole Count - The number of unfilled spots that have at least one filled spot above them
+    // Hole Count - The number of unfilled spots that have at least one filled spot above them
     public static double calculateFeature7(int[] top, int[][] field) {
         int holes = 0;
-        
+
         for(int i = 0; i<State.ROWS-1; i++){
         	for(int j = 0;j<State.COLS; j++){
-        		for(int k = i+1; k<State.ROWS; k++){
-        			if(field[i][j] == 0 && field[k][j]>0){
-        				holes++;
-        				k=State.ROWS-1;
-        			}
+        		if(field[i][j]==0){
+	        		for(int k = i+1; k<State.ROWS; k++){
+	        			if(field[i][j] == 0 && field[k][j]>0){
+	        				holes++;
+	        				k=State.ROWS-1;
+	        			}
+	        		}
         		}
         	}
         }
-        
+
         return holes;
     }
 
@@ -119,24 +129,62 @@ public class Features {
     }
 
     // FEATURE 9
+    //Sum of all Holes - The total number of cells of all the holes on the game board
+    //"number of islands " approach
     public static double calculateFeature9(int[] top, int[][] field) {
-        return 0;
+        boolean [][] visited = new boolean[State.ROWS][State.COLS]; //2d array of false values
+        int clusternumber =0; // we start at cluster #1
+        for (int row = 0; row<field.length; row++){
+            for (int col=0; col<field[0].length; col++){
+             if(isSafe(field, row, col,visited, top))   {
+                 clusternumber++;
+                 localClusterSearch(field, row, col, visited, top);
+             }
+            }
+        }
+        return clusternumber;
+    }
+
+    private static void localClusterSearch(int[][] field, int row, int col, boolean[][] visited, int[] top) {
+
+            //the we try to visit each of the four adjacent cells that are above, below, left, right.
+            int rowNbr[] = {1,-1,0,0};
+            int colNbr[] = {0,0,1,-1};
+            // Mark this cell as visited
+            visited[row][col] = true;
+            // Recur for all connected neighbours
+            for (int k = 0; k < rowNbr.length; ++k){
+                if (isSafe(field, row + rowNbr[k], col + colNbr[k], visited, top)){
+                    localClusterSearch(field, row + rowNbr[k], col + colNbr[k], visited, top);
+                }
+            }
+    }
+
+    private static boolean isSafe(int field[][], int row, int col,
+                   boolean visited[][], int[] top) {
+        //topmost row is only a validation row for some lose function....
+        if ((row >= 0) && (row < field.length-1) && (col >= 0) && (col < field[0].length) && row<top[col]){
+            return (field[row][col]==0 && !visited[row][col]);
+        }
+            return false;
     }
 
     //FEATURE 10
     //Well Count - The number of uncovered holes that are 3 or more blocks deep
     public static double calculateFeature10(int[] top, int[][] field) {
 
-        double numberOfWells = 0;
+    	int numberOfWells = 0;
 
-        for (int i = 1; i<top.length; i++) {
-            int diff = Math.abs(top[i-1] - top[i]);
-            if (diff >= 3) {
-                numberOfWells++;
-            }
-        }
-
-        return numberOfWells;
+    	for (int i = 1; i<top.length; i++) {
+    		
+    		if (((i-1) == 0) || ((top[i-1] - top[i]) >= 3)) {
+    			if (i == (top.length-1) || ((top[i] - top[i+1]) <= -3)) {
+    				numberOfWells++;
+    			}
+    		}
+    	}
+    	
+    	return numberOfWells;
     }
 
     // FEATURE 11
@@ -168,7 +216,7 @@ public class Features {
         	}
         }
         return 0;
-        	
+
     }
 
     //FEATURE 13
@@ -182,28 +230,23 @@ public class Features {
         return columnSum;
     }
 
-    // FEATURE 14
-    public static double calculateFeature14(int[] top, int[][] field) {
-        return 0;
-    }
-
-    //FEATURE 15
-    //Column difference - height difference between each pair of adjacent columns
-	/*
-	 * TODO: do we really need both sum height differences and individual column differences?
-	 * Instead of returning 15 distinct values, I have applied the individual column weights directly in this function, and opted to return the sum
-	 * i.e. This function will return the weighted sum of column weights (instead of 9 unique column height differences)
-	 * This way we can get rid of feature 5, and instead just have this weighted version of column heights instead
-	 * An additional weight for the sum of column heights can still be added in calculateUtility()
-	 */
-    public static double calculateFeature15(int[] top, int[][] field) {
-
-        double weightedSumHeightDiff = 0;
-
-        for (int i = 1; i<top.length; i++) {
-            weightedSumHeightDiff += colDiffWeights[i-1] * (Math.abs(top[i-1] - top[i]));
+    //FEATURE 14
+    //Column heights - height of each column
+    //only converting int to double here....
+    public static double[] calculateFeature14(int[] top, int[][] field) {
+        double[] topDouble = new double[top.length];
+        for (int i = 0; i<top.length; i++ ){
+            topDouble[i] = top[i];
         }
-
-        return weightedSumHeightDiff;
+        return topDouble;
     }
+
+    public static double dotProduct(double[] X, double[] Y){
+        double sumOfWeightedHeights = 0;
+        for (int i=0; i <X.length; i++){
+            sumOfWeightedHeights += X[i]*Y[i];
+        }
+        return sumOfWeightedHeights;
+    }
+
 }
