@@ -22,13 +22,12 @@ public class Features {
     // Weighted Filled Spot Count - Similar to the above, but spots in row i counts i times as much as blocks in row 1 
     public static double calculateFeature2(int[] top, int[][] field) {
     	int sum = 0;
-    	int i = 1;
     	for (int i = 0; i < State.ROWS; i++){
     		for (int j = 0; j < State.COLS; j++){
-    			if (field[i][j]> 0)
+    			if (field[i][j]> 0){
     				sum+= i;
+    			}
     		}
-    		i++;
     	}
     	return sum;
     }
