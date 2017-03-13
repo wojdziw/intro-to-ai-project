@@ -1,7 +1,4 @@
 public class Features {
-    //Column Difference weights
-    //Used for feature 15 when calculating importance of individual column-pairs (otherwise why split calculate individual pairings?)
-    private static final double[] colDiffWeights = {1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0};
 
     // FEATURE 1
     // Filled Spot count - The number of filled spots on the game board
@@ -55,23 +52,10 @@ public class Features {
     }
 
     //FEATURE 5
-    //Column difference - height difference between each pair of adjacent columns
-	/*
-	 * TODO: do we really need both sum height differences and individual column differences?
-	 * Instead of returning 15 distinct values, I have applied the individual column weights directly in this function, and opted to return the sum
-	 * i.e. This function will return the weighted sum of column weights (instead of 9 unique column height differences)
-	 * This way we can get rid of feature 5, and instead just have this weighted version of column heights instead
-	 * An additional weight for the sum of column heights can still be added in calculateUtility()
-	 */
+    //lines cleared
     public static double calculateFeature5(int[] top, int[][] field) {
 
-        double weightedSumHeightDiff = 0;
-
-        for (int i = 1; i<top.length; i++) {
-            weightedSumHeightDiff += colDiffWeights[i-1] * (Math.abs(top[i-1] - top[i]));
-        }
-
-        return weightedSumHeightDiff;
+        return 0;
     }
 
     // FEATURE 6
@@ -247,6 +231,19 @@ public class Features {
             sumOfWeightedHeights += X[i]*Y[i];
         }
         return sumOfWeightedHeights;
+    }
+    
+    //FEATURE 15
+    //Column difference - height difference between each pair of adjacent columns
+    public static double[] calculateFeature15(int[] top, int[][] field) {
+
+        double[] weightedSumHeightDiff = new double[top.length-1];
+
+        for (int i = 1; i<top.length; i++) {
+            weightedSumHeightDiff[i-1] = Math.abs(top[i-1] - top[i]);
+        }
+
+        return weightedSumHeightDiff;
     }
 
 }

@@ -14,7 +14,7 @@
 
     WOJ'S REMARKS:
         -> This works decently - manages to clear a few hundred rows each time
-           Update - a few hundred rows clared each time when the fitness is averaged over several trials
+           Update - a few hundred rows cleared each time when the fitness is averaged over several trials
         -> Please tweak it however you want, it should get much much better as we implement more features
 
     WOJ'S DOUBTS:
@@ -27,7 +27,7 @@
 
 public class GeneticAlgorithm {
 
-    private static final int noFeatures = 15;
+    private static final int noFeatures = 15 + (State.COLS - 1) + (State.COLS -2); //noFeatures + columnHeightWeights + columnDifferenceWeights
     private static final double maxWeight = 3;
     private static final int populationSize = 50;
     private static final int noGenerations = 10;
