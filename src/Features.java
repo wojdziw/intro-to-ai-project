@@ -82,17 +82,19 @@ public class Features {
     }
 
     // FEATURE 7
-    //Hole Count - The number of unfilled spots that have at least one filled spot above them
+    // Hole Count - The number of unfilled spots that have at least one filled spot above them
     public static double calculateFeature7(int[] top, int[][] field) {
         int holes = 0;
         
         for(int i = 0; i<State.ROWS-1; i++){
         	for(int j = 0;j<State.COLS; j++){
-        		for(int k = i+1; k<State.ROWS; k++){
-        			if(field[i][j] == 0 && field[k][j]>0){
-        				holes++;
-        				k=State.ROWS-1;
-        			}
+        		if{field[i][j]==0{
+	        		for(int k = i+1; k<State.ROWS; k++){
+	        			if(field[i][j] == 0 && field[k][j]>0){
+	        				holes++;
+	        				k=State.ROWS-1;
+	        			}
+	        		}
         		}
         	}
         }
