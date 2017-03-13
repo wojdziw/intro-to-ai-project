@@ -60,9 +60,12 @@ public class PlayerSkeleton {
 		double feature12 = Features.calculateFeature12(top, field);
 		double feature13 = Features.calculateFeature13(top, field);
 		double[] feature14 = Features.calculateFeature14(top, field);
+		double[] feature15 = Features.calculateFeature15(top, field);
 
 
-		double[] columnHeightWeights = Arrays.copyOfRange(weights, 14, (14+ field[0].length));
+		double[] columnHeightWeights = Arrays.copyOfRange(weights, 14, (14 + field[0].length));
+		double[] colDiffWeights = Arrays.copyOfRange(weights, (14 + field[0].length + 1), (14 + 2*field[0].length));
+		
 		// apply weights
 		return weights[0]
 				+ weights[1]*feature1
@@ -78,7 +81,8 @@ public class PlayerSkeleton {
 				+ weights[11]*feature11
 				+ weights[12]*feature12
 				+ weights[13]*feature13
-				+ Features.dotProduct(columnHeightWeights, feature14);
+				+ Features.dotProduct(columnHeightWeights, feature14)
+				+ Features.dotProduct(colDiffWeights, feature15);
 
 	}
 
@@ -120,7 +124,7 @@ public class PlayerSkeleton {
 
 	public static void main(String[] args) {
 
-		// Initialise the feature weight to something
+		// Initialize the feature weight to something
 		// we have noFeatures+1 vector to have the extra bias term
 
 		// Use line 104 to test your features
@@ -128,7 +132,7 @@ public class PlayerSkeleton {
 		int noFeatures = 15;
 		int noColumns = State.COLS;
 		double maxWeight = 3;
-		double[] weights = new double[noFeatures+1+(noColumns-1)];
+		double[] weights = new double[noFeatures + 1 + (noColumns-1) + (noColumns-2)]; //noFeatures + bias + columnHeightWeights + columnDifferenceWeights
 		for (int i=0; i<weights.length; i++) {
 			int plusMinus = Math.random() > 0.5 ? -1 : 1;
 			weights[i] = plusMinus * maxWeight * Math.random();
