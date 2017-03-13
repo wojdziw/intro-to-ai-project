@@ -88,7 +88,7 @@ public class Features {
         
         for(int i = 0; i<State.ROWS-1; i++){
         	for(int j = 0;j<State.COLS; j++){
-        		if{field[i][j]==0{
+        		if(field[i][j]==0){
 	        		for(int k = i+1; k<State.ROWS; k++){
 	        			if(field[i][j] == 0 && field[k][j]>0){
 	        				holes++;
