@@ -51,19 +51,23 @@ public class Features {
     }
 
     //FEATURE 5
-    //Height differences - sum of the height differences between adjacent columns
+    //Column difference - height difference between each pair of adjacent columns
 	/*
-	 * TODO: can we remove this feature and just keep feature 15 instead?
+	 * TODO: do we really need both sum height differences and individual column differences?
+	 * Instead of returning 15 distinct values, I have applied the individual column weights directly in this function, and opted to return the sum
+	 * i.e. This function will return the weighted sum of column weights (instead of 9 unique column height differences)
+	 * This way we can get rid of feature 5, and instead just have this weighted version of column heights instead
+	 * An additional weight for the sum of column heights can still be added in calculateUtility()
 	 */
     public static double calculateFeature5(int[] top, int[][] field) {
 
-        double sumHeightDiff = 0;
+        double weightedSumHeightDiff = 0;
 
         for (int i = 1; i<top.length; i++) {
-            sumHeightDiff += Math.abs(top[i-1] - top[i]);
+            weightedSumHeightDiff += colDiffWeights[i-1] * (Math.abs(top[i-1] - top[i]));
         }
 
-        return sumHeightDiff;
+        return weightedSumHeightDiff;
     }
 
     // FEATURE 6
@@ -129,16 +133,27 @@ public class Features {
     //Well Count - The number of uncovered holes that are 3 or more blocks deep
     public static double calculateFeature10(int[] top, int[][] field) {
 
-        double numberOfWells = 0;
+    	int numberOfWells = 0;
 
-        for (int i = 1; i<top.length; i++) {
-            int diff = Math.abs(top[i-1] - top[i]);
-            if (diff >= 3) {
-                numberOfWells++;
-            }
-        }
-
-        return numberOfWells;
+    	for (int i = 1; i<top.length; i++) {
+    		
+    		if (((i-1) == 0) || ((top[i-1] - top[i]) >= 3)) {
+    			if (i == (top.length-1) || ((top[i] - top[i+1]) <= -3)) {
+    				numberOfWells++;
+    			}
+    		}
+    	}
+    	
+    	//print board
+    	for(int i = 0; i<top.length; i++) {
+    		System.out.print(" " +top[i]);
+    	}
+    	System.out.println("");
+    	
+    	System.out.println("Num wells: " + numberOfWells);
+    	
+    	
+    	return numberOfWells;
     }
 
     // FEATURE 11
@@ -189,23 +204,4 @@ public class Features {
         return 0;
     }
 
-    //FEATURE 15
-    //Column difference - height difference between each pair of adjacent columns
-	/*
-	 * TODO: do we really need both sum height differences and individual column differences?
-	 * Instead of returning 15 distinct values, I have applied the individual column weights directly in this function, and opted to return the sum
-	 * i.e. This function will return the weighted sum of column weights (instead of 9 unique column height differences)
-	 * This way we can get rid of feature 5, and instead just have this weighted version of column heights instead
-	 * An additional weight for the sum of column heights can still be added in calculateUtility()
-	 */
-    public static double calculateFeature15(int[] top, int[][] field) {
-
-        double weightedSumHeightDiff = 0;
-
-        for (int i = 1; i<top.length; i++) {
-            weightedSumHeightDiff += colDiffWeights[i-1] * (Math.abs(top[i-1] - top[i]));
-        }
-
-        return weightedSumHeightDiff;
-    }
 }

@@ -59,7 +59,6 @@ public class PlayerSkeleton {
 		double feature12 = Features.calculateFeature12(top, field);
 		double feature13 = Features.calculateFeature13(top, field);
 		double feature14 = Features.calculateFeature14(top, field);
-		double feature15 = Features.calculateFeature15(top, field);
 
 		
 		// apply weights
@@ -77,8 +76,7 @@ public class PlayerSkeleton {
 				+ weights[11]*feature11
 				+ weights[12]*feature12
 				+ weights[13]*feature13
-				+ weights[14]*feature14
-				+ weights[15]*feature15;
+				+ weights[14]*feature14;
 	}
 
 	// Returns the score (number of rows cleared) based on the strategy i.e. the weights of the utility function
