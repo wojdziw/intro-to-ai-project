@@ -143,15 +143,6 @@ public class Features {
     		}
     	}
     	
-    	//print board
-    	for(int i = 0; i<top.length; i++) {
-    		System.out.print(" " +top[i]);
-    	}
-    	System.out.println("");
-    	
-    	System.out.println("Num wells: " + numberOfWells);
-    	
-    	
     	return numberOfWells;
     }
 
