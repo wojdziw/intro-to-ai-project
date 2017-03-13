@@ -113,13 +113,12 @@ public class GeneticAlgorithm {
             generationsResults[generation][1] = fittness;
             System.out.println("   second calculation: " + fittness);
             System.out.println("- - - - - - - - - - - - - -");
-            myPop.getFittest().printGenes();
             generationsWeights[generation]=myPop.getFittest().getGenes();
             myPop = evolvePopulation(myPop);
         }
 
-        System.out.println("Writing over results and weights to geneticRun.csv");
-        saveToCsv.writeCsvFile("geneticRun.csv", generationsResults, generationsWeights);
+        System.out.println("Writing over results and weights to csv");
+        saveToCsv.writeCsvFile("geneticRun", generationsResults, generationsWeights);
 
         int rowsCleared = PlayerSkeleton.playAGame(myPop.getFittest().getGenes(), true, false);
         System.out.println("Rows cleared: " + rowsCleared);

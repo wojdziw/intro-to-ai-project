@@ -3,15 +3,13 @@
  */
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public class saveToCsv {
     //Delimiter used in CSV file
     private static final String COMMA_DELIMITER = ",";
     private static final String NEW_LINE_SEPARATOR = "\n";
-
-
 
     public static void writeCsvFile(String fileName, int[][] runs, double[][] weights) {
 
@@ -30,10 +28,11 @@ public class saveToCsv {
                 FILE_HEADER += "Weight" + String.valueOf(i);
             }
         }
+        String timestamp = new SimpleDateFormat("yyyy_MM_dd-HH_mm_ss").format(Calendar.getInstance().getTime());
 
         try {
+            fileName = fileName+"-"+timestamp+".csv";
             fileWriter = new FileWriter(fileName);
-
             //Write the CSV file header
             fileWriter.append(FILE_HEADER.toString());
 
@@ -53,13 +52,12 @@ public class saveToCsv {
                 fileWriter.append(NEW_LINE_SEPARATOR);
             }
 
-            System.out.println("CSV file was created successfully !!!");
+            System.out.println("CSV file was created successfully with name " + fileName);
 
         } catch (Exception e) {
             System.out.println("Error in CsvFileWriter !!!");
             e.printStackTrace();
         } finally {
-
             try {
                 fileWriter.flush();
                 fileWriter.close();
