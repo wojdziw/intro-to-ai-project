@@ -205,9 +205,9 @@ public class PlayerSkeleton {
 
         for (int i=0; i<timeTaken.length;i++){
             try {
-                System.out.println((i + 1) + " - Avg time taken: " + timeTaken[i] / timeRan + ", % of runtime: " + timeTaken[i] * 100 / totalruntime + "%");
+                System.out.println("method " +(i + 1) + " - Avg time taken: " + timeTaken[i] / timeRan + "ns , % of runtime: " + timeTaken[i] * 100 / totalruntime + "%");
             } catch (ArithmeticException e){
-                System.out.println((i + 1) + " - " + e.toString());
+                System.out.println("method " +(i + 1) + " - " + e.toString());
             }
         }
     }
