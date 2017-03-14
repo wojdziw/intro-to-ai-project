@@ -30,8 +30,8 @@ public class GeneticAlgorithm {
 
     private static final int noFeatures = 15 + (State.COLS - 1) + (State.COLS -2); //noFeatures + columnHeightWeights + columnDifferenceWeights
     private static final double maxWeight = 3;
-    private static final int populationSize = 15;
-    private static final int noGenerations = 5;
+    private static final int populationSize = 50;
+    private static final int noGenerations = 40;
 
     private static final double uniformRate = 0.5;
     private static final double mutationRate = 0.015;
@@ -103,6 +103,7 @@ public class GeneticAlgorithm {
         double[][] generationsWeights = new double[noGenerations][noFeatures];
         int[][] generationsResults =  new int[noGenerations][2];
 
+
         Population myPop = new Population(populationSize, true, noFeatures, maxWeight);
         for (int generation = 0; generation< noGenerations; generation++) {
 
@@ -117,6 +118,7 @@ public class GeneticAlgorithm {
             myPop = evolvePopulation(myPop);
         }
 
+
         System.out.println("Writing over results and weights to csv");
         saveToCsv.writeCsvFile("geneticRun", generationsResults, generationsWeights);
 
@@ -124,6 +126,7 @@ public class GeneticAlgorithm {
         System.out.println("Rows cleared: " + rowsCleared);
 
     }
+
 }
 
 

@@ -1,10 +1,15 @@
+
 import static java.lang.Math.min;
 
+
 public class Features {
+
 
     // FEATURE 1
     // Filled Spot count - The number of filled spots on the game board
     public static double calculateFeature1(int[] top, int[][] field) {
+
+
         int sum = 0;
 
         for (int[] row : field ){
@@ -19,15 +24,15 @@ public class Features {
 
     // FEATURE 2
     public static double calculateFeature2(int[] top, int[][] field) {
-    	int sum = 0;
-    	for (int i = 0; i < State.ROWS; i++){
-    		for (int j = 0; j < State.COLS; j++){
-    			if (field[i][j]> 0){
-    				sum+= i;
-    			}
-    		}
-    	}
-    	return sum;
+        int sum = 0;
+        for (int i = 0; i < State.ROWS; i++){
+            for (int j = 0; j < State.COLS; j++){
+                if (field[i][j]> 0){
+                    sum+= i;
+                }
+            }
+        }
+        return sum;
     }
 
     //FEATURE 3
@@ -81,14 +86,13 @@ public class Features {
         int holes = 0;
 
         for(int i = 0; i<State.ROWS-1; i++){
-        	for(int j = 0;j<State.COLS; j++){
+            for(int j = 0;j<State.COLS; j++){
                 if (field[i][j]==0 && top[j] > i)
                 {
                     holes++;
                 }
-        	}
+            }
         }
-
         return holes;
     }
 
@@ -114,10 +118,10 @@ public class Features {
         int clusternumber =0; // we start at cluster #1
         for (int row = 0; row<field.length; row++){
             for (int col=0; col<field[0].length; col++){
-             if(isSafe(field, row, col,visited, top))   {
-                 clusternumber++;
-                 localClusterSearch(field, row, col, visited, top);
-             }
+                if(isSafe(field, row, col,visited, top))   {
+                    clusternumber++;
+                    localClusterSearch(field, row, col, visited, top);
+                }
             }
         }
         return clusternumber;
@@ -125,44 +129,44 @@ public class Features {
 
     private static void localClusterSearch(int[][] field, int row, int col, boolean[][] visited, int[] top) {
 
-            //the we try to visit each of the four adjacent cells that are above, below, left, right.
-            int rowNbr[] = {1,-1,0,0};
-            int colNbr[] = {0,0,1,-1};
-            // Mark this cell as visited
-            visited[row][col] = true;
-            // Recur for all connected neighbours
-            for (int k = 0; k < rowNbr.length; ++k){
-                if (isSafe(field, row + rowNbr[k], col + colNbr[k], visited, top)){
-                    localClusterSearch(field, row + rowNbr[k], col + colNbr[k], visited, top);
-                }
+        //the we try to visit each of the four adjacent cells that are above, below, left, right.
+        int rowNbr[] = {1,-1,0,0};
+        int colNbr[] = {0,0,1,-1};
+        // Mark this cell as visited
+        visited[row][col] = true;
+        // Recur for all connected neighbours
+        for (int k = 0; k < rowNbr.length; ++k){
+            if (isSafe(field, row + rowNbr[k], col + colNbr[k], visited, top)){
+                localClusterSearch(field, row + rowNbr[k], col + colNbr[k], visited, top);
             }
+        }
     }
 
     private static boolean isSafe(int field[][], int row, int col,
-                   boolean visited[][], int[] top) {
+                                  boolean visited[][], int[] top) {
         //topmost row is only a validation row for some lose function....
         if ((row >= 0) && (row < field.length-1) && (col >= 0) && (col < field[0].length) && row<top[col]){
             return (field[row][col]==0 && !visited[row][col]);
         }
-            return false;
+        return false;
     }
 
     //FEATURE 10
     //Well Count - The number of uncovered holes that are 3 or more blocks deep
     public static double calculateFeature10(int[] top, int[][] field) {
 
-    	int numberOfWells = 0;
+        int numberOfWells = 0;
 
-    	for (int i = 1; i<top.length; i++) {
-    		
-    		if (((i-1) == 0) || ((top[i-1] - top[i]) >= 3)) {
-    			if (i == (top.length-1) || ((top[i] - top[i+1]) <= -3)) {
-    				numberOfWells++;
-    			}
-    		}
-    	}
-    	
-    	return numberOfWells;
+        for (int i = 1; i<top.length; i++) {
+
+            if (((i-1) == 0) || ((top[i-1] - top[i]) >= 3)) {
+                if (i == (top.length-1) || ((top[i] - top[i+1]) <= -3)) {
+                    numberOfWells++;
+                }
+            }
+        }
+
+        return numberOfWells;
     }
 
     // FEATURE 11
@@ -188,9 +192,9 @@ public class Features {
     // Game Status - Based on the game status, 1 for a losing state, 0 otherwise
     public static double calculateFeature12(int[] top, int[][] field) {
         for(int i : top){
-        	if (i >= State.COLS){
-        		return 1;
-        	}
+            if (i >= State.COLS){
+                return 1;
+            }
         }
         return 0;
 
@@ -225,7 +229,7 @@ public class Features {
         }
         return sumOfWeightedHeights;
     }
-    
+
     //FEATURE 15
     //Column difference - height difference between each pair of adjacent columns
     public static double[] calculateFeature15(int[] top, int[][] field) {

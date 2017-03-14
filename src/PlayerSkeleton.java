@@ -43,24 +43,72 @@ public class PlayerSkeleton {
 		return bestMove;
 	}
 
+	static long[] featureTimeTaken = new long[15];
+    static long featureTimesRunned = 0;
 	public static double calculateUtility(int[][] field, int[] top, double[] weights) {
 		
 		//calculate feature values
+
+        long startTime = System.nanoTime();
 		double feature1 = Features.calculateFeature1(top, field);
-		double feature2 = Features.calculateFeature2(top, field);
+        featureTimeTaken[0] += (System.nanoTime() - startTime);
+
+        startTime = System.nanoTime();
+        double feature2 = Features.calculateFeature2(top, field);
+        featureTimeTaken[1] += (System.nanoTime() - startTime);
+
+        startTime = System.nanoTime();
 		double feature3 = Features.calculateFeature3(top, field);
+        featureTimeTaken[2] += (System.nanoTime() - startTime);
+
+        startTime = System.nanoTime();
 		double feature4 = Features.calculateFeature4(top, field);
+        featureTimeTaken[3] += (System.nanoTime() - startTime);
+
+        startTime = System.nanoTime();
 		double feature5 = Features.calculateFeature5(top, field);
+        featureTimeTaken[4] += (System.nanoTime() - startTime);
+
+        startTime = System.nanoTime();
 		double feature6 = Features.calculateFeature6(top, field);
+        featureTimeTaken[5] += (System.nanoTime() - startTime);
+
+        startTime = System.nanoTime();
 		double feature7 = Features.calculateFeature7(top, field);
+        featureTimeTaken[6] += (System.nanoTime() - startTime);
+
+        startTime = System.nanoTime();
 		double feature8 = Features.calculateFeature8(top, field);
+        featureTimeTaken[7] += (System.nanoTime() - startTime);
+
+        startTime = System.nanoTime();
 		double feature9 = Features.calculateFeature9(top, field);
+        featureTimeTaken[8] += (System.nanoTime() - startTime);
+
+        startTime = System.nanoTime();
 		double feature10 = Features.calculateFeature10(top, field);
+        featureTimeTaken[9] += (System.nanoTime() - startTime);
+
+        startTime = System.nanoTime();
 		double feature11 = Features.calculateFeature11(top, field);
+        featureTimeTaken[10] += (System.nanoTime() - startTime);
+
+        startTime = System.nanoTime();
 		double feature12 = Features.calculateFeature12(top, field);
+        featureTimeTaken[11] += (System.nanoTime() - startTime);
+
+        startTime = System.nanoTime();
 		double feature13 = Features.calculateFeature13(top, field);
+        featureTimeTaken[12] += (System.nanoTime() - startTime);
+
+        startTime = System.nanoTime();
 		double[] feature14 = Features.calculateFeature14(top, field);
+        featureTimeTaken[13] += (System.nanoTime() - startTime);
+
+        startTime = System.nanoTime();
 		double[] feature15 = Features.calculateFeature15(top, field);
+        featureTimeTaken[14] += (System.nanoTime() - startTime);
+        featureTimesRunned++;
 
 
 		double[] columnHeightWeights = Arrays.copyOfRange(weights, 14, (14 + field[0].length));
@@ -142,6 +190,28 @@ public class PlayerSkeleton {
 		int rowsCleared = playAGame(weights, true, false);
 
 		System.out.println("You have completed "+rowsCleared+" rows.");
+        printRuntimeStatistics();
 	}
-	
+
+
+    public static void printRuntimeStatistics(){
+        long [] timeTaken = featureTimeTaken;
+        long timeRan = featureTimesRunned;
+        long totalruntime  = 0;
+
+        for (long time: timeTaken){
+            totalruntime += time;
+        }
+
+        for (int i=0; i<timeTaken.length;i++){
+            try {
+                System.out.println((i + 1) + " - Avg time taken: " + timeTaken[i] / timeRan + ", % of runtime: " + timeTaken[i] * 100 / totalruntime + "%");
+            } catch (ArithmeticException e){
+                System.out.println((i + 1) + " - " + e.toString());
+            }
+        }
+    }
+
 }
+
+
