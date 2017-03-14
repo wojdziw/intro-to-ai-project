@@ -4,6 +4,7 @@
 public class Individual {
 
     private double[] weights;
+    private int fitness = 0;
 
     public Individual(int noFeatures, double maxWeight) {
         // one more than the number of features to have the bias term
@@ -23,14 +24,15 @@ public class Individual {
     }
 
     public int getFitness() {
-        int fitness = 0;
-        int n = 10;
 
-        // Averaging over N games to mitigate the impact of the random piece choice
-        for (int i=0; i<n; i++)
-            fitness += PlayerSkeleton.playAGame(weights, false, false);
+        if (fitness==0) {
+            int n = 10;
 
-        return fitness/n;
+            // Averaging over N games to mitigate the impact of the random piece choice
+            for (int i=0; i<n; i++)
+                fitness += PlayerSkeleton.playAGame(weights, false, false);
+        }
+        return fitness;
     }
 
     public double[] getGenes() {
