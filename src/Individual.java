@@ -31,6 +31,9 @@ public class Individual {
             // Averaging over N games to mitigate the impact of the random piece choice
             for (int i=0; i<n; i++)
                 fitness += PlayerSkeleton.playAGame(weights, false, false);
+
+            // Get average
+            fitness = fitness/n;
         }
         return fitness;
     }

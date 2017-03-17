@@ -136,7 +136,7 @@ public class PlayerSkeleton {
 				+ weights[6]*feature6
 				+ weights[7]*feature7_9[0]
 				+ weights[8]*feature8
-				+ weights[9]*feature7_9[0]
+				+ weights[9]*feature7_9[1]
 				+ weights[10]*feature10
 				+ weights[11]*feature11
 				+ weights[12]*feature12
@@ -164,9 +164,14 @@ public class PlayerSkeleton {
 
 			s.makeMove(nextMove);
 
+			//double[] feature1_2 = Features.calculateFeature1_2(s.getTop(), s.getField());
+			//System.out.println("Feature1_2's values are: " + feature1_2[0] + " and: " + feature1_2[1]);
+			//double[] feature7_9 = Features.calculateFeature7_9(s.getTop(), s.getField());
+			//System.out.println("Feature7_9's values are: " + feature7_9[0] + " and: " + feature7_9[1]);
+
 			if (drawing) {
 				try {
-					Thread.sleep(30);
+					Thread.sleep(3000);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}

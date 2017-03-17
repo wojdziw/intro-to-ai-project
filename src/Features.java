@@ -29,21 +29,21 @@ public class Features {
     public static double[] calculateFeature1_2(int[] top, int[][] field) {
 
         double[] bothSums = new double[2];
-        int clearColumns;
+        //int clearColumns;
 
         for (int i = 0; i < State.ROWS; i++){
-            clearColumns = 0;
+            //clearColumns = 0;
             for (int j = 0; j < State.COLS; j++){
-                if (i > top[j])
-                    clearColumns++;
+                //if (i > top[j])
+                //    clearColumns++;
 
                 if (field[i][j]> 0){
                     bothSums[0]++;
                     bothSums[1] += i;
                 }
             }
-            if(clearColumns == State.COLS)
-                break;
+            //if(clearColumns == State.COLS)
+            //    break;
         }
         return bothSums;
     }
@@ -139,8 +139,7 @@ public class Features {
 
                 if(isSafe(field, row, col, visited, top))   {
                     clusternumber++;
-                    nrOfHoleSpots = localClusterSearch(field, row, col, visited, top);
-                    //localClusterSearch(field, row, col, visited, top);
+                    nrOfHoleSpots += localClusterSearch(field, row, col, visited, top);
                 }
             }
             if(clearColumns == State.COLS)
