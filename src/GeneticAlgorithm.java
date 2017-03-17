@@ -29,7 +29,7 @@
 public class GeneticAlgorithm {
 
     private static final int noFeatures = 15 + (State.COLS - 1) + (State.COLS -2); //noFeatures + columnHeightWeights + columnDifferenceWeights
-    private static final double maxWeight = 15;
+    private static final double maxWeight = 5;
     private static final int populationSize = 50;
     private static final int noGenerations = 40;
 
@@ -103,19 +103,20 @@ public class GeneticAlgorithm {
         double[][] generationsWeights = new double[noGenerations][noFeatures];
         int[][] generationsResults =  new int[noGenerations][2];
 
-        long startTime = 0;
+        long startTime = System.nanoTime();
         Population myPop = new Population(populationSize, true, noFeatures, maxWeight);
         Individual bestInd = myPop.getIndividual(0);
+
         for (int generation = 0; generation< noGenerations; generation++) {
 
             bestInd = myPop.getFittest();
 
-            int fittness=bestInd.getFitness();
-            generationsResults[generation][0] = fittness;
-            System.out.println("Generation: " + generation + " Fittest: " + fittness);
-            fittness=bestInd.getFitness(); // Will return same value always! (Regardless if we use bestInd or myPop.getFittest() again)
-            generationsResults[generation][1] = fittness;
-            System.out.println("   second calculation: " + fittness);
+            int fitness=bestInd.getFitness();
+            generationsResults[generation][0] = fitness;
+            System.out.println("Generation: " + (generation+1) + " Fittest: " + fitness);
+            //fitness=bestInd.getFitness(); // Will return same value always! (Regardless if we use bestInd or myPop.getFittest() again)
+            //generationsResults[generation][1] = fitness;
+            //System.out.println("   second calculation: " + fitness);
 
             // Time every iteration
             long iterTime = (System.nanoTime() - startTime)/1000000000;

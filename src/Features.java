@@ -4,47 +4,28 @@ import static java.lang.Math.min;
 
 public class Features {
 
-/*
-    // FEATURE 1
-    // Filled Spot count - The number of filled spots on the game board
-    public static double calculateFeature1(int[] top, int[][] field) {
-
-        int sum = 0;
-
-        for (int[] row : field ){
-            for (int value : row){
-                if (value > 0)
-                    sum++;
-            }
-        }
-
-        return sum;
-        // Example of normalization:
-        //return sum/State.COLS;
-    }
-    */
-
     // FEATURE 1 + 2
-    // Weighted Filled Spot Count - Similar to the above, but spots in row i counts i times
+    // 1: Filled Spot count - The number of filled spots on the game board
+    // 2: Weighted Filled Spot Count - Similar to the above, but spots in row i counts i times
     public static double[] calculateFeature1_2(int[] top, int[][] field) {
 
+        int sum = 0;
+        int weightedSum = 0;
         double[] bothSums = new double[2];
-        //int clearColumns;
 
         for (int i = 0; i < State.ROWS; i++){
-            //clearColumns = 0;
             for (int j = 0; j < State.COLS; j++){
-                //if (i > top[j])
-                //    clearColumns++;
 
                 if (field[i][j]> 0){
-                    bothSums[0]++;
-                    bothSums[1] += i;
+                    sum++;
+                    weightedSum += i;
                 }
             }
-            //if(clearColumns == State.COLS)
-            //    break;
         }
+        // Example of a normalization
+        // TODO: decide if we should keep it!
+        bothSums[0] = sum/State.COLS;
+        bothSums[1] = weightedSum/State.COLS;
         return bothSums;
     }
 
@@ -75,7 +56,23 @@ public class Features {
     //Lines Cleared - The number cleared lines by this move
     public static double calculateFeature5(int[] top, int[][] field) {
 
-        return 0;
+        int cleared = 0;
+
+        for (int r = 0; r < State.ROWS; r++) {
+            //check all columns in the row
+            boolean full = true;
+
+            for (int c = 0; c < State.COLS; c++) {
+                if (field[r][c] == 0) {
+                    full = false;
+                    break;
+                }
+            }
+            if(full)
+                cleared++;
+        }
+
+        return cleared;
     }
 
     // FEATURE 6
@@ -92,23 +89,7 @@ public class Features {
 
         return maxHeightDiff;
     }
-/*
-    // FEATURE 7
-    // Hole Count - The number of unfilled spots that have at least one filled spot above them
-    public static double calculateFeature7(int[] top, int[][] field) {
-        int holes = 0;
 
-        for(int i = 0; i<State.ROWS-1; i++){
-            for(int j = 0;j<State.COLS; j++){
-                if (field[i][j]==0 && top[j] > i)
-                {
-                    holes++;
-                }
-            }
-        }
-        return holes;
-    }
-*/
     //FEATURE 8
     //Deepest Hole - The depth of the deepest hole (an unfillable spot = has at least a block above it)
     public static int calculateFeature8(int[] top, int[][] field) {
@@ -127,7 +108,7 @@ public class Features {
     //Amount of Holes - The number of enclosed clusters/caves of holes
     public static double[] calculateFeature7_9(int[] top, int[][] field) {
         boolean [][] visited = new boolean[State.ROWS][State.COLS]; //2d array of false values
-        int clusternumber = 0; // we start at cluster #0
+        int clusterCount = 0; // we start at cluster #0
         int nrOfHoleSpots = 0;
         int clearColumns;
 
@@ -138,7 +119,7 @@ public class Features {
                     clearColumns++;
 
                 if(isSafe(field, row, col, visited, top))   {
-                    clusternumber++;
+                    clusterCount++;
                     nrOfHoleSpots += localClusterSearch(field, row, col, visited, top);
                 }
             }
@@ -148,7 +129,7 @@ public class Features {
         // We could calculate both in the same feature here!
         double [] result = new double[2];
         result[0] = nrOfHoleSpots;
-        result[1] = clusternumber;
+        result[1] = clusterCount;
         return result;
     }
 

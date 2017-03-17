@@ -9,7 +9,7 @@ public class Individual {
     public Individual(int noFeatures, double maxWeight) {
         // one more than the number of features to have the bias term
         weights = new double[noFeatures+1];
-            for (int i=0; i<noFeatures; i++) {
+            for (int i=0; i<noFeatures+1; i++) {
                 int plusMinus = Math.random() > 0.5 ? -1 : 1;
                 weights[i] = plusMinus * maxWeight * Math.random();
             }
@@ -33,7 +33,7 @@ public class Individual {
                 fitness += PlayerSkeleton.playAGame(weights, false, false);
 
             // Get average
-            fitness = fitness/n;
+            fitness = fitness/n; // TODO: return median instead?
         }
         return fitness;
     }
