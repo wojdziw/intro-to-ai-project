@@ -29,9 +29,9 @@
 public class GeneticAlgorithm {
 
     private static final int noFeatures = 15 + (State.COLS - 1) + (State.COLS -2); //noFeatures + columnHeightWeights + columnDifferenceWeights
-    private static final double maxWeight = 3;
-    private static final int populationSize = 50;
-    private static final int noGenerations = 40;
+    private static final double maxWeight = 15;
+    private static final int populationSize = 40;
+    private static final int noGenerations = 10;
 
     private static final double uniformRate = 0.5;
     private static final double mutationRate = 0.015;
@@ -103,26 +103,35 @@ public class GeneticAlgorithm {
         double[][] generationsWeights = new double[noGenerations][noFeatures];
         int[][] generationsResults =  new int[noGenerations][2];
 
-
+        long startTime = 0;
         Population myPop = new Population(populationSize, true, noFeatures, maxWeight);
+        Individual bestInd = myPop.getIndividual(0);
         for (int generation = 0; generation< noGenerations; generation++) {
 
-            int fittness=myPop.getFittest().getFitness();
+            bestInd = myPop.getFittest();
+
+            int fittness=bestInd.getFitness();
             generationsResults[generation][0] = fittness;
             System.out.println("Generation: " + generation + " Fittest: " + fittness);
-            fittness=myPop.getFittest().getFitness();
+            fittness=bestInd.getFitness(); // Will return same value always!
             generationsResults[generation][1] = fittness;
             System.out.println("   second calculation: " + fittness);
+
+            // Time every iteration
+            long iterTime = (System.nanoTime() - startTime)/1000000000;
+            System.out.println("Time for iteration: " + iterTime + "s");
+            startTime = System.nanoTime();
+
             PlayerSkeleton.printRuntimeStatistics();
             System.out.println("- - - - - - - - - - - - - -");
-            generationsWeights[generation]=myPop.getFittest().getGenes();
+            generationsWeights[generation]=bestInd.getGenes();
             myPop = evolvePopulation(myPop);
         }
 
 
         System.out.println("Writing over results and weights to csv");
         saveToCsv.writeCsvFile("geneticRun", generationsResults, generationsWeights);
-        int rowsCleared = PlayerSkeleton.playAGame(myPop.getFittest().getGenes(), true, false);
+        int rowsCleared = PlayerSkeleton.playAGame(bestInd.getGenes(), true, false);
         System.out.println("Rows cleared: " + rowsCleared);
         System.out.println();
 
