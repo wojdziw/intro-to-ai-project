@@ -9,7 +9,7 @@ public class Individual {
     public Individual(int noFeatures, double maxWeight) {
         // one more than the number of features to have the bias term
         weights = new double[noFeatures+1];
-            for (int i=0; i<noFeatures+1; i++) {
+            for (int i=0; i<noFeatures+1; i++) { // +1 so we initialize the last weight as well
                 int plusMinus = Math.random() > 0.5 ? -1 : 1;
                 weights[i] = plusMinus * maxWeight * Math.random();
             }

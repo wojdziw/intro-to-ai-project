@@ -44,16 +44,17 @@ public class GeneticAlgorithm {
         if (elitism)
             newPopulation.setIndividual(0, pop.getFittest());
 
+        //Improve selection part!?
+
         int elitismOffset = elitism ? 1 : 0;
 
         // Loop over the population size and create new individuals with crossover
         for (int i = elitismOffset; i<pop.size(); i++) {
-            Individual indiv1 = tournamentSelection(pop);
+            Individual indiv1 = tournamentSelection(pop); // Find the fittest among 5 random individuals
             Individual indiv2 = tournamentSelection(pop);
 
             Individual newIndiv = crossover(indiv1, indiv2);
             newPopulation.setIndividual(i, newIndiv);
-            // Remove added individual from population?
         }
 
         // Mutate population
@@ -82,7 +83,7 @@ public class GeneticAlgorithm {
         for (int i = 0; i< noFeatures; i++) {
             if (Math.random() <= mutationRate) {
                 // Create random gene
-                double gene = maxWeight *Math.random();
+                double gene = maxWeight * Math.random();
                 indiv.setGene(i, gene);
             }
         }
@@ -129,7 +130,7 @@ public class GeneticAlgorithm {
             myPop = evolvePopulation(myPop);
         }
 
-
+        // TODO: print used constants as well!?
         System.out.println("Writing over results and weights to csv");
         saveToCsv.writeCsvFile("geneticRun", generationsResults, generationsWeights);
         int rowsCleared = PlayerSkeleton.playAGame(bestInd.getGenes(), true, false);

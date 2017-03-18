@@ -38,6 +38,7 @@ public class PlayerSkeleton {
 					bestUtility = utility;
 				}
 			}
+
 		}
 
 		return bestMove;

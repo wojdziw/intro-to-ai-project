@@ -54,6 +54,7 @@ public class Features {
 
     //FEATURE 5
     //Lines Cleared - The number cleared lines by this move
+    // Comment: this is already added to utility score in pickMove()
     public static double calculateFeature5(int[] top, int[][] field) {
 
         int cleared = 0;
