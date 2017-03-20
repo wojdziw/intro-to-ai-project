@@ -17,6 +17,8 @@ public class PlayerSkeleton {
 		int bestMove = 0;
 		double bestUtility = -Double.MAX_VALUE;
 
+		DummyState dummy = new DummyState();
+
 		int nextPiece = s.nextPiece;
 
 		for (int move=0; move<legalMoves.length; move++) {
@@ -30,16 +32,57 @@ public class PlayerSkeleton {
 				int[] newTop = simulatedState.getTop();
 				int rowsCleared = simulatedState.getRowsCleared();
 
-				// Passed rowsCleared into calculateUtility to apply weight to it
-				double utility = calculateUtility(newField, newTop, weights, rowsCleared);
+				// Calculate utility for Layer 1
+				//double topUtility = calculateUtility(newField, newTop, weights, rowsCleared); // TODO: reinstate?
+				double avgL2Utility = 0.0;
 
-				// Find the move maximizing the utility
-				if (utility > bestUtility) {
+
+				// Find the best combination with a second move (2-ply deep)
+				for (int secondPiece = 0; secondPiece < s.N_PIECES; secondPiece++){
+
+					double bestL2Utility = 0.0;
+
+					// Get legal moves for second piece (somehow...)
+					int[][] secondLegalMoves = dummy.getLegalMoves(secondPiece);
+
+					for (int secondMove = 0; secondMove<secondLegalMoves.length; secondMove++) {
+
+						int[] bothPieces = {nextPiece, secondPiece};
+						int [][] bothMoves ={legalMoves[move], secondLegalMoves[secondMove]};
+
+						SimulatedState secondState = UtilityHelpers.calc2_plySimulatedState(s, bothMoves, bothPieces);
+
+						if (!secondState.wouldGameFinish()) {
+
+							// If not, simulate the move
+							int[][] newField2 = secondState.getField();
+							int[] newTop2 = secondState.getTop();
+							int rowsCleared2 = secondState.getRowsCleared();
+
+							// Calculate utility for this set of 2 moves
+							double temp = calculateUtility(newField2, newTop2, weights, rowsCleared2);
+
+							// Find the best move for this piece
+							if(temp > bestL2Utility)
+								bestL2Utility = temp;
+						}
+					}
+
+					avgL2Utility += bestL2Utility;
+				}
+
+				// Take the average of the best moves for every possible piece
+				avgL2Utility = avgL2Utility / s.N_PIECES;
+
+
+				// Find the move that maximizes the average of next piece
+				if (avgL2Utility > bestUtility) {
 					bestMove = move;
-					bestUtility = utility;
+					bestUtility = avgL2Utility;
 				}
 			}
-
+			// Print stuff
+			//System.out.println("Looped through move: " + move);
 		}
 
 		return bestMove;

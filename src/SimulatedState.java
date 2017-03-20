@@ -11,6 +11,7 @@ public class SimulatedState {
         this.gameFinished = gameFinished;
     }
 
+
     public int[][] getField() {
         return field;
     }
@@ -26,4 +27,5 @@ public class SimulatedState {
     public boolean wouldGameFinish() {
         return gameFinished;
     }
+
 }
