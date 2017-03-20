@@ -4,14 +4,15 @@
 public class Individual {
 
     private double[] weights;
+    private int fitness = 0;
 
     public Individual(int noFeatures, double maxWeight) {
         // one more than the number of features to have the bias term
         weights = new double[noFeatures+1];
-        for (int i=0; i<noFeatures; i++) {
-            int plusMinus = Math.random() > 0.5 ? -1 : 1;
-            weights[i] = plusMinus * maxWeight * Math.random();
-        }
+            for (int i=0; i<noFeatures+1; i++) { // +1 so we initialize the last weight as well
+                int plusMinus = Math.random() > 0.5 ? -1 : 1;
+                weights[i] = plusMinus * maxWeight * Math.random();
+            }
     }
 
     public double getGene(int index) {
@@ -23,14 +24,18 @@ public class Individual {
     }
 
     public int getFitness() {
-        int fitness = 0;
-        int n = 10;
 
-        // Averaging over N games to mitigate the impact of the random piece choice
-        for (int i=0; i<n; i++)
-            fitness += PlayerSkeleton.playAGame(weights, false, false);
+        if (fitness==0) {
+            int n = 10;
 
-        return fitness/n;
+            // Averaging over N games to mitigate the impact of the random piece choice
+            for (int i=0; i<n; i++)
+                fitness += PlayerSkeleton.playAGame(weights, false, false);
+
+            // Get average
+            fitness = fitness/n; // TODO: return median instead?
+        }
+        return fitness;
     }
 
     public double[] getGenes() {
@@ -38,8 +43,15 @@ public class Individual {
     }
 
     public void printGenes() {
-        for (double gene : getGenes())
-            System.out.print(gene + " ");
+        int i = 0;
+        for (double gene : getGenes()) {
+            System.out.print(i + ": " + String.format("%.2f", gene) + " ");
+            i++;
+            if (i == 14) {
+                System.out.println();
+            }
+        }
         System.out.println("");
     }
+
 }
