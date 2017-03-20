@@ -30,7 +30,8 @@ public class PlayerSkeleton {
 				int[] newTop = simulatedState.getTop();
 				int rowsCleared = simulatedState.getRowsCleared();
 
-				double utility = calculateUtility(newField, newTop, weights)+rowsCleared;
+				// Passed rowsCleared into calculateUtility to apply weight to it
+				double utility = calculateUtility(newField, newTop, weights, rowsCleared);
 
 				// Find the move maximizing the utility
 				if (utility > bestUtility) {
@@ -46,7 +47,7 @@ public class PlayerSkeleton {
 
 	static long[] featureTimeTaken = new long[15];
     static long featureTimesRunned = 0;
-	public static double calculateUtility(int[][] field, int[] top, double[] weights) {
+	public static double calculateUtility(int[][] field, int[] top, double[] weights, int rowsCleared) {
 		
 		//calculate feature values
 		/*
@@ -70,9 +71,9 @@ public class PlayerSkeleton {
 		double feature4 = Features.calculateFeature4(top, field);
         featureTimeTaken[3] += (System.nanoTime() - startTime);
 
-        startTime = System.nanoTime();
-		double feature5 = Features.calculateFeature5(top, field);
-        featureTimeTaken[4] += (System.nanoTime() - startTime);
+//      startTime = System.nanoTime();
+//		double feature5 = Features.calculateFeature5(top, field);
+//      featureTimeTaken[4] += (System.nanoTime() - startTime);
 
         startTime = System.nanoTime();
 		double feature6 = Features.calculateFeature6(top, field);
@@ -133,7 +134,7 @@ public class PlayerSkeleton {
 				+ weights[2]*feature1_2[1]
 				+ weights[3]*feature3
 				+ weights[4]*feature4
-				+ weights[5]*feature5
+				+ weights[5]*rowsCleared
 				+ weights[6]*feature6
 				+ weights[7]*feature7_9[0]
 				+ weights[8]*feature8

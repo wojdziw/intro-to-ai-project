@@ -52,30 +52,6 @@ public class Features {
         return minHeight;
     }
 
-    //FEATURE 5
-    //Lines Cleared - The number cleared lines by this move
-    // Comment: this is already added to utility score in pickMove()
-    public static double calculateFeature5(int[] top, int[][] field) {
-
-        int cleared = 0;
-
-        for (int r = 0; r < State.ROWS; r++) {
-            //check all columns in the row
-            boolean full = true;
-
-            for (int c = 0; c < State.COLS; c++) {
-                if (field[r][c] == 0) {
-                    full = false;
-                    break;
-                }
-            }
-            if(full)
-                cleared++;
-        }
-
-        return cleared;
-    }
-
     // FEATURE 6
     // Max height difference - maximum difference of height between two columns
     public static double calculateFeature6(int[] top, int[][] field) {
