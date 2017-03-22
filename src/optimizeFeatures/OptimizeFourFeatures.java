@@ -178,8 +178,8 @@ public class OptimizeFourFeatures {
 	       
 	        
 	        System.out.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
-			System.out.printf("The top %s features are as follows:\n", noSavedCombinations);
-			System.out.printf("%-20s%-20s\n", "Fitness Score","Features");
+			System.out.printf("The top %s feature sets are as follows:\n", noSavedCombinations);
+			System.out.printf("%-20s%-20s\n", "Fitness Score:","Features:");
 			for (Map.Entry<Integer, int[]> entry : bestCombinations.descendingMap().entrySet()) {
 				System.out.printf("%-20s", entry.getKey());
 				for(int i : entry.getValue()) {
