@@ -50,7 +50,7 @@ public class GeneticAlgorithm {
 
         // Loop over the population size and create new individuals with crossover
         for (int i = elitismOffset; i<pop.size(); i++) {
-            Individual indiv1 = tournamentSelection(pop); // Find the fittest among 5 random individuals
+            Individual indiv1 = tournamentSelection(pop); // Find the fitest among 5 random individuals
             Individual indiv2 = tournamentSelection(pop);
 
             Individual newIndiv = crossover(indiv1, indiv2);
