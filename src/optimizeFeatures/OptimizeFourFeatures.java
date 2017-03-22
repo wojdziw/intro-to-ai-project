@@ -147,8 +147,8 @@ public class OptimizeFourFeatures {
 	        }
 
 	        // TODO: print used constants as well!?
-	        System.out.println("Writing over results and weights to csv");
-	        saveToCsv.writeCsvFile("geneticRun", generationsResults, generationsWeights);
+//	        System.out.println("Writing over results and weights to csv");
+//	        saveToCsv.writeCsvFile("geneticRun", generationsResults, generationsWeights);
 	        int rowsCleared = PlayerSkeleton.playAGame(bestInd.getGenes(), true, false, currentFeatureSet);
 	        System.out.println("Rows cleared: " + rowsCleared);
 	        System.out.println();
@@ -169,7 +169,7 @@ public class OptimizeFourFeatures {
 	 	        		
 	 	        		//if max size of map is reached, remove the smallest entry
 	 	        		if(bestCombinations.size() > noSavedCombinations) {
-	 	        			bestCombinations.remove(bestCombinations.firstEntry());
+	 	        			bestCombinations.remove(bestCombinations.firstKey());
 	 	        		}
 	 	        		break;
 	 	        	}
@@ -180,7 +180,7 @@ public class OptimizeFourFeatures {
 	        
 	        System.out.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
 			System.out.printf("The top %s features are as follows:\n", noSavedCombinations);
-			System.out.printf("%-20s %-20s\n", "Fitness Score","Features");
+			System.out.printf("%-20s%-20s\n", "Fitness Score","Features");
 			for (Map.Entry<Integer, int[]> entry : bestCombinations.descendingMap().entrySet()) {
 				System.out.printf("%-20s", entry.getKey());
 				for(int i : entry.getValue()) {
