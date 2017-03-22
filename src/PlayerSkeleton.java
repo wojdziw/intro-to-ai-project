@@ -30,7 +30,8 @@ public class PlayerSkeleton {
 				int[] newTop = simulatedState.getTop();
 				int rowsCleared = simulatedState.getRowsCleared();
 
-				double utility = calculateUtility(newField, newTop, weights)+rowsCleared;
+				// Passed rowsCleared into calculateUtility to apply weight to it
+				double utility = calculateUtility(newField, newTop, weights, rowsCleared);
 
 				// Find the move maximizing the utility
 				if (utility > bestUtility) {
@@ -38,6 +39,7 @@ public class PlayerSkeleton {
 					bestUtility = utility;
 				}
 			}
+
 		}
 
 		return bestMove;
@@ -45,10 +47,10 @@ public class PlayerSkeleton {
 
 	static long[] featureTimeTaken = new long[15];
     static long featureTimesRunned = 0;
-	public static double calculateUtility(int[][] field, int[] top, double[] weights) {
+	public static double calculateUtility(int[][] field, int[] top, double[] weights, int rowsCleared) {
 		
 		//calculate feature values
-
+		/*
         long startTime = System.nanoTime();
 		double feature1 = Features.calculateFeature1(top, field);
         featureTimeTaken[0] += (System.nanoTime() - startTime);
@@ -56,6 +58,10 @@ public class PlayerSkeleton {
         startTime = System.nanoTime();
         double feature2 = Features.calculateFeature2(top, field);
         featureTimeTaken[1] += (System.nanoTime() - startTime);
+		*/
+		long startTime = System.nanoTime();
+		double[] feature1_2 = Features.calculateFeature1_2(top, field);
+		featureTimeTaken[0] += (System.nanoTime() - startTime);
 
         startTime = System.nanoTime();
 		double feature3 = Features.calculateFeature3(top, field);
@@ -65,14 +71,14 @@ public class PlayerSkeleton {
 		double feature4 = Features.calculateFeature4(top, field);
         featureTimeTaken[3] += (System.nanoTime() - startTime);
 
-        startTime = System.nanoTime();
-		double feature5 = Features.calculateFeature5(top, field);
-        featureTimeTaken[4] += (System.nanoTime() - startTime);
+//      startTime = System.nanoTime();
+//		double feature5 = Features.calculateFeature5(top, field);
+//      featureTimeTaken[4] += (System.nanoTime() - startTime);
 
         startTime = System.nanoTime();
 		double feature6 = Features.calculateFeature6(top, field);
         featureTimeTaken[5] += (System.nanoTime() - startTime);
-
+/*
         startTime = System.nanoTime();
 		double feature7 = Features.calculateFeature7(top, field);
         featureTimeTaken[6] += (System.nanoTime() - startTime);
@@ -84,6 +90,14 @@ public class PlayerSkeleton {
         startTime = System.nanoTime();
 		double feature9 = Features.calculateFeature9(top, field);
         featureTimeTaken[8] += (System.nanoTime() - startTime);
+*/
+		startTime = System.nanoTime();
+		double feature8 = Features.calculateFeature8(top, field);
+		featureTimeTaken[7] += (System.nanoTime() - startTime);
+
+		startTime = System.nanoTime();
+		double[] feature7_9 = Features.calculateFeature7_9(top, field);
+		featureTimeTaken[8] += (System.nanoTime() - startTime);
 
         startTime = System.nanoTime();
 		double feature10 = Features.calculateFeature10(top, field);
@@ -116,15 +130,15 @@ public class PlayerSkeleton {
 
 		// apply weights
 		return weights[0]
-				+ weights[1]*feature1
-				+ weights[2]*feature2
+				+ weights[1]*feature1_2[0]
+				+ weights[2]*feature1_2[1]
 				+ weights[3]*feature3
 				+ weights[4]*feature4
-				+ weights[5]*feature5
+				+ weights[5]*rowsCleared
 				+ weights[6]*feature6
-				+ weights[7]*feature7
+				+ weights[7]*feature7_9[0]
 				+ weights[8]*feature8
-				+ weights[9]*feature9
+				+ weights[9]*feature7_9[1]
 				+ weights[10]*feature10
 				+ weights[11]*feature11
 				+ weights[12]*feature12
@@ -152,8 +166,10 @@ public class PlayerSkeleton {
 
 			s.makeMove(nextMove);
 
-			// YOU CAN TEST YOUR FEATURES HERE
-			//System.out.println("Feature1's value is: " + Features.calculateFeature1(s.getTop(), s.getField()));
+			//double[] feature1_2 = Features.calculateFeature1_2(s.getTop(), s.getField());
+			//System.out.println("Feature1_2's values are: " + feature1_2[0] + " and: " + feature1_2[1]);
+			//double[] feature7_9 = Features.calculateFeature7_9(s.getTop(), s.getField());
+			//System.out.println("Feature7_9's values are: " + feature7_9[0] + " and: " + feature7_9[1]);
 
 			if (drawing) {
 				try {
@@ -175,7 +191,6 @@ public class PlayerSkeleton {
 		// Initialize the feature weight to something
 		// we have noFeatures+1 vector to have the extra bias term
 
-		// Use line 104 to test your features
 
 		int noFeatures = 15;
 		int noColumns = State.COLS;

@@ -4,35 +4,29 @@ import static java.lang.Math.min;
 
 public class Features {
 
-
-    // FEATURE 1
-    // Filled Spot count - The number of filled spots on the game board
-    public static double calculateFeature1(int[] top, int[][] field) {
-
+    // FEATURE 1 + 2
+    // 1: Filled Spot count - The number of filled spots on the game board
+    // 2: Weighted Filled Spot Count - Similar to the above, but spots in row i counts i times
+    public static double[] calculateFeature1_2(int[] top, int[][] field) {
 
         int sum = 0;
+        int weightedSum = 0;
+        double[] bothSums = new double[2];
 
-        for (int[] row : field ){
-            for (int value : row){
-                if (value > 0)
-                    sum++;
-            }
-        }
-
-        return sum;
-    }
-
-    // FEATURE 2
-    public static double calculateFeature2(int[] top, int[][] field) {
-        int sum = 0;
         for (int i = 0; i < State.ROWS; i++){
             for (int j = 0; j < State.COLS; j++){
+
                 if (field[i][j]> 0){
-                    sum+= i;
+                    sum++;
+                    weightedSum += i;
                 }
             }
         }
-        return sum;
+        // Example of a normalization
+        // TODO: decide if we should keep it!
+        bothSums[0] = sum/State.COLS;
+        bothSums[1] = weightedSum/State.COLS;
+        return bothSums;
     }
 
     //FEATURE 3
@@ -49,7 +43,7 @@ public class Features {
     //FEATURE 4
     // Min heights - minimum height of the boards columns, Min(ColumnHeight[0], .. ,ColumnHeight[n])
     public static Integer calculateFeature4(int[] top, int[][] field) {
-        Integer minHeight = field.length;  // sets the minvalue to the maxvalue in the beginning
+        Integer minHeight = State.ROWS;  // sets the minvalue to the maxvalue in the beginning
         for (int columnHeight: top) {
             if (columnHeight < minHeight) {
                 minHeight = columnHeight;
@@ -58,15 +52,8 @@ public class Features {
         return minHeight;
     }
 
-    //FEATURE 5
-    //lines cleared
-    public static double calculateFeature5(int[] top, int[][] field) {
-
-        return 0;
-    }
-
     // FEATURE 6
-    // Max height difference
+    // Max height difference - maximum difference of height between two columns
     public static double calculateFeature6(int[] top, int[][] field) {
         double maxHeightDiff = 0;
         double diff;
@@ -78,22 +65,6 @@ public class Features {
         }
 
         return maxHeightDiff;
-    }
-
-    // FEATURE 7
-    // Hole Count - The number of unfilled spots that have at least one filled spot above them
-    public static double calculateFeature7(int[] top, int[][] field) {
-        int holes = 0;
-
-        for(int i = 0; i<State.ROWS-1; i++){
-            for(int j = 0;j<State.COLS; j++){
-                if (field[i][j]==0 && top[j] > i)
-                {
-                    holes++;
-                }
-            }
-        }
-        return holes;
     }
 
     //FEATURE 8
@@ -111,24 +82,38 @@ public class Features {
     }
 
     // FEATURE 9
-    //Sum of all Holes - The total number of cells of all the holes on the game board
-    //"number of islands " approach
-    public static double calculateFeature9(int[] top, int[][] field) {
+    //Amount of Holes - The number of enclosed clusters/caves of holes
+    public static double[] calculateFeature7_9(int[] top, int[][] field) {
         boolean [][] visited = new boolean[State.ROWS][State.COLS]; //2d array of false values
-        int clusternumber =0; // we start at cluster #1
+        int clusterCount = 0; // we start at cluster #0
+        int nrOfHoleSpots = 0;
+        int clearColumns;
+
         for (int row = 0; row<field.length; row++){
+            clearColumns = 0;
             for (int col=0; col<field[0].length; col++){
-                if(isSafe(field, row, col,visited, top))   {
-                    clusternumber++;
-                    localClusterSearch(field, row, col, visited, top);
+                if (row > top[col])
+                    clearColumns++;
+
+                if(isSafe(field, row, col, visited, top))   {
+                    clusterCount++;
+                    nrOfHoleSpots += localClusterSearch(field, row, col, visited, top);
                 }
             }
+            if(clearColumns == State.COLS)
+                break;
         }
-        return clusternumber;
+        // We could calculate both in the same feature here!
+        double [] result = new double[2];
+        result[0] = nrOfHoleSpots;
+        result[1] = clusterCount;
+        return result;
     }
 
-    private static void localClusterSearch(int[][] field, int row, int col, boolean[][] visited, int[] top) {
+    private static int localClusterSearch(int[][] field, int row, int col, boolean[][] visited, int[] top) {
 
+        /*
+        //Try 1:
         //the we try to visit each of the four adjacent cells that are above, below, left, right.
         int rowNbr[] = {1,-1,0,0};
         int colNbr[] = {0,0,1,-1};
@@ -140,10 +125,19 @@ public class Features {
                 localClusterSearch(field, row + rowNbr[k], col + colNbr[k], visited, top);
             }
         }
+        */
+        // Try 2:
+        if (!isSafe(field, row, col, visited, top))
+            return 0;
+
+        // Mark this cell as visited
+        visited[row][col] = true;
+        return 1 + localClusterSearch(field, row, col+1 , visited, top) + localClusterSearch(field, row+1, col , visited, top)
+                + localClusterSearch(field, row-1, col , visited, top) +localClusterSearch(field, row, col-1 , visited, top);
+
     }
 
-    private static boolean isSafe(int field[][], int row, int col,
-                                  boolean visited[][], int[] top) {
+    private static boolean isSafe(int field[][], int row, int col, boolean visited[][], int[] top) {
         //topmost row is only a validation row for some lose function....
         if ((row >= 0) && (row < field.length-1) && (col >= 0) && (col < field[0].length) && row<top[col]){
             return (field[row][col]==0 && !visited[row][col]);

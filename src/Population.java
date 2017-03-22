@@ -13,16 +13,16 @@ public class Population {
 
     // A set of genes can be fit when testing, but not when it's actually used because the blocks are random as well
     public Individual getFittest() {
-        int fittest = 0;
+        int fittestIdx = 0;
         int bestFitness = 0;
         for (int i=0; i<size(); i++) {
             int currentFitness = getIndividual(i).getFitness();
             if (currentFitness > bestFitness) {
-                fittest = i;
+                fittestIdx = i;
                 bestFitness = currentFitness;
             }
         }
-        return getIndividual(fittest);
+        return getIndividual(fittestIdx);
     }
 
     public int size() {

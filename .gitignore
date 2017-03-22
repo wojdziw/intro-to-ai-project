@@ -1,12 +1,12 @@
 
 /bin/
+*.csv
+
 
 
 # For Eclipse:
 .project
 .classpath
-
-
 
 
 
