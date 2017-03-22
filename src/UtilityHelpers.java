@@ -95,7 +95,7 @@ public class UtilityHelpers {
     }
 
 
-    // simulates the next state based on the move
+    // simulates the next state based on 2 moves
     // puts it in the SimulatedState class as we can't mutate the actual state
     public static SimulatedState calc2_plySimulatedState(State s, int[][] move, int[] nextPiece) {
 
@@ -112,7 +112,7 @@ public class UtilityHelpers {
             int orient = move[level][State.ORIENT];
             int slot = move[level][State.SLOT];
 
-            int turn = 1;
+            int turn = s.getTurnNumber();
 
             //height if the first column makes contact
             int height = top[slot]-pBottom[nextPiece[level]][orient][0];
@@ -124,7 +124,6 @@ public class UtilityHelpers {
             //check if game ended
             if(height+pHeight[nextPiece[level]][orient] >= State.ROWS)
                 return new SimulatedState(field, top, rowsCleared, true);
-
 
             //for each column in the piece - fill in the appropriate blocks
             for(int i = 0; i < pWidth[nextPiece[level]][orient]; i++) {
@@ -139,7 +138,6 @@ public class UtilityHelpers {
             for(int c = 0; c < pWidth[nextPiece[level]][orient]; c++) {
                 top[slot+c]=height+pTop[nextPiece[level]][orient][c];
             }
-
 
             //check for full rows - starting at the top
             for(int r = height+pHeight[nextPiece[level]][orient]-1; r >= height; r--) {
@@ -170,11 +168,6 @@ public class UtilityHelpers {
             }
         }
 
-
-
         return new SimulatedState(field, top, rowsCleared, false);
-
     }
-
-
 }

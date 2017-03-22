@@ -30,7 +30,7 @@ public class GeneticAlgorithm {
 
     private static final int noFeatures = 15 + (State.COLS - 1) + (State.COLS -2); //noFeatures + columnHeightWeights + columnDifferenceWeights
     private static final double maxWeight = 5;
-    private static final int populationSize = 10;
+    private static final int populationSize = 50;
     private static final int noGenerations = 40;
 
     private static final double uniformRate = 0.5;

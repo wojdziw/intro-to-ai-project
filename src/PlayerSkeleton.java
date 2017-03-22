@@ -1,10 +1,5 @@
 /*
-
-The most recent version of stuff as I commit it (Friday 11/03) is in the GeneticAlgorithm file
-Here you can test the working of the Utility Function calculator and the move chooser
-
-LOOK AT LINE 104 FOR TESTING YOUR FUNCTIONS
-
+	A try on 2-ply deep search.
 */
 
 import java.util.Arrays;
@@ -33,25 +28,27 @@ public class PlayerSkeleton {
 				int rowsCleared = simulatedState.getRowsCleared();
 
 				// Calculate utility for Layer 1
-				//double topUtility = calculateUtility(newField, newTop, weights, rowsCleared); // TODO: reinstate?
-				double avgL2Utility = 0.0;
+				double topUtility = calculateUtility(newField, newTop, weights, rowsCleared);
 
+				double avgL2Utility = 0.0;
 
 				// Find the best combination with a second move (2-ply deep)
 				for (int secondPiece = 0; secondPiece < s.N_PIECES; secondPiece++){
 
-					double bestL2Utility = 0.0;
+					double bestL2UtilityForPiece = 0.0;
 
 					// Get legal moves for second piece (somehow...)
 					int[][] secondLegalMoves = dummy.getLegalMoves(secondPiece);
 
 					for (int secondMove = 0; secondMove<secondLegalMoves.length; secondMove++) {
 
+						// Add combination of pieces and moves to arrays
 						int[] bothPieces = {nextPiece, secondPiece};
 						int [][] bothMoves ={legalMoves[move], secondLegalMoves[secondMove]};
 
 						SimulatedState secondState = UtilityHelpers.calc2_plySimulatedState(s, bothMoves, bothPieces);
 
+						// Check if game doesn't end with the two moves
 						if (!secondState.wouldGameFinish()) {
 
 							// If not, simulate the move
@@ -59,30 +56,28 @@ public class PlayerSkeleton {
 							int[] newTop2 = secondState.getTop();
 							int rowsCleared2 = secondState.getRowsCleared();
 
-							// Calculate utility for this set of 2 moves
+							// Calculate utility for state after 2 moves
 							double temp = calculateUtility(newField2, newTop2, weights, rowsCleared2);
 
 							// Find the best move for this piece
-							if(temp > bestL2Utility)
-								bestL2Utility = temp;
+							if(temp > bestL2UtilityForPiece)
+								bestL2UtilityForPiece = temp;
 						}
 					}
 
-					avgL2Utility += bestL2Utility;
+					avgL2Utility += bestL2UtilityForPiece;
 				}
 
 				// Take the average of the best moves for every possible piece
 				avgL2Utility = avgL2Utility / s.N_PIECES;
 
 
-				// Find the move that maximizes the average of next piece
-				if (avgL2Utility > bestUtility) {
+				// Find the best move by combining utility of 1st state and 2nd state
+				if ((avgL2Utility+topUtility) > bestUtility) {
 					bestMove = move;
-					bestUtility = avgL2Utility;
+					bestUtility = (avgL2Utility+topUtility);
 				}
 			}
-			// Print stuff
-			//System.out.println("Looped through move: " + move);
 		}
 
 		return bestMove;
@@ -90,18 +85,10 @@ public class PlayerSkeleton {
 
 	static long[] featureTimeTaken = new long[15];
     static long featureTimesRunned = 0;
+	static long featureTimesRunnedPerIteration = 0;
 	public static double calculateUtility(int[][] field, int[] top, double[] weights, int rowsCleared) {
 		
 		//calculate feature values
-		/*
-        long startTime = System.nanoTime();
-		double feature1 = Features.calculateFeature1(top, field);
-        featureTimeTaken[0] += (System.nanoTime() - startTime);
-
-        startTime = System.nanoTime();
-        double feature2 = Features.calculateFeature2(top, field);
-        featureTimeTaken[1] += (System.nanoTime() - startTime);
-		*/
 		long startTime = System.nanoTime();
 		double[] feature1_2 = Features.calculateFeature1_2(top, field);
 		featureTimeTaken[0] += (System.nanoTime() - startTime);
@@ -114,26 +101,10 @@ public class PlayerSkeleton {
 		double feature4 = Features.calculateFeature4(top, field);
         featureTimeTaken[3] += (System.nanoTime() - startTime);
 
-//      startTime = System.nanoTime();
-//		double feature5 = Features.calculateFeature5(top, field);
-//      featureTimeTaken[4] += (System.nanoTime() - startTime);
-
         startTime = System.nanoTime();
 		double feature6 = Features.calculateFeature6(top, field);
         featureTimeTaken[5] += (System.nanoTime() - startTime);
-/*
-        startTime = System.nanoTime();
-		double feature7 = Features.calculateFeature7(top, field);
-        featureTimeTaken[6] += (System.nanoTime() - startTime);
 
-        startTime = System.nanoTime();
-		double feature8 = Features.calculateFeature8(top, field);
-        featureTimeTaken[7] += (System.nanoTime() - startTime);
-
-        startTime = System.nanoTime();
-		double feature9 = Features.calculateFeature9(top, field);
-        featureTimeTaken[8] += (System.nanoTime() - startTime);
-*/
 		startTime = System.nanoTime();
 		double feature8 = Features.calculateFeature8(top, field);
 		featureTimeTaken[7] += (System.nanoTime() - startTime);
@@ -209,11 +180,6 @@ public class PlayerSkeleton {
 
 			s.makeMove(nextMove);
 
-			//double[] feature1_2 = Features.calculateFeature1_2(s.getTop(), s.getField());
-			//System.out.println("Feature1_2's values are: " + feature1_2[0] + " and: " + feature1_2[1]);
-			//double[] feature7_9 = Features.calculateFeature7_9(s.getTop(), s.getField());
-			//System.out.println("Feature7_9's values are: " + feature7_9[0] + " and: " + feature7_9[1]);
-
 			if (drawing) {
 				try {
 					Thread.sleep(30);
@@ -257,6 +223,11 @@ public class PlayerSkeleton {
         long timeRan = featureTimesRunned;
         long totalruntime  = 0;
 
+        // Get number of times ran for this iteration
+        long iterRun = featureTimesRunned - featureTimesRunnedPerIteration;
+		featureTimesRunnedPerIteration = featureTimesRunned;
+
+
         for (long time: timeTaken){
             totalruntime += time;
         }
@@ -268,6 +239,7 @@ public class PlayerSkeleton {
                 System.out.println("method " +(i + 1) + " - " + e.toString());
             }
         }
+		System.out.println("Total times 'calculateUtility' called this iteration: " + iterRun);
     }
 
 }
