@@ -1,4 +1,7 @@
 package optimizeFeatures;
+import java.util.Map;
+import java.util.TreeMap;
+
 import de.bezier.math.combinatorics.Combination;
 
 /*
@@ -13,7 +16,7 @@ public class OptimizeFourFeatures {
 	private static final int noFeatures = 15 + (State.COLS - 1) + (State.COLS -2); //noFeatures + columnHeightWeights + columnDifferenceWeights
     private static final double maxWeight = 5;
     private static final int populationSize = 50;
-    private static final int noGenerations = 40;
+    private static final int noGenerations = 5;
 
     private static final double uniformRate = 0.5;
     private static final double mutationRate = 0.015;
@@ -93,6 +96,10 @@ public class OptimizeFourFeatures {
 		int bestFitness = 0;
 		int[] bestCombi = null;
 		int[] currentFeatureSet;
+		int noSavedCombinations = 5;
+		
+		TreeMap<Integer, int[]> bestCombinations = new TreeMap<Integer, int[]>();
+	
 		
 		while (combi.hasMore()) {
 			
@@ -102,11 +109,12 @@ public class OptimizeFourFeatures {
 				bestCombi = currentFeatureSet;
 			}
 			
+			System.out.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
 			System.out.println("Currently trying feature combination:");
 			for(int i : currentFeatureSet) {
 				System.out.print(i + " ");
 			}
-			System.out.println("\n- - - - - - - - - -\n");
+			System.out.println("\n- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n");
 			
  			
 			double[][] generationsWeights = new double[noGenerations][noFeatures];
@@ -147,17 +155,42 @@ public class OptimizeFourFeatures {
 	        
 	        
 	        //update the best feature set
-	        if(rowsCleared > bestFitness) {
-	        	bestCombi = currentFeatureSet;
-	        	bestFitness = rowsCleared;
-	        }
 	        
-		}
-		
-		System.out.println("The bestFitness Score is: " + bestFitness);
-		System.out.println("The best combination of features are: ");
-		for(int i : bestCombi) {
-			System.out.println(i + " ");
+	        if(bestCombinations.isEmpty()) {
+	        	bestCombinations.put(rowsCleared, currentFeatureSet);
+	        } else {
+	        	
+	        	 for (Map.Entry<Integer, int[]> entry : bestCombinations.descendingMap().entrySet()) {
+	 	        	
+	 	        	//going from largest key to smallest, if rowsCleared is greater than an existing key or the map is not full, add the entry
+	 	        	if (rowsCleared > entry.getKey() || bestCombinations.size() < noSavedCombinations) {
+	 	 
+	 	        		bestCombinations.put(rowsCleared, currentFeatureSet);
+	 	        		
+	 	        		//if max size of map is reached, remove the smallest entry
+	 	        		if(bestCombinations.size() > noSavedCombinations) {
+	 	        			bestCombinations.remove(bestCombinations.firstEntry());
+	 	        		}
+	 	        		break;
+	 	        	}
+	 	        
+	 	        }
+	        }
+	       
+	        
+	        System.out.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -");
+			System.out.printf("The top %s features are as follows:\n", noSavedCombinations);
+			System.out.printf("%-20s %-20s\n", "Fitness Score","Features");
+			for (Map.Entry<Integer, int[]> entry : bestCombinations.descendingMap().entrySet()) {
+				System.out.printf("%-20s", entry.getKey());
+				for(int i : entry.getValue()) {
+					System.out.print(i + " ");
+				}
+				System.out.println();
+			}
+			System.out.println("- - - - - - - - - - - - - - - - - - - - - - - - - - - - - -\n\n");
+			
+	        
 		}
 		
 
