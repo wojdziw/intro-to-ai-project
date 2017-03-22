@@ -87,16 +87,16 @@ public class OptimizeFourFeatures {
 	
 	public static void main(String[] args) {
 		
-		// Calculate all features each time
-		// but only use certain ones in calculation
+		//Calculate all features each time
+		//but only use certain ones in calculation
 
-		// get all values for C(noGenerations, noWeights)
-		
+		//get all values for C(noGenerations, noWeights)
 		Combination combi = new Combination(15, 4);
-		int bestFitness = 0;
+		
+		int noSavedCombinations = 5;
+		
 		int[] bestCombi = null;
 		int[] currentFeatureSet;
-		int noSavedCombinations = 5;
 		
 		TreeMap<Integer, int[]> bestCombinations = new TreeMap<Integer, int[]>();
 	
@@ -155,7 +155,6 @@ public class OptimizeFourFeatures {
 	        
 	        
 	        //update the best feature set
-	        
 	        if(bestCombinations.isEmpty()) {
 	        	bestCombinations.put(rowsCleared, currentFeatureSet);
 	        } else {
