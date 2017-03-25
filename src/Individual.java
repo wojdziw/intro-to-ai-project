@@ -33,7 +33,7 @@ public class Individual {
                 fitness += PlayerSkeleton.playAGame(weights, false, false);
 
             // Get average
-            fitness = fitness/n; // TODO: return median instead?
+            fitness = fitness/n; // TODO: return median instead? <- why? We average to get rid of the stochastic noise due to random piece-picking
         }
         return fitness;
     }
