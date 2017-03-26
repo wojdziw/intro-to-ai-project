@@ -115,6 +115,7 @@ public class GeneticAlgorithm {
             int fitness=bestInd.getFitness();
             generationsResults[generation][0] = fitness;
             System.out.println("Generation: " + (generation+1) + " Fittest: " + fitness);
+            bestInd.printGenes();
             //fitness=bestInd.getFitness(); // Will return same value always! (Regardless if we use bestInd or myPop.getFittest() again)
             //generationsResults[generation][1] = fitness;
             //System.out.println("   second calculation: " + fitness);
