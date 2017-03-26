@@ -5,12 +5,24 @@ Credit: https://gandhim.wordpress.com/2010/04/04/particle-swarm-optimization-pso
 import java.util.Random;
 import java.util.Vector;
 
-public class PSOProcess implements PSOConstants {
-    private Vector<Particle> swarm = new Vector<Particle>();
+public class ParticleSwarmAlgorithm {
+
+    private int SWARM_SIZE = 30;
+    private int MAX_ITERATION = 300;
+    private int NO_FEATURES = 33;
+    private double RANGE = 10;
+    private double VELOCITY_RANGE = 0.5;
+
+    private double C1 = 2.0;
+    private double C2 = 2.0;
+    private double W_UPPERBOUND = 1.0;
+    private double W_LOWERBOUND = 0.0;
+
+    private Vector<Particle> swarm = new Vector<>();
     private double[] pBest = new double[SWARM_SIZE];
-    private Vector<Location> pBestLocation = new Vector<Location>();
+    private Vector<double[]> pBestLocation = new Vector<>();
     private double gBest;
-    private Location gBestLocation;
+    private double[] gBestLocation;
     private double[] fitnessValueList = new double[SWARM_SIZE];
 
     Random generator = new Random();
@@ -37,7 +49,7 @@ public class PSOProcess implements PSOConstants {
             }
 
             // step 2 - update gBest
-            int bestParticleIndex = PSOUtility.getMaxPos(fitnessValueList);
+            int bestParticleIndex = getMaxPos(fitnessValueList);
             if(t == 0 || fitnessValueList[bestParticleIndex] > gBest) {
                 gBest = fitnessValueList[bestParticleIndex];
                 gBestLocation = swarm.get(bestParticleIndex).getLocation();
@@ -54,31 +66,27 @@ public class PSOProcess implements PSOConstants {
                 // step 3 - update velocity
                 double[] newVel = new double[NO_FEATURES];
                 for (int j=0; j<NO_FEATURES; j++) {
-                    newVel[j] = (w * p.getVelocity().getVel()[j]) +
-                            (r1 * C1) * (pBestLocation.get(i).getLoc()[j] - p.getLocation().getLoc()[j]) +
-                            (r2 * C2) * (gBestLocation.getLoc()[j] - p.getLocation().getLoc()[j]);
+                    newVel[j] = (w * p.getVelocity()[j]) +
+                            (r1 * C1) * (pBestLocation.get(i)[j] - p.getLocation()[j]) +
+                            (r2 * C2) * (gBestLocation[j] - p.getLocation()[j]);
                 }
-                Velocity vel = new Velocity(newVel);
-                p.setVelocity(vel);
+                p.setVelocity(newVel);
 
                 // step 4 - update location
                 double[] newLoc = new double[NO_FEATURES+1];
                 for (int j=0; j<NO_FEATURES; j++) {
-                    newLoc[j] = p.getLocation().getLoc()[j] + newVel[j];
+                    newLoc[j] = p.getLocation()[j] + newVel[j];
                 }
-                Location loc = new Location(newLoc);
-                p.setLocation(loc);
+                p.setLocation(newLoc);
             }
 
             double fitness = 0;
             int n = 10;
             // Averaging over N games to mitigate the impact of the random piece choice
             for (int i=0; i<n; i++)
-                fitness += PlayerSkeleton.playAGame(gBestLocation.getLoc(), false, false);
+                fitness += PlayerSkeleton.playAGame(gBestLocation, false, false);
             // Get average
             fitness /= n;
-
-
 
             System.out.println("ITERATION " + t + ": ");
             System.out.println("     Value: " + fitness);
@@ -86,10 +94,10 @@ public class PSOProcess implements PSOConstants {
             t++;
             updateFitnessList();
         }
-
-        System.out.println("\nSolution found at iteration " + (t - 1) + ", the solutions is:");
-        System.out.println("     Best X: " + gBestLocation.getLoc()[0]);
-        System.out.println("     Best Y: " + gBestLocation.getLoc()[1]);
+        for (int j=0; j<NO_FEATURES+1; j++) {
+            System.out.print(gBestLocation[j] + " ");
+        }
+        System.out.println("");
     }
 
     public void initializeSwarm() {
@@ -105,18 +113,15 @@ public class PSOProcess implements PSOConstants {
                 loc[j] = plusMinus * RANGE * Math.random();
             }
 
-            Location location = new Location(loc);
-
             // randomize velocity in the range defined in Problem Set
             double[] vel = new double[NO_FEATURES+1];
             for (int j=0; j<NO_FEATURES+1; j++) { // +1 so we initialize the last weight as well
                 int plusMinus = Math.random() > 0.5 ? -1 : 1;
                 vel[j] = plusMinus * VELOCITY_RANGE * Math.random();
             }
-            Velocity velocity = new Velocity(vel);
 
-            p.setLocation(location);
-            p.setVelocity(velocity);
+            p.setLocation(loc);
+            p.setVelocity(vel);
             swarm.add(p);
         }
     }
@@ -125,5 +130,23 @@ public class PSOProcess implements PSOConstants {
         for(int i=0; i<SWARM_SIZE; i++) {
             fitnessValueList[i] = swarm.get(i).getFitnessValue();
         }
+    }
+
+    public static int getMaxPos(double[] list) {
+        int pos = 0;
+        double maxValue = list[0];
+
+        for(int i=0; i<list.length; i++) {
+            if(list[i] > maxValue) {
+                pos = i;
+                maxValue = list[i];
+            }
+        }
+
+        return pos;
+    }
+
+    public static void main(String[] args) {
+        new ParticleSwarmAlgorithm().execute();
     }
 }
