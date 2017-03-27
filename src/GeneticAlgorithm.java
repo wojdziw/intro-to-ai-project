@@ -26,8 +26,9 @@ public class GeneticAlgorithm {
     private double mutationRate;
     private int tournamentSize;
     private boolean elitism;
+    private FitnessCalculator fitnessCalculator;
 
-    public GeneticAlgorithm(int noWeights, double maxWeight, int populationSize, int noGenerations, double uniformRate, double mutationRate, int tournamentSize, boolean elitism) {
+    public GeneticAlgorithm(int noWeights, double maxWeight, int populationSize, int noGenerations, double uniformRate, double mutationRate, int tournamentSize, boolean elitism, FitnessCalculator fitnessCalculator) {
         this.noWeights = noWeights;
         this.maxWeight = maxWeight;
         this.populationSize = populationSize;
@@ -36,10 +37,11 @@ public class GeneticAlgorithm {
         this.mutationRate = mutationRate;
         this.tournamentSize = tournamentSize;
         this.elitism = elitism;
+        this.fitnessCalculator = fitnessCalculator;
     }
 
     private Population evolvePopulation(Population pop) {
-        Population newPopulation = new Population(pop.size(), false, noWeights, maxWeight);
+        Population newPopulation = new Population(pop.size(), false, noWeights, maxWeight, fitnessCalculator);
 
         if (elitism)
             newPopulation.setIndividual(0, pop.getFittest());
@@ -65,7 +67,7 @@ public class GeneticAlgorithm {
     }
 
     private Individual crossover(Individual indiv1, Individual indiv2) {
-        Individual newSol = new Individual(noWeights, maxWeight);
+        Individual newSol = new Individual(noWeights, maxWeight, fitnessCalculator);
         // Loop through genes
         for (int i = 0; i< noWeights; i++) {
             // Crossover
@@ -92,7 +94,7 @@ public class GeneticAlgorithm {
     // Tournament is picking a random sample of a chosen size and choosing the fittest out of that
     private Individual tournamentSelection(Population pop) {
         // Create a tournament population
-        Population tournament = new Population(tournamentSize, false, noWeights, maxWeight);
+        Population tournament = new Population(tournamentSize, false, noWeights, maxWeight, fitnessCalculator);
         for (int i = 0; i<tournamentSize; i++) {
             int randomId = (int) (Math.random() * pop.size());
             tournament.setIndividual(i, pop.getIndividual(randomId));
@@ -102,42 +104,43 @@ public class GeneticAlgorithm {
 
     public void execute() {
 
-        Population myPop = new Population(populationSize, true, noWeights, maxWeight);
+        Population myPop = new Population(populationSize, true, noWeights, maxWeight, fitnessCalculator);
 
-        double[][] generationsWeights = new double[noGenerations][noWeights];
-        int[][] generationsResults =  new int[noGenerations][2];
+        //double[][] generationsWeights = new double[noGenerations][noWeights];
+        //int[][] generationsResults =  new int[noGenerations][2];
 
-        long startTime = System.nanoTime();
+        //long startTime = System.nanoTime();
 
         for (int generation = 0; generation< noGenerations; generation++) {
 
             myPop = evolvePopulation(myPop);
             myPop.printStats(generation);
 
-//            generationsResults[generation][0] = myPop.getFittest().getFitness();
-//            generationsWeights[generation]=myPop.getFittest().getGenes();
-//
-//            long iterTime = (System.nanoTime() - startTime)/1000000000;
-//            System.out.println("Time for iteration: " + iterTime + "s");
-//            startTime = System.nanoTime();
+            //generationsResults[generation][0] = myPop.getFittest().getFitness();
+            //generationsWeights[generation]=myPop.getFittest().getGenes();
 
+            //long iterTime = (System.nanoTime() - startTime)/1000000000;
+            //System.out.println("Time for iteration: " + iterTime + "s");
+            //startTime = System.nanoTime();
+
+            System.out.println("------------------------------------------------");
         }
 
-//        saveToCsv.writeCsvFile("geneticRun", generationsResults, generationsWeights);
+        //saveToCsv.writeCsvFile("geneticRun", generationsResults, generationsWeights);
     }
 
     public static void main(String[] args) {
         int noWeights = Features.getNumberOfWeights();
         double maxWeight = 5;
         int populationSize = 50;
-        int noGenerations = 40;
+        int noGenerations = 3;
 
         double uniformRate = 0.5;
         double mutationRate = 0.015;
         int tournamentSize = 5;
         boolean elitism = true;
 
-        GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, uniformRate, mutationRate, tournamentSize, elitism);
+        GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, uniformRate, mutationRate, tournamentSize, elitism, new PlayerSkeleton());
         geneticAlgorithm.execute();
     }
 

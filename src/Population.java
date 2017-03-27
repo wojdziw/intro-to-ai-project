@@ -1,12 +1,12 @@
 public class Population {
     private Individual[] individuals;
 
-    public Population(int populationSize, boolean initialise, int noFeatures, double maxWeight) {
+    public Population(int populationSize, boolean initialise, int noFeatures, double maxWeight, FitnessCalculator fitnessCalculator) {
         individuals = new Individual[populationSize];
 
         if (initialise)
             for (int i=0; i<size(); i++) {
-                Individual newIndividual = new Individual(noFeatures, maxWeight);
+                Individual newIndividual = new Individual(noFeatures, maxWeight, fitnessCalculator);
                 setIndividual(i, newIndividual);
             }
     }
@@ -42,7 +42,6 @@ public class Population {
         int fitness=bestInd.getFitness();
         System.out.println("Generation: " + (generation+1) + " Fittest: " + fitness);
         bestInd.printGenes();
-        System.out.println("------------------------------------------------");
     }
 }
 

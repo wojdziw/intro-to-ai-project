@@ -10,7 +10,7 @@ LOOK AT LINE 104 FOR TESTING YOUR FUNCTIONS
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class PlayerSkeleton {
+public class PlayerSkeleton implements FitnessCalculator {
 	
 	public int pickMove(State s, int[][] legalMoves, double[] weights) {
 
@@ -85,14 +85,20 @@ public class PlayerSkeleton {
 
 	// Returns the score (number of rows cleared) based on the strategy i.e. the weights of the utility function
 	public static int playNGames(double[] weights, boolean drawing, boolean waitForEnter, int N) {
-		int n = 10;
 		int fitness = 0;
 		// Averaging over N games to mitigate the impact of the random piece choice
-		for (int i=0; i<n; i++)
+		for (int i=0; i<N; i++)
 			fitness += PlayerSkeleton.playAGame(weights, false, false);
 
 		// Get average
 		return fitness/N;
+	}
+
+	public int calculateFitness(double[] weights) {
+		int N = 10;
+		boolean drawing = false;
+		boolean waitForEnter = false;
+		return playNGames(weights, drawing, waitForEnter, N);
 	}
 
 	public static void main(String[] args) {

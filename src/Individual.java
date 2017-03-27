@@ -5,10 +5,12 @@ public class Individual {
 
     private double[] weights;
     private int fitness = 0;
+    private FitnessCalculator fitnessCalculator;
 
-    public Individual(int noFeatures, double maxWeight) {
-        weights = new double[noFeatures];
-            for (int i=0; i<noFeatures; i++) {
+    public Individual(int noWeights, double maxWeight, FitnessCalculator fitnessCalculator) {
+        this.fitnessCalculator = fitnessCalculator;
+        weights = new double[noWeights];
+            for (int i=0; i<noWeights; i++) {
                 int plusMinus = Math.random() > 0.5 ? -1 : 1;
                 weights[i] = plusMinus * maxWeight * Math.random();
             }
@@ -26,7 +28,7 @@ public class Individual {
 
         if (fitness==0) {
             int N = 10;
-            fitness = PlayerSkeleton.playNGames(weights, false, false, N);
+            fitness = fitnessCalculator.calculateFitness(weights);
         }
 
         return fitness;
