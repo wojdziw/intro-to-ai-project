@@ -7,23 +7,7 @@ import static java.lang.Math.min;
 public class Features {
 
     //1 + 13 + (State.COLS) + (State.COLS-1) - this is the most weights we can have
-    public static int[] f0 = {0};
-    public static int[] f1 = {1};
-    public static int[] f2 = {1};
-    public static int[] f3 = {1};
-    public static int[] f4 = {1};
-    public static int[] f5 = {1};
-    public static int[] f6 = {1};
-    public static int[] f7 = {1};
-    public static int[] f8 = {1};
-    public static int[] f9 = {1};
-    public static int[] f10 = {1};
-    public static int[] f11 = {1};
-    public static int[] f12 = {1};
-    public static int[] f13 = {1};
-    public static int[] f14 = {1};
-    public static int[] f15 = {1};
-
+    // These list down the weights related to each of the features
     public static Map<Integer, List<Integer>> featureWeights;
     static {
         featureWeights = new HashMap<>();
@@ -44,7 +28,8 @@ public class Features {
         featureWeights.put(14, Arrays.asList(14,15,16,17,18,19,20,21,22));
         featureWeights.put(15, Arrays.asList(23,24,25,26,27,28,29,30,31,32,33));
     }
-
+    // HERE WE CHOOSE THE SUBSET OF FEATURES WE WANT TO TEST
+    // Add features by choosing appropriate lists in here
     public static List<Integer> subset = new ArrayList<>();
     static {
         subset.addAll(featureWeights.get(0));
@@ -293,24 +278,25 @@ public class Features {
     }
 
     // subset size should be the same as the number of weights
+    // no time statistics sadly
     public static double calculateUtility(int[][] field, int[] top, double[] weights, int rowsCleared) {
 
         // Here are all the features
-        double[] feature1_2 = Features.calculateFeature1_2(top, field);
-        double feature3 = Features.calculateFeature3(top, field);
-        double feature4 = Features.calculateFeature4(top, field);
-        double feature6 = Features.calculateFeature6(top, field);
-        double feature8 = Features.calculateFeature8(top, field);
-        double[] feature7_9 = Features.calculateFeature7_9(top, field);
-        double feature10 = Features.calculateFeature10(top, field);
-        double feature11 = Features.calculateFeature11(top, field);
-        double feature12 = Features.calculateFeature12(top, field);
-        double feature13 = Features.calculateFeature13(top, field);
-        double[] feature14 = Features.calculateFeature14(top, field);
-        double[] feature15 = Features.calculateFeature15(top, field);
+        double[] feature1_2 = subset.contains(1) || subset.contains(2) ? Features.calculateFeature1_2(top, field) : new double[2];
+        double feature3 = subset.contains(3) ? Features.calculateFeature3(top, field) : 0.0;
+        double feature4 = subset.contains(4) ? Features.calculateFeature4(top, field) : 0.0;
+        double feature6 = subset.contains(6) ? Features.calculateFeature6(top, field) : 0.0;
+        double feature8 = subset.contains(8) ? Features.calculateFeature8(top, field) : 0.0;
+        double[] feature7_9 = subset.contains(7) || subset.contains(9) ? Features.calculateFeature7_9(top, field) : new double[2];
+        double feature10 = subset.contains(10) ? Features.calculateFeature10(top, field) : 0.0;
+        double feature11 = subset.contains(11) ? Features.calculateFeature11(top, field) : 0.0;
+        double feature12 = subset.contains(12) ? Features.calculateFeature12(top, field) : 0.0;
+        double feature13 = subset.contains(13) ? Features.calculateFeature13(top, field) : 0.0;
+        double[] feature14 = subset.contains(14) ? Features.calculateFeature14(top, field) : new double[10];
+        double[] feature15 = subset.contains(23) ? Features.calculateFeature15(top, field) : new double[9];
 
         // Plus 1 for bias
-        int numberOfAllWeights = 15 + (State.COLS - 1) + (State.COLS -2) + 1;
+        int numberOfAllWeights = 1 + 13 + (State.COLS) + (State.COLS-1);
 
         // The weights inputted only refer to the subset
         // Need to convert that to a weight vector referring to all the features

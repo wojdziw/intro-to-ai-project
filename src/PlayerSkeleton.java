@@ -10,7 +10,7 @@ LOOK AT LINE 104 FOR TESTING YOUR FUNCTIONS
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class PlayerSkeleton implements FitnessCalculator {
+public class PlayerSkeleton{
 	
 	public int pickMove(State s, int[][] legalMoves, double[] weights) {
 

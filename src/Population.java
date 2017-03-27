@@ -1,12 +1,12 @@
 public class Population {
     private Individual[] individuals;
 
-    public Population(int populationSize, boolean initialise, int noFeatures, double maxWeight, FitnessCalculator fitnessCalculator) {
+    public Population(int populationSize, boolean initialise, int noFeatures, double maxWeight) {
         individuals = new Individual[populationSize];
 
         if (initialise)
             for (int i=0; i<size(); i++) {
-                Individual newIndividual = new Individual(noFeatures, maxWeight, fitnessCalculator);
+                Individual newIndividual = new Individual(noFeatures, maxWeight);
                 setIndividual(i, newIndividual);
             }
     }
