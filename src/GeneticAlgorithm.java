@@ -17,17 +17,28 @@
 
 public class GeneticAlgorithm {
 
-    private static final int noWeights = Features.getNumberOfWeights();
-    private static final double maxWeight = 5;
-    private static final int populationSize = 50;
-    private static final int noGenerations = 50;
+    private int noWeights;
+    private double maxWeight;
+    private int populationSize;
+    private int noGenerations;
 
-    private static final double uniformRate = 0.5;
-    private static final double mutationRate = 0.015;
-    private static int tournamentSize = 5;
-    private static final boolean elitism = true;
+    private double uniformRate;
+    private double mutationRate;
+    private int tournamentSize;
+    private boolean elitism;
 
-    public static Population evolvePopulation(Population pop) {
+    public GeneticAlgorithm(int noWeights, double maxWeight, int populationSize, int noGenerations, double uniformRate, double mutationRate, int tournamentSize, boolean elitism) {
+        this.noWeights = noWeights;
+        this.maxWeight = maxWeight;
+        this.populationSize = populationSize;
+        this.noGenerations = noGenerations;
+        this.uniformRate = uniformRate;
+        this.mutationRate = mutationRate;
+        this.tournamentSize = tournamentSize;
+        this.elitism = elitism;
+    }
+
+    private Population evolvePopulation(Population pop) {
         Population newPopulation = new Population(pop.size(), false, noWeights, maxWeight);
 
         if (elitism)
@@ -53,7 +64,7 @@ public class GeneticAlgorithm {
         return newPopulation;
     }
 
-    private static Individual crossover(Individual indiv1, Individual indiv2) {
+    private Individual crossover(Individual indiv1, Individual indiv2) {
         Individual newSol = new Individual(noWeights, maxWeight);
         // Loop through genes
         for (int i = 0; i< noWeights; i++) {
@@ -67,7 +78,7 @@ public class GeneticAlgorithm {
         return newSol;
     }
 
-    private static void mutate(Individual indiv) {
+    private void mutate(Individual indiv) {
         //Loop through genes
         for (int i = 0; i< noWeights; i++) {
             if (Math.random() <= mutationRate) {
@@ -79,7 +90,7 @@ public class GeneticAlgorithm {
     }
 
     // Tournament is picking a random sample of a chosen size and choosing the fittest out of that
-    private static Individual tournamentSelection(Population pop) {
+    private Individual tournamentSelection(Population pop) {
         // Create a tournament population
         Population tournament = new Population(tournamentSize, false, noWeights, maxWeight);
         for (int i = 0; i<tournamentSize; i++) {
@@ -89,7 +100,7 @@ public class GeneticAlgorithm {
         return tournament.getFittest();
     }
 
-    public static void execute() {
+    public void execute() {
 
         Population myPop = new Population(populationSize, true, noWeights, maxWeight);
 
@@ -116,8 +127,18 @@ public class GeneticAlgorithm {
     }
 
     public static void main(String[] args) {
+        int noWeights = Features.getNumberOfWeights();
+        double maxWeight = 5;
+        int populationSize = 50;
+        int noGenerations = 40;
 
-        execute();
+        double uniformRate = 0.5;
+        double mutationRate = 0.015;
+        int tournamentSize = 5;
+        boolean elitism = true;
+
+        GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, uniformRate, mutationRate, tournamentSize, elitism);
+        geneticAlgorithm.execute();
     }
 
 }

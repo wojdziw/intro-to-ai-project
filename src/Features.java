@@ -1,5 +1,5 @@
 
-import java.util.Arrays;
+import java.util.*;
 
 import static java.lang.Math.min;
 
@@ -7,11 +7,56 @@ import static java.lang.Math.min;
 public class Features {
 
     //1 + 13 + (State.COLS) + (State.COLS-1) - this is the most weights we can have
-    public static int[] subset = new int[]{0,7,9,24,25,26,27,28,29,30,31,32};
+    public static int[] f0 = {0};
+    public static int[] f1 = {1};
+    public static int[] f2 = {1};
+    public static int[] f3 = {1};
+    public static int[] f4 = {1};
+    public static int[] f5 = {1};
+    public static int[] f6 = {1};
+    public static int[] f7 = {1};
+    public static int[] f8 = {1};
+    public static int[] f9 = {1};
+    public static int[] f10 = {1};
+    public static int[] f11 = {1};
+    public static int[] f12 = {1};
+    public static int[] f13 = {1};
+    public static int[] f14 = {1};
+    public static int[] f15 = {1};
+
+    public static Map<Integer, List<Integer>> featureWeights;
+    static {
+        featureWeights = new HashMap<>();
+        featureWeights.put(0, Arrays.asList(0));
+        featureWeights.put(1, Arrays.asList(1));
+        featureWeights.put(2, Arrays.asList(2));
+        featureWeights.put(3, Arrays.asList(3));
+        featureWeights.put(4, Arrays.asList(4));
+        featureWeights.put(5, Arrays.asList(5));
+        featureWeights.put(6, Arrays.asList(6));
+        featureWeights.put(7, Arrays.asList(7));
+        featureWeights.put(8, Arrays.asList(8));
+        featureWeights.put(9, Arrays.asList(9));
+        featureWeights.put(10, Arrays.asList(10));
+        featureWeights.put(11, Arrays.asList(11));
+        featureWeights.put(12, Arrays.asList(12));
+        featureWeights.put(13, Arrays.asList(13));
+        featureWeights.put(14, Arrays.asList(14,15,16,17,18,19,20,21,22));
+        featureWeights.put(15, Arrays.asList(24,25,26,27,28,29,30,31,32,33));
+    }
+
+    public static List<Integer> subset = new ArrayList<>();
+    static {
+        subset.addAll(featureWeights.get(0));
+        subset.addAll(featureWeights.get(7));
+        subset.addAll(featureWeights.get(9));
+        subset.addAll(featureWeights.get(11));
+        subset.addAll(featureWeights.get(15));
+    }
 
     // THIS INCLUDES THE BIAS
     public static int getNumberOfWeights() {
-        return subset.length;
+        return subset.size();
     }
 
     // FEATURE 1 + 2
@@ -274,8 +319,8 @@ public class Features {
         int subsetIdx = 0;
 
         for (int i=0; i<allWeights.length; i++) {
-            if (subsetIdx<subset.length) {
-                if (i==subset[subsetIdx]) {
+            if (subsetIdx<subset.size()) {
+                if (i==subset.get(subsetIdx)) {
                     allWeights[i] = weights[subsetIdx++];
                     continue;
                 }
