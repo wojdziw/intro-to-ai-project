@@ -28,7 +28,7 @@
 
 public class GeneticAlgorithm {
 
-    private static final int noFeatures = 15 + (State.COLS - 1) + (State.COLS -2); //noFeatures + columnHeightWeights + columnDifferenceWeights
+    private static final int noFeatures = Features.getNumberOfFeatures();
     private static final double maxWeight = 5;
     private static final int populationSize = 50;
     private static final int noGenerations = 50;
@@ -125,7 +125,7 @@ public class GeneticAlgorithm {
             System.out.println("Time for iteration: " + iterTime + "s");
             startTime = System.nanoTime();
 
-            PlayerSkeleton.printRuntimeStatistics();
+            Features.printRuntimeStatistics();
             System.out.println("- - - - - - - - - - - - - -");
             generationsWeights[generation]=bestInd.getGenes();
             myPop = evolvePopulation(myPop);
