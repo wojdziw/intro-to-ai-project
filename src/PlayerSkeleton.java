@@ -94,13 +94,6 @@ public class PlayerSkeleton{
 		return fitness/N;
 	}
 
-	public int calculateFitness(double[] weights) {
-		int N = 10;
-		boolean drawing = false;
-		boolean waitForEnter = false;
-		return playNGames(weights, drawing, waitForEnter, N);
-	}
-
 	public static void main(String[] args) {
 
 		// Initialize the feature weight to something
