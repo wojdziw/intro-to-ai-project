@@ -61,4 +61,4 @@ fabric.properties
 /src/output
 /src/jobs
 
-.class
+*.class
