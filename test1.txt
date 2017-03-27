@@ -1,0 +1,724 @@
+Generation: 1 Fittest: 8
+Time for iteration: 1s
+method 1 - Avg time taken: 220ns , % of runtime: 7%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 67ns , % of runtime: 2%
+method 4 - Avg time taken: 51ns , % of runtime: 1%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 65ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 49ns , % of runtime: 1%
+method 9 - Avg time taken: 2033ns , % of runtime: 71%
+method 10 - Avg time taken: 63ns , % of runtime: 2%
+method 11 - Avg time taken: 80ns , % of runtime: 2%
+method 12 - Avg time taken: 48ns , % of runtime: 1%
+method 13 - Avg time taken: 41ns , % of runtime: 1%
+method 14 - Avg time taken: 57ns , % of runtime: 2%
+method 15 - Avg time taken: 66ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 2 Fittest: 20
+Time for iteration: 9s
+method 1 - Avg time taken: 200ns , % of runtime: 7%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 63ns , % of runtime: 2%
+method 4 - Avg time taken: 48ns , % of runtime: 1%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 60ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 47ns , % of runtime: 1%
+method 9 - Avg time taken: 1954ns , % of runtime: 72%
+method 10 - Avg time taken: 57ns , % of runtime: 2%
+method 11 - Avg time taken: 73ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 40ns , % of runtime: 1%
+method 14 - Avg time taken: 52ns , % of runtime: 1%
+method 15 - Avg time taken: 59ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 3 Fittest: 32
+Time for iteration: 7s
+method 1 - Avg time taken: 207ns , % of runtime: 7%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 63ns , % of runtime: 2%
+method 4 - Avg time taken: 49ns , % of runtime: 1%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 61ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 47ns , % of runtime: 1%
+method 9 - Avg time taken: 1953ns , % of runtime: 72%
+method 10 - Avg time taken: 58ns , % of runtime: 2%
+method 11 - Avg time taken: 75ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 40ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 1%
+method 15 - Avg time taken: 61ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 4 Fittest: 65
+Time for iteration: 4s
+method 1 - Avg time taken: 213ns , % of runtime: 7%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 63ns , % of runtime: 2%
+method 4 - Avg time taken: 50ns , % of runtime: 1%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 61ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 47ns , % of runtime: 1%
+method 9 - Avg time taken: 1925ns , % of runtime: 71%
+method 10 - Avg time taken: 58ns , % of runtime: 2%
+method 11 - Avg time taken: 75ns , % of runtime: 2%
+method 12 - Avg time taken: 40ns , % of runtime: 1%
+method 13 - Avg time taken: 41ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 1%
+method 15 - Avg time taken: 61ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 5 Fittest: 72
+Time for iteration: 5s
+method 1 - Avg time taken: 217ns , % of runtime: 8%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 63ns , % of runtime: 2%
+method 4 - Avg time taken: 51ns , % of runtime: 1%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 62ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 46ns , % of runtime: 1%
+method 9 - Avg time taken: 1872ns , % of runtime: 70%
+method 10 - Avg time taken: 58ns , % of runtime: 2%
+method 11 - Avg time taken: 74ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 41ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 62ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 6 Fittest: 149
+Time for iteration: 7s
+method 1 - Avg time taken: 220ns , % of runtime: 8%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 63ns , % of runtime: 2%
+method 4 - Avg time taken: 52ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 63ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 46ns , % of runtime: 1%
+method 9 - Avg time taken: 1815ns , % of runtime: 70%
+method 10 - Avg time taken: 58ns , % of runtime: 2%
+method 11 - Avg time taken: 74ns , % of runtime: 2%
+method 12 - Avg time taken: 40ns , % of runtime: 1%
+method 13 - Avg time taken: 41ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 62ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 7 Fittest: 149
+Time for iteration: 8s
+method 1 - Avg time taken: 222ns , % of runtime: 8%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 62ns , % of runtime: 2%
+method 4 - Avg time taken: 52ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 63ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 45ns , % of runtime: 1%
+method 9 - Avg time taken: 1764ns , % of runtime: 69%
+method 10 - Avg time taken: 57ns , % of runtime: 2%
+method 11 - Avg time taken: 73ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 41ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 62ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 8 Fittest: 149
+Time for iteration: 9s
+method 1 - Avg time taken: 221ns , % of runtime: 8%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 62ns , % of runtime: 2%
+method 4 - Avg time taken: 52ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 62ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 44ns , % of runtime: 1%
+method 9 - Avg time taken: 1718ns , % of runtime: 69%
+method 10 - Avg time taken: 57ns , % of runtime: 2%
+method 11 - Avg time taken: 72ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 40ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 61ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 9 Fittest: 149
+Time for iteration: 10s
+method 1 - Avg time taken: 222ns , % of runtime: 9%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 62ns , % of runtime: 2%
+method 4 - Avg time taken: 53ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 63ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 44ns , % of runtime: 1%
+method 9 - Avg time taken: 1697ns , % of runtime: 68%
+method 10 - Avg time taken: 57ns , % of runtime: 2%
+method 11 - Avg time taken: 71ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 41ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 61ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 10 Fittest: 149
+Time for iteration: 11s
+method 1 - Avg time taken: 223ns , % of runtime: 9%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 62ns , % of runtime: 2%
+method 4 - Avg time taken: 53ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 63ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 44ns , % of runtime: 1%
+method 9 - Avg time taken: 1673ns , % of runtime: 68%
+method 10 - Avg time taken: 56ns , % of runtime: 2%
+method 11 - Avg time taken: 71ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 41ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 61ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 11 Fittest: 149
+Time for iteration: 10s
+method 1 - Avg time taken: 223ns , % of runtime: 9%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 62ns , % of runtime: 2%
+method 4 - Avg time taken: 53ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 63ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 44ns , % of runtime: 1%
+method 9 - Avg time taken: 1656ns , % of runtime: 68%
+method 10 - Avg time taken: 56ns , % of runtime: 2%
+method 11 - Avg time taken: 71ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 40ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 61ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 12 Fittest: 149
+Time for iteration: 10s
+method 1 - Avg time taken: 223ns , % of runtime: 9%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 62ns , % of runtime: 2%
+method 4 - Avg time taken: 53ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 63ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 43ns , % of runtime: 1%
+method 9 - Avg time taken: 1644ns , % of runtime: 68%
+method 10 - Avg time taken: 56ns , % of runtime: 2%
+method 11 - Avg time taken: 70ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 40ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 61ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 13 Fittest: 149
+Time for iteration: 10s
+method 1 - Avg time taken: 223ns , % of runtime: 9%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 62ns , % of runtime: 2%
+method 4 - Avg time taken: 53ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 63ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 43ns , % of runtime: 1%
+method 9 - Avg time taken: 1635ns , % of runtime: 68%
+method 10 - Avg time taken: 56ns , % of runtime: 2%
+method 11 - Avg time taken: 70ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 40ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 61ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 14 Fittest: 167
+Time for iteration: 11s
+method 1 - Avg time taken: 223ns , % of runtime: 9%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 62ns , % of runtime: 2%
+method 4 - Avg time taken: 53ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 63ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 43ns , % of runtime: 1%
+method 9 - Avg time taken: 1625ns , % of runtime: 67%
+method 10 - Avg time taken: 55ns , % of runtime: 2%
+method 11 - Avg time taken: 70ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 40ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 61ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 15 Fittest: 167
+Time for iteration: 10s
+method 1 - Avg time taken: 223ns , % of runtime: 9%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 62ns , % of runtime: 2%
+method 4 - Avg time taken: 53ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 63ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 43ns , % of runtime: 1%
+method 9 - Avg time taken: 1618ns , % of runtime: 67%
+method 10 - Avg time taken: 55ns , % of runtime: 2%
+method 11 - Avg time taken: 70ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 40ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 61ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 16 Fittest: 172
+Time for iteration: 11s
+method 1 - Avg time taken: 224ns , % of runtime: 9%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 62ns , % of runtime: 2%
+method 4 - Avg time taken: 53ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 63ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 43ns , % of runtime: 1%
+method 9 - Avg time taken: 1614ns , % of runtime: 67%
+method 10 - Avg time taken: 55ns , % of runtime: 2%
+method 11 - Avg time taken: 70ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 40ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 61ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 17 Fittest: 193
+Time for iteration: 11s
+method 1 - Avg time taken: 224ns , % of runtime: 9%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 62ns , % of runtime: 2%
+method 4 - Avg time taken: 53ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 63ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 43ns , % of runtime: 1%
+method 9 - Avg time taken: 1612ns , % of runtime: 67%
+method 10 - Avg time taken: 55ns , % of runtime: 2%
+method 11 - Avg time taken: 70ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 40ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 61ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 18 Fittest: 193
+Time for iteration: 12s
+method 1 - Avg time taken: 224ns , % of runtime: 9%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 62ns , % of runtime: 2%
+method 4 - Avg time taken: 53ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 63ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 43ns , % of runtime: 1%
+method 9 - Avg time taken: 1607ns , % of runtime: 67%
+method 10 - Avg time taken: 55ns , % of runtime: 2%
+method 11 - Avg time taken: 70ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 40ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 61ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 19 Fittest: 233
+Time for iteration: 13s
+method 1 - Avg time taken: 225ns , % of runtime: 9%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 62ns , % of runtime: 2%
+method 4 - Avg time taken: 53ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 63ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 43ns , % of runtime: 1%
+method 9 - Avg time taken: 1606ns , % of runtime: 67%
+method 10 - Avg time taken: 55ns , % of runtime: 2%
+method 11 - Avg time taken: 70ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 40ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 61ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 20 Fittest: 247
+Time for iteration: 12s
+method 1 - Avg time taken: 225ns , % of runtime: 9%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 62ns , % of runtime: 2%
+method 4 - Avg time taken: 53ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 63ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 43ns , % of runtime: 1%
+method 9 - Avg time taken: 1603ns , % of runtime: 67%
+method 10 - Avg time taken: 55ns , % of runtime: 2%
+method 11 - Avg time taken: 70ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 40ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 61ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 21 Fittest: 251
+Time for iteration: 12s
+method 1 - Avg time taken: 225ns , % of runtime: 9%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 62ns , % of runtime: 2%
+method 4 - Avg time taken: 53ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 63ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 43ns , % of runtime: 1%
+method 9 - Avg time taken: 1603ns , % of runtime: 67%
+method 10 - Avg time taken: 55ns , % of runtime: 2%
+method 11 - Avg time taken: 70ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 40ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 61ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 22 Fittest: 251
+Time for iteration: 14s
+method 1 - Avg time taken: 225ns , % of runtime: 9%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 62ns , % of runtime: 2%
+method 4 - Avg time taken: 53ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 63ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 43ns , % of runtime: 1%
+method 9 - Avg time taken: 1600ns , % of runtime: 67%
+method 10 - Avg time taken: 55ns , % of runtime: 2%
+method 11 - Avg time taken: 70ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 41ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 62ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 23 Fittest: 251
+Time for iteration: 14s
+method 1 - Avg time taken: 226ns , % of runtime: 9%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 62ns , % of runtime: 2%
+method 4 - Avg time taken: 53ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 63ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 43ns , % of runtime: 1%
+method 9 - Avg time taken: 1599ns , % of runtime: 67%
+method 10 - Avg time taken: 55ns , % of runtime: 2%
+method 11 - Avg time taken: 70ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 41ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 62ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 24 Fittest: 253
+Time for iteration: 15s
+method 1 - Avg time taken: 226ns , % of runtime: 9%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 62ns , % of runtime: 2%
+method 4 - Avg time taken: 53ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 63ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 43ns , % of runtime: 1%
+method 9 - Avg time taken: 1596ns , % of runtime: 67%
+method 10 - Avg time taken: 55ns , % of runtime: 2%
+method 11 - Avg time taken: 70ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 41ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 62ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 25 Fittest: 253
+Time for iteration: 12s
+method 1 - Avg time taken: 226ns , % of runtime: 9%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 63ns , % of runtime: 2%
+method 4 - Avg time taken: 52ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 63ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 43ns , % of runtime: 1%
+method 9 - Avg time taken: 1594ns , % of runtime: 67%
+method 10 - Avg time taken: 55ns , % of runtime: 2%
+method 11 - Avg time taken: 70ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 41ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 62ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 26 Fittest: 253
+Time for iteration: 14s
+method 1 - Avg time taken: 226ns , % of runtime: 9%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 63ns , % of runtime: 2%
+method 4 - Avg time taken: 52ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 63ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 43ns , % of runtime: 1%
+method 9 - Avg time taken: 1590ns , % of runtime: 67%
+method 10 - Avg time taken: 55ns , % of runtime: 2%
+method 11 - Avg time taken: 70ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 41ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 62ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 27 Fittest: 253
+Time for iteration: 14s
+method 1 - Avg time taken: 225ns , % of runtime: 9%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 62ns , % of runtime: 2%
+method 4 - Avg time taken: 52ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 63ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 43ns , % of runtime: 1%
+method 9 - Avg time taken: 1587ns , % of runtime: 67%
+method 10 - Avg time taken: 55ns , % of runtime: 2%
+method 11 - Avg time taken: 70ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 41ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 61ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 28 Fittest: 253
+Time for iteration: 15s
+method 1 - Avg time taken: 225ns , % of runtime: 9%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 62ns , % of runtime: 2%
+method 4 - Avg time taken: 52ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 63ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 43ns , % of runtime: 1%
+method 9 - Avg time taken: 1583ns , % of runtime: 67%
+method 10 - Avg time taken: 55ns , % of runtime: 2%
+method 11 - Avg time taken: 69ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 40ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 61ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 29 Fittest: 253
+Time for iteration: 14s
+method 1 - Avg time taken: 225ns , % of runtime: 9%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 63ns , % of runtime: 2%
+method 4 - Avg time taken: 52ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 63ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 43ns , % of runtime: 1%
+method 9 - Avg time taken: 1582ns , % of runtime: 67%
+method 10 - Avg time taken: 55ns , % of runtime: 2%
+method 11 - Avg time taken: 69ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 40ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 61ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 30 Fittest: 333
+Time for iteration: 16s
+method 1 - Avg time taken: 225ns , % of runtime: 9%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 63ns , % of runtime: 2%
+method 4 - Avg time taken: 52ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 63ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 43ns , % of runtime: 1%
+method 9 - Avg time taken: 1581ns , % of runtime: 67%
+method 10 - Avg time taken: 55ns , % of runtime: 2%
+method 11 - Avg time taken: 69ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 40ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 62ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 31 Fittest: 333
+Time for iteration: 13s
+method 1 - Avg time taken: 225ns , % of runtime: 9%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 63ns , % of runtime: 2%
+method 4 - Avg time taken: 52ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 63ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 43ns , % of runtime: 1%
+method 9 - Avg time taken: 1579ns , % of runtime: 67%
+method 10 - Avg time taken: 54ns , % of runtime: 2%
+method 11 - Avg time taken: 69ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 40ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 62ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 32 Fittest: 333
+Time for iteration: 16s
+method 1 - Avg time taken: 225ns , % of runtime: 9%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 63ns , % of runtime: 2%
+method 4 - Avg time taken: 52ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 63ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 43ns , % of runtime: 1%
+method 9 - Avg time taken: 1578ns , % of runtime: 67%
+method 10 - Avg time taken: 54ns , % of runtime: 2%
+method 11 - Avg time taken: 69ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 40ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 62ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 33 Fittest: 333
+Time for iteration: 14s
+method 1 - Avg time taken: 225ns , % of runtime: 9%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 63ns , % of runtime: 2%
+method 4 - Avg time taken: 52ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 63ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 42ns , % of runtime: 1%
+method 9 - Avg time taken: 1577ns , % of runtime: 67%
+method 10 - Avg time taken: 54ns , % of runtime: 2%
+method 11 - Avg time taken: 69ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 40ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 62ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 34 Fittest: 333
+Time for iteration: 13s
+method 1 - Avg time taken: 225ns , % of runtime: 9%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 63ns , % of runtime: 2%
+method 4 - Avg time taken: 52ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 63ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 42ns , % of runtime: 1%
+method 9 - Avg time taken: 1576ns , % of runtime: 67%
+method 10 - Avg time taken: 54ns , % of runtime: 2%
+method 11 - Avg time taken: 69ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 40ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 61ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 35 Fittest: 333
+Time for iteration: 15s
+method 1 - Avg time taken: 225ns , % of runtime: 9%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 63ns , % of runtime: 2%
+method 4 - Avg time taken: 52ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 63ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 42ns , % of runtime: 1%
+method 9 - Avg time taken: 1574ns , % of runtime: 67%
+method 10 - Avg time taken: 54ns , % of runtime: 2%
+method 11 - Avg time taken: 69ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 40ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 61ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 36 Fittest: 333
+Time for iteration: 14s
+method 1 - Avg time taken: 225ns , % of runtime: 9%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 63ns , % of runtime: 2%
+method 4 - Avg time taken: 52ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 63ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 42ns , % of runtime: 1%
+method 9 - Avg time taken: 1572ns , % of runtime: 67%
+method 10 - Avg time taken: 54ns , % of runtime: 2%
+method 11 - Avg time taken: 69ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 40ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 61ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 37 Fittest: 333
+Time for iteration: 16s
+method 1 - Avg time taken: 225ns , % of runtime: 9%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 63ns , % of runtime: 2%
+method 4 - Avg time taken: 52ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 63ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 42ns , % of runtime: 1%
+method 9 - Avg time taken: 1570ns , % of runtime: 67%
+method 10 - Avg time taken: 54ns , % of runtime: 2%
+method 11 - Avg time taken: 69ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 40ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 61ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 38 Fittest: 333
+Time for iteration: 15s
+method 1 - Avg time taken: 225ns , % of runtime: 9%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 62ns , % of runtime: 2%
+method 4 - Avg time taken: 52ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 63ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 42ns , % of runtime: 1%
+method 9 - Avg time taken: 1567ns , % of runtime: 67%
+method 10 - Avg time taken: 54ns , % of runtime: 2%
+method 11 - Avg time taken: 69ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 40ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 61ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 39 Fittest: 333
+Time for iteration: 15s
+method 1 - Avg time taken: 224ns , % of runtime: 9%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 62ns , % of runtime: 2%
+method 4 - Avg time taken: 52ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 62ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 42ns , % of runtime: 1%
+method 9 - Avg time taken: 1565ns , % of runtime: 67%
+method 10 - Avg time taken: 54ns , % of runtime: 2%
+method 11 - Avg time taken: 69ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 40ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 61ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Generation: 40 Fittest: 333
+Time for iteration: 15s
+method 1 - Avg time taken: 224ns , % of runtime: 9%
+method 2 - Avg time taken: 0ns , % of runtime: 0%
+method 3 - Avg time taken: 62ns , % of runtime: 2%
+method 4 - Avg time taken: 52ns , % of runtime: 2%
+method 5 - Avg time taken: 0ns , % of runtime: 0%
+method 6 - Avg time taken: 62ns , % of runtime: 2%
+method 7 - Avg time taken: 0ns , % of runtime: 0%
+method 8 - Avg time taken: 42ns , % of runtime: 1%
+method 9 - Avg time taken: 1563ns , % of runtime: 67%
+method 10 - Avg time taken: 54ns , % of runtime: 2%
+method 11 - Avg time taken: 69ns , % of runtime: 2%
+method 12 - Avg time taken: 39ns , % of runtime: 1%
+method 13 - Avg time taken: 40ns , % of runtime: 1%
+method 14 - Avg time taken: 53ns , % of runtime: 2%
+method 15 - Avg time taken: 61ns , % of runtime: 2%
+- - - - - - - - - - - - - -
+Writing over results and weights to csv
+CSV file was created successfully with name geneticRun-2017_03_20-19_44_22.csv
+Rows cleared: 53
+

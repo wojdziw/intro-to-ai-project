@@ -16,7 +16,7 @@ public class OptimizeFourFeatures {
 	private static final int noFeatures = 15 + (State.COLS - 1) + (State.COLS -2); //noFeatures + columnHeightWeights + columnDifferenceWeights
     private static final double maxWeight = 5;
     private static final int populationSize = 50;
-    private static final int noGenerations = 5;
+    private static final int noGenerations = 40;
 
     private static final double uniformRate = 0.5;
     private static final double mutationRate = 0.015;
@@ -149,7 +149,7 @@ public class OptimizeFourFeatures {
 	        // TODO: print used constants as well!?
 //	        System.out.println("Writing over results and weights to csv");
 //	        saveToCsv.writeCsvFile("geneticRun", generationsResults, generationsWeights);
-	        int rowsCleared = PlayerSkeleton.playAGame(bestInd.getGenes(), true, false, currentFeatureSet);
+	        int rowsCleared = bestInd.getFitness(currentFeatureSet);
 	        System.out.println("Rows cleared: " + rowsCleared);
 	        System.out.println();
 	        
@@ -183,7 +183,7 @@ public class OptimizeFourFeatures {
 			for (Map.Entry<Integer, int[]> entry : bestCombinations.descendingMap().entrySet()) {
 				System.out.printf("%-20s", entry.getKey());
 				for(int i : entry.getValue()) {
-					System.out.print(i + " ");
+					System.out.print(i+1 + " ");
 				}
 				System.out.println();
 			}
