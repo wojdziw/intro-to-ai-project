@@ -83,7 +83,8 @@ public class GeneticAlgorithm {
         for (int i = 0; i< noWeights; i++) {
             if (Math.random() <= mutationRate) {
                 // Create random gene
-                double gene = maxWeight * Math.random();
+                int plusMinus = Math.random() > 0.5 ? -1 : 1;
+                double gene = plusMinus * maxWeight * Math.random();
                 indiv.setGene(i, gene);
             }
         }
@@ -131,7 +132,7 @@ public class GeneticAlgorithm {
         int noWeights = Features.getNumberOfWeights();
         double maxWeight = 5;
         int populationSize = 50;
-        int noGenerations = 4;
+        int noGenerations = 40;
 
         double uniformRate = 0.5;
         double mutationRate = 0.015;
