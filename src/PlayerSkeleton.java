@@ -83,6 +83,18 @@ public class PlayerSkeleton {
 		return s.getRowsCleared();
 	}
 
+	// Returns the score (number of rows cleared) based on the strategy i.e. the weights of the utility function
+	public static int playNGames(double[] weights, boolean drawing, boolean waitForEnter, int N) {
+		int n = 10;
+		int fitness = 0;
+		// Averaging over N games to mitigate the impact of the random piece choice
+		for (int i=0; i<n; i++)
+			fitness += PlayerSkeleton.playAGame(weights, false, false);
+
+		// Get average
+		return fitness/N;
+	}
+
 	public static void main(String[] args) {
 
 		// Initialize the feature weight to something

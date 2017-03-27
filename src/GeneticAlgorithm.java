@@ -13,22 +13,11 @@
     Individual - one weight vector
     Fitness - number of cleared rows when a game is played
 
-    WOJ'S REMARKS:
-        -> This works decently - manages to clear a few hundred rows each time
-           Update - a few hundred rows cleared each time when the fitness is averaged over several trials
-        -> Please tweak it however you want, it should get much much better as we implement more features
-
-    WOJ'S DOUBTS:
-        -> I was not quite sure how to initialize an Individual (weight vector)
-           It is random within a range defined by (-maxWeight, +maxWeight)
-           But then it might have to be more diverse
-        -> I really hope the algorithm does something better than random guessing
-
 */
 
 public class GeneticAlgorithm {
 
-    private static final int noFeatures = Features.getNumberOfFeatures();
+    private static final int noFeatures = Features.getNumberOfFeatures()+1; // include the bias term
     private static final double maxWeight = 5;
     private static final int populationSize = 50;
     private static final int noGenerations = 50;
