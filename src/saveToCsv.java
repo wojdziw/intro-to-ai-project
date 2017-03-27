@@ -13,6 +13,8 @@ public class saveToCsv {
 
     public static void writeCsvFile(String fileName, int[][] fittnessMatrix, double[][] weightMatrix) {
 
+        System.out.println("Writing over results and weights to csv");
+
 
         FileWriter fileWriter = null;
         //CSV file header

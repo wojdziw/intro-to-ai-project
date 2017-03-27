@@ -17,7 +17,7 @@
 
 public class GeneticAlgorithm {
 
-    private static final int noFeatures = Features.getNumberOfFeatures()+1; // include the bias term
+    private static final int noWeights = Features.getNumberOfWeights();
     private static final double maxWeight = 5;
     private static final int populationSize = 50;
     private static final int noGenerations = 50;
@@ -28,7 +28,7 @@ public class GeneticAlgorithm {
     private static final boolean elitism = true;
 
     public static Population evolvePopulation(Population pop) {
-        Population newPopulation = new Population(pop.size(), false, noFeatures, maxWeight);
+        Population newPopulation = new Population(pop.size(), false, noWeights, maxWeight);
 
         if (elitism)
             newPopulation.setIndividual(0, pop.getFittest());
@@ -54,9 +54,9 @@ public class GeneticAlgorithm {
     }
 
     private static Individual crossover(Individual indiv1, Individual indiv2) {
-        Individual newSol = new Individual(noFeatures, maxWeight);
+        Individual newSol = new Individual(noWeights, maxWeight);
         // Loop through genes
-        for (int i = 0; i< noFeatures; i++) {
+        for (int i = 0; i< noWeights; i++) {
             // Crossover
             if (Math.random() <= uniformRate) {
                 newSol.setGene(i, indiv1.getGene(i));
@@ -69,7 +69,7 @@ public class GeneticAlgorithm {
 
     private static void mutate(Individual indiv) {
         //Loop through genes
-        for (int i = 0; i< noFeatures; i++) {
+        for (int i = 0; i< noWeights; i++) {
             if (Math.random() <= mutationRate) {
                 // Create random gene
                 double gene = maxWeight * Math.random();
@@ -81,7 +81,7 @@ public class GeneticAlgorithm {
     // Tournament is picking a random sample of a chosen size and choosing the fittest out of that
     private static Individual tournamentSelection(Population pop) {
         // Create a tournament population
-        Population tournament = new Population(tournamentSize, false, noFeatures, maxWeight);
+        Population tournament = new Population(tournamentSize, false, noWeights, maxWeight);
         for (int i = 0; i<tournamentSize; i++) {
             int randomId = (int) (Math.random() * pop.size());
             tournament.setIndividual(i, pop.getIndividual(randomId));
@@ -89,44 +89,35 @@ public class GeneticAlgorithm {
         return tournament.getFittest();
     }
 
-    public static void main(String[] args) {
-        double[][] generationsWeights = new double[noGenerations][noFeatures];
+    public static void execute() {
+
+        Population myPop = new Population(populationSize, true, noWeights, maxWeight);
+
+        double[][] generationsWeights = new double[noGenerations][noWeights];
         int[][] generationsResults =  new int[noGenerations][2];
 
         long startTime = System.nanoTime();
-        Population myPop = new Population(populationSize, true, noFeatures, maxWeight);
-        Individual bestInd = myPop.getIndividual(0);
 
         for (int generation = 0; generation< noGenerations; generation++) {
 
-            bestInd = myPop.getFittest();
-
-            int fitness=bestInd.getFitness();
-            generationsResults[generation][0] = fitness;
-            System.out.println("Generation: " + (generation+1) + " Fittest: " + fitness);
-            bestInd.printGenes();
-            //fitness=bestInd.getFitness(); // Will return same value always! (Regardless if we use bestInd or myPop.getFittest() again)
-            //generationsResults[generation][1] = fitness;
-            //System.out.println("   second calculation: " + fitness);
-
-            // Time every iteration
-            long iterTime = (System.nanoTime() - startTime)/1000000000;
-            System.out.println("Time for iteration: " + iterTime + "s");
-            startTime = System.nanoTime();
-
-            Features.printRuntimeStatistics();
-            System.out.println("- - - - - - - - - - - - - -");
-            generationsWeights[generation]=bestInd.getGenes();
             myPop = evolvePopulation(myPop);
+            myPop.printStats(generation);
+
+//            generationsResults[generation][0] = myPop.getFittest().getFitness();
+//            generationsWeights[generation]=myPop.getFittest().getGenes();
+//
+//            long iterTime = (System.nanoTime() - startTime)/1000000000;
+//            System.out.println("Time for iteration: " + iterTime + "s");
+//            startTime = System.nanoTime();
+
         }
 
-        // TODO: print used constants as well!?
-        System.out.println("Writing over results and weights to csv");
-        saveToCsv.writeCsvFile("geneticRun", generationsResults, generationsWeights);
-        int rowsCleared = PlayerSkeleton.playAGame(bestInd.getGenes(), true, false);
-        System.out.println("Rows cleared: " + rowsCleared);
-        System.out.println();
+//        saveToCsv.writeCsvFile("geneticRun", generationsResults, generationsWeights);
+    }
 
+    public static void main(String[] args) {
+
+        execute();
     }
 
 }

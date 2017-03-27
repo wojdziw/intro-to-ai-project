@@ -6,8 +6,12 @@ import static java.lang.Math.min;
 
 public class Features {
 
-    public static int getNumberOfFeatures() {
-        return 15 + (State.COLS - 1) + (State.COLS -2); //noFeatures + columnHeightWeights + columnDifferenceWeights
+    //1 + 13 + (State.COLS) + (State.COLS-1) - this is the most weights we can have
+    public static int[] subset = new int[]{0,7,9,24,25,26,27,28,29,30,31,32};
+
+    // THIS INCLUDES THE BIAS
+    public static int getNumberOfWeights() {
+        return subset.length;
     }
 
     // FEATURE 1 + 2
@@ -243,9 +247,67 @@ public class Features {
         return weightedSumHeightDiff;
     }
 
+    // subset size should be the same as the number of weights
+    public static double calculateUtility(int[][] field, int[] top, double[] weights, int rowsCleared) {
+
+        // Here are all the features
+        double[] feature1_2 = Features.calculateFeature1_2(top, field);
+        double feature3 = Features.calculateFeature3(top, field);
+        double feature4 = Features.calculateFeature4(top, field);
+        double feature6 = Features.calculateFeature6(top, field);
+        double feature8 = Features.calculateFeature8(top, field);
+        double[] feature7_9 = Features.calculateFeature7_9(top, field);
+        double feature10 = Features.calculateFeature10(top, field);
+        double feature11 = Features.calculateFeature11(top, field);
+        double feature12 = Features.calculateFeature12(top, field);
+        double feature13 = Features.calculateFeature13(top, field);
+        double[] feature14 = Features.calculateFeature14(top, field);
+        double[] feature15 = Features.calculateFeature15(top, field);
+
+        // Plus 1 for bias
+        int numberOfAllWeights = 15 + (State.COLS - 1) + (State.COLS -2) + 1;
+
+        // The weights inputted only refer to the subset
+        // Need to convert that to a weight vector referring to all the features
+        // For the ones that are not in the subset, the weight is zero
+        double[] allWeights = new double[numberOfAllWeights];
+        int subsetIdx = 0;
+
+        for (int i=0; i<allWeights.length; i++) {
+            if (subsetIdx<subset.length) {
+                if (i==subset[subsetIdx]) {
+                    allWeights[i] = weights[subsetIdx++];
+                    continue;
+                }
+            }
+            allWeights[i] = 0;
+        }
+
+        double[] columnHeightWeights = Arrays.copyOfRange(allWeights, 14, (14 + field[0].length));
+        double[] colDiffWeights = Arrays.copyOfRange(allWeights, (14 + field[0].length + 1), (14 + 2*field[0].length));
+
+        // apply weights
+        return allWeights[0]
+                + allWeights[1]*feature1_2[0]
+                + allWeights[2]*feature1_2[1]
+                + allWeights[3]*feature3
+                + allWeights[4]*feature4
+                + allWeights[5]*rowsCleared
+                + allWeights[6]*feature6
+                + allWeights[7]*feature7_9[0]
+                + allWeights[8]*feature8
+                + allWeights[9]*feature7_9[1]
+                + allWeights[10]*feature10
+                + allWeights[11]*feature11
+                + allWeights[12]*feature12
+                + allWeights[13]*feature13
+                + Features.dotProduct(columnHeightWeights, feature14)
+                + Features.dotProduct(colDiffWeights, feature15);
+    }
+
     static long[] featureTimeTaken = new long[15];
     static long featureTimesRunned = 0;
-    public static double calculateUtility(int[][] field, int[] top, double[] weights, int rowsCleared) {
+    public static double calculateOldUtility(int[][] field, int[] top, double[] weights, int rowsCleared) {
 
         //calculate feature values
 		/*
@@ -343,7 +405,6 @@ public class Features {
                 + weights[13]*feature13
                 + Features.dotProduct(columnHeightWeights, feature14)
                 + Features.dotProduct(colDiffWeights, feature15);
-
     }
 
     public static void printRuntimeStatistics(){

@@ -36,5 +36,13 @@ public class Population {
     public void setIndividual(int index, Individual indiv) {
         individuals[index] = indiv;
     }
+
+    public void printStats(int generation) {
+        Individual bestInd = getFittest();
+        int fitness=bestInd.getFitness();
+        System.out.println("Generation: " + (generation+1) + " Fittest: " + fitness);
+        bestInd.printGenes();
+        System.out.println("------------------------------------------------");
+    }
 }
 
