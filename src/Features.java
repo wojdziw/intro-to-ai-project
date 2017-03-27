@@ -26,7 +26,7 @@ public class Features {
         featureWeights.put(12, Arrays.asList(12));
         featureWeights.put(13, Arrays.asList(13));
         featureWeights.put(14, Arrays.asList(14,15,16,17,18,19,20,21,22));
-        featureWeights.put(15, Arrays.asList(23,24,25,26,27,28,29,30,31,32,33));
+        featureWeights.put(15, Arrays.asList(23,24,25,26,27,28,29,30,31,32));
     }
     // HERE WE CHOOSE THE SUBSET OF FEATURES WE WANT TO TEST
     // Add features by choosing appropriate lists in here

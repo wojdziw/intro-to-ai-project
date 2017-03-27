@@ -80,13 +80,9 @@ public class ParticleSwarmAlgorithm {
                 p.setLocation(newLoc);
             }
 
-            double fitness = 0;
-            int n = 10;
-            // Averaging over N games to mitigate the impact of the random piece choice
-            for (int i=0; i<n; i++)
-                fitness += PlayerSkeleton.playAGame(gBestLocation, false, false);
-            // Get average
-            fitness /= n;
+            int N = 10;
+            int fitness = PlayerSkeleton.playNGames(gBestLocation, false, false, N);
+
 
             System.out.println("ITERATION " + t + ": ");
             System.out.println("     Value: " + fitness);
