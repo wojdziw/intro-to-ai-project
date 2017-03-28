@@ -22,17 +22,17 @@ public class GeneticAlgorithm {
     private int populationSize;
     private int noGenerations;
 
-    private double uniformRate;
+    private double crossoverRate;
     private double mutationRate;
     private int tournamentSize;
     private boolean elitism;
 
-    public GeneticAlgorithm(int noWeights, double maxWeight, int populationSize, int noGenerations, double uniformRate, double mutationRate, int tournamentSize, boolean elitism) {
+    public GeneticAlgorithm(int noWeights, double maxWeight, int populationSize, int noGenerations, double crossoverRate, double mutationRate, int tournamentSize, boolean elitism) {
         this.noWeights = noWeights;
         this.maxWeight = maxWeight;
         this.populationSize = populationSize;
         this.noGenerations = noGenerations;
-        this.uniformRate = uniformRate;
+        this.crossoverRate = crossoverRate;
         this.mutationRate = mutationRate;
         this.tournamentSize = tournamentSize;
         this.elitism = elitism;
@@ -69,7 +69,7 @@ public class GeneticAlgorithm {
         // Loop through genes
         for (int i = 0; i< noWeights; i++) {
             // Crossover
-            if (Math.random() <= uniformRate) {
+            if (Math.random() <= crossoverRate) {
                 newSol.setGene(i, indiv1.getGene(i));
             } else {
                 newSol.setGene(i, indiv2.getGene(i));
@@ -130,16 +130,16 @@ public class GeneticAlgorithm {
 
     public static void main(String[] args) {
         int noWeights = Features.getNumberOfWeights();
-        double maxWeight = 5;
+        double maxWeight = 10;
         int populationSize = 50;
         int noGenerations = 40;
 
-        double uniformRate = 0.5;
-        double mutationRate = 0.015;
+        double crossoverRate = 0.5;
+        double mutationRate = 0.1;
         int tournamentSize = 5;
         boolean elitism = true;
 
-        GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, uniformRate, mutationRate, tournamentSize, elitism);
+        GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism);
         geneticAlgorithm.execute();
     }
 
