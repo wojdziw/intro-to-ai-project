@@ -88,7 +88,7 @@ public class GeneticAlgorithm {
         }
     }
 
-    // Tournament is picking a random sample of a chosen size  and choosing the fittest out of that
+    // Tournament is picking a random sample of a chosen size and choosing the fittest out of that
     private Individual tournamentSelection(Population pop) {
         // Create a tournament population
         Population tournament = new Population(tournamentSize, false, noWeights, maxWeight);
