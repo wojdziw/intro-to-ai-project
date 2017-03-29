@@ -32,9 +32,9 @@ public class Features {
     // Add features by choosing appropriate lists in here
     public static List<Integer> subset = new ArrayList<>();
     static {
-        subset.addAll(featureWeights.get(0));
         subset.addAll(featureWeights.get(7));
         subset.addAll(featureWeights.get(9));
+        subset.addAll(featureWeights.get(10));
         subset.addAll(featureWeights.get(11));
         subset.addAll(featureWeights.get(15));
     }

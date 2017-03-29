@@ -45,8 +45,6 @@ public class GeneticAlgorithm {
         if (elitism)
             newPopulation.setIndividual(0, pop.getFittest());
 
-        //Improve selection part!?
-
         int elitismOffset = elitism ? 1 : 0;
 
         // Loop over the population size and create new individuals with crossover
@@ -105,10 +103,12 @@ public class GeneticAlgorithm {
 
         Population myPop = new Population(populationSize, true, noWeights, maxWeight);
 
+        System.out.println("NrOfCores: " + myPop.getCores()); // Check if it finds all cores
+
         //double[][] generationsWeights = new double[noGenerations][noWeights];
         //int[][] generationsResults =  new int[noGenerations][2];
 
-        //long startTime = System.nanoTime();
+        long startTime = System.nanoTime();
 
         for (int generation = 0; generation< noGenerations; generation++) {
 
@@ -118,9 +118,9 @@ public class GeneticAlgorithm {
             //generationsResults[generation][0] = myPop.getFittest().getFitness();
             //generationsWeights[generation]=myPop.getFittest().getGenes();
 
-            //long iterTime = (System.nanoTime() - startTime)/1000000000;
-            //System.out.println("Time for iteration: " + iterTime + "s");
-            //startTime = System.nanoTime();
+            long iterTime = (System.nanoTime() - startTime)/1000000000;
+            System.out.println("Time for iteration: " + iterTime + "s");
+            startTime = System.nanoTime();
 
             System.out.println("------------------------------------------------");
         }
@@ -135,7 +135,7 @@ public class GeneticAlgorithm {
         int noGenerations = 40;
 
         double crossoverRate = 0.5;
-        double mutationRate = 0.1;
+        double mutationRate = 0.05;
         int tournamentSize = 5;
         boolean elitism = true;
 
