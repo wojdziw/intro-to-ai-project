@@ -25,9 +25,9 @@ public class saveToCsv {
         }
         for (int i = 0; i<weightMatrix[0].length;i++ ){
             if (i<weightMatrix[0].length-1) {
-                FILE_HEADER += "Weight" + String.valueOf(i) + ',';
-            } else{
-                FILE_HEADER += "Weight" + String.valueOf(i);
+                FILE_HEADER += "Weight" + String.valueOf(i+1) + ',';
+            } else {
+                FILE_HEADER += "Weight" + String.valueOf(i+1);
             }
         }
         String timestamp = new SimpleDateFormat("yyyy_MM_dd-HH_mm_ss").format(Calendar.getInstance().getTime());

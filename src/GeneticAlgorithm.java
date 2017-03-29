@@ -1,3 +1,4 @@
+
 /*
 
     Credit: http://www.theprojectspot.com/tutorial-post/creating-a-genetic-algorithm-for-beginners/3
@@ -60,7 +61,6 @@ public class GeneticAlgorithm {
         // Mutate population
         for (int i=elitismOffset; i<newPopulation.size(); i++)
             mutate(newPopulation.getIndividual(i));
-
         return newPopulation;
     }
 
@@ -144,5 +144,10 @@ public class GeneticAlgorithm {
     }
 
 }
+
+
+
+
+
 
 
