@@ -110,10 +110,16 @@ public class GeneticAlgorithm {
 
         //long startTime = System.nanoTime();
 
-        for (int generation = 0; generation< noGenerations; generation++) {
+
+        for (int generation = 0; generation<noGenerations; generation++) {
 
             myPop = evolvePopulation(myPop);
-            myPop.printStats(generation);
+            System.out.print(generation + " ");
+            if (generation==noGenerations-1) {
+                System.out.println("");
+                myPop.printStats(generation);
+            }
+
 
             //generationsResults[generation][0] = myPop.getFittest().getFitness();
             //generationsWeights[generation]=myPop.getFittest().getGenes();
@@ -122,7 +128,7 @@ public class GeneticAlgorithm {
             //System.out.println("Time for iteration: " + iterTime + "s");
             //startTime = System.nanoTime();
 
-            System.out.println("------------------------------------------------");
+            //System.out.println("------------------------------------------------");
         }
 
         //saveToCsv.writeCsvFile("geneticRun", generationsResults, generationsWeights);
@@ -130,17 +136,23 @@ public class GeneticAlgorithm {
 
     public static void main(String[] args) {
         int noWeights = Features.getNumberOfWeights();
-        double maxWeight = 10;
+        double maxWeight = 5;
         int populationSize = 50;
-        int noGenerations = 40;
+        int noGenerations = 20;
 
         double crossoverRate = 0.5;
-        double mutationRate = 0.1;
+        double mutationRate = 0.015;
         int tournamentSize = 5;
         boolean elitism = true;
 
-        GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism);
-        geneticAlgorithm.execute();
+        for (int i=0; i<20; i++) {
+            GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism);
+            geneticAlgorithm.execute();
+
+
+        }
+
+
     }
 
 }
