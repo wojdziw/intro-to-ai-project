@@ -342,6 +342,9 @@ public class Features {
 
     public static double dotProduct(double[] X, double[] Y){
         double sumOfWeightedHeights = 0;
+        if(X.length != Y.length){
+            System.out.println("Vector sizes in dotProduct doesn't match");
+        }
         for (int i=0; i <X.length; i++){
             sumOfWeightedHeights += X[i]*Y[i];
         }
@@ -405,7 +408,7 @@ public class Features {
         }
 
         double[] columnHeightWeights = Arrays.copyOfRange(allWeights, 14, (14 + field[0].length));
-        double[] colDiffWeights = Arrays.copyOfRange(allWeights, (14 + field[0].length + 1), (14 + 2*field[0].length));
+        double[] colDiffWeights = Arrays.copyOfRange(allWeights, (14 + field[0].length), (14 + 2*field[0].length-1));
 
         // apply weights
         return allWeights[0]
