@@ -113,7 +113,7 @@ public class PlayerSkeleton{
 		int rowsCleared = playAGame(weights, true, false);
 
 		System.out.println("You have completed "+rowsCleared+" rows.");
-        Features.printRuntimeStatistics();
+        //Features.printRuntimeStatistics();
 	}
 
 }

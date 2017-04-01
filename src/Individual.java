@@ -10,7 +10,7 @@ public class Individual {
         weights = new double[noWeights];
             for (int i=0; i<noWeights; i++) {
                 int plusMinus = Math.random() > 0.5 ? -1 : 1;
-                weights[i] = plusMinus * maxWeight * Math.random();
+                weights[i] = plusMinus * maxWeight * Math.random();// * 1/Features.normalizer[i];
             }
     }
 

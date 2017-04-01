@@ -10,6 +10,12 @@ public class Features {
     public static double[] meanFeatures = new double[33];
     public static double[] iterations = new double[33];
 
+    //public static double[] means = new double[]{1.0, 7.260931305906441, 39.86691494537444, 11.382054281869124, 6.2461108071661435, 1.0, 3.8774681430770097, 10.531386333648312, 0.054224436984330014, 7.43574630079814, 0.22721294872218112, 1.5971969113560776, 0.6075433745810921, 87.14923142024399, 8.459415662759394, 8.784401291198375, 8.770024774005313, 8.699441521576762, 8.733525820673956, 8.697846508464966, 8.745445867940028, 8.751390424887003, 8.870758273959671, 8.636981275583201, 1.1817579634832298, 1.2981736628522689, 1.3384756100749544, 1.3582006763073597, 1.3036775806941878, 1.3289761003608018, 1.3194114529893903, 1.3182568388663436, 1.2933163015733438};
+    public static double[] means = new double[]{0.0, 18.0, 171.0, 20.0, 19.0, 0.0, 20.0, 160.0, 18.0, 39.0, 5.0, 119.0, 1.0, 199.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0};
+    public static double[] normalizer = new double[]{10.0,162.0, 40.0, 5.0, 124.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0};
+    //public static double[] means = new double[]{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+    //public static double[] means = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 5.745312432686657, 1.0, 3.490504657351936, 0.2728646383672273, 1.3580521275808033, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.1358390441080533, 1.7572490312095388, 1.3219034254250845, 1.3646943968418537, 1.2341129604110166, 1.2846766008092583, 1.4470907372218667, 1.5180438108013459, 1.2373904652980754};
+    //public static double[] means = new double[]{1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 162.0, 1.0, 40.0, 5.0, 124.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0, 20.0};
 
     //1 + 13 + (State.COLS) + (State.COLS-1) - this is the most weights we can have
     // These list down the weights related to each of the features
@@ -38,20 +44,20 @@ public class Features {
     public static List<Integer> subset = new ArrayList<>();
     static {
         subset.addAll(featureWeights.get(0));
-        subset.addAll(featureWeights.get(1));
-        subset.addAll(featureWeights.get(2));
-        subset.addAll(featureWeights.get(3));
-        subset.addAll(featureWeights.get(4));
-        subset.addAll(featureWeights.get(5));
-        subset.addAll(featureWeights.get(6));
+//        subset.addAll(featureWeights.get(1));
+//        subset.addAll(featureWeights.get(2));
+//        subset.addAll(featureWeights.get(3));
+//        subset.addAll(featureWeights.get(4));
+//        subset.addAll(featureWeights.get(5));
+//        subset.addAll(featureWeights.get(6));
         subset.addAll(featureWeights.get(7));
-        subset.addAll(featureWeights.get(8));
+//        subset.addAll(featureWeights.get(8));
         subset.addAll(featureWeights.get(9));
         subset.addAll(featureWeights.get(10));
         subset.addAll(featureWeights.get(11));
-        subset.addAll(featureWeights.get(12));
-        subset.addAll(featureWeights.get(13));
-        subset.addAll(featureWeights.get(14));
+//        subset.addAll(featureWeights.get(12));
+//        subset.addAll(featureWeights.get(13));
+//        subset.addAll(featureWeights.get(14));
         subset.addAll(featureWeights.get(15));
     }
 
@@ -195,6 +201,7 @@ public class Features {
         result[0] = nrOfHoleSpots;
         result[1] = clusterCount;
 
+
         iterations[7]+=1;
         maxFeatures[7] = Math.max(maxFeatures[7], result[0]);
         meanFeatures[7] = ((iterations[7]-1)/iterations[7])* meanFeatures[7]+result[0]/iterations[7];
@@ -202,6 +209,15 @@ public class Features {
         iterations[9]+=1;
         maxFeatures[9] = Math.max(maxFeatures[9], result[1]);
         meanFeatures[9] = ((iterations[9]-1)/iterations[9])* meanFeatures[9]+result[1]/iterations[9];
+
+
+
+
+
+//        System.out.println(nrOfHoleSpots + "/" + maxFeatures[7] + "=" + result[0]);
+//        System.out.println(clusterCount + "/" + maxFeatures[9] + "=" + result[1]);
+
+
 
         return result;
     }
@@ -245,7 +261,7 @@ public class Features {
     //Well Count - The number of uncovered holes that are 3 or more blocks deep
     public static double calculateFeature10(int[] top, int[][] field) {
 
-        int numberOfWells = 0;
+        double numberOfWells = 0;
 
         for (int i = 1; i<top.length; i++) {
 
@@ -259,6 +275,13 @@ public class Features {
         iterations[10]+=1;
         maxFeatures[10] = Math.max(maxFeatures[10], numberOfWells);
         meanFeatures[10] = ((iterations[10]-1)/iterations[10])* meanFeatures[10]+numberOfWells/iterations[10];
+
+
+//        System.out.println(numberOfWells + "/" + maxFeatures[10] + "=" + numberOfWells/maxFeatures[10]);
+
+
+
+
 
         return numberOfWells;
     }
@@ -278,10 +301,13 @@ public class Features {
                 sumOfWells += min(diff1, diff2);
             }
         }
-
         iterations[11]+=1;
         maxFeatures[11] = Math.max(maxFeatures[11], sumOfWells);
         meanFeatures[11] = ((iterations[11]-1)/iterations[11])* meanFeatures[11]+sumOfWells/iterations[11];
+
+//        System.out.println(sumOfWells + "/" + maxFeatures[11] + "=" + sumOfWells/maxFeatures[11]);
+
+
 
         return sumOfWells;
     }
@@ -367,6 +393,8 @@ public class Features {
             meanFeatures[24+i] = ((iterations[24+i]-1)/iterations[24+i])* meanFeatures[24+i]+weightedSumHeightDiff[i]/iterations[24+i];
         }
 
+
+
         return weightedSumHeightDiff;
     }
 
@@ -410,6 +438,10 @@ public class Features {
         double[] columnHeightWeights = Arrays.copyOfRange(allWeights, 14, (14 + field[0].length));
         double[] colDiffWeights = Arrays.copyOfRange(allWeights, (14 + field[0].length), (14 + 2*field[0].length-1));
 
+        iterations[0]+=1;
+        maxFeatures[0] = Math.max(maxFeatures[0], allWeights[0]);
+        meanFeatures[0] = ((iterations[0]-1)/iterations[0])* meanFeatures[0]+allWeights[0]/iterations[13];
+
         // apply weights
         return allWeights[0]
                 + allWeights[1]*feature1_2[0]
@@ -429,125 +461,125 @@ public class Features {
                 + Features.dotProduct(colDiffWeights, feature15);
     }
 
-    static long[] featureTimeTaken = new long[15];
-    static long featureTimesRunned = 0;
-    public static double calculateOldUtility(int[][] field, int[] top, double[] weights, int rowsCleared) {
-
-        //calculate feature values
-		/*
-        long startTime = System.nanoTime();
-		double feature1 = Features.calculateFeature1(top, field);
-        featureTimeTaken[0] += (System.nanoTime() - startTime);
-
-        startTime = System.nanoTime();
-        double feature2 = Features.calculateFeature2(top, field);
-        featureTimeTaken[1] += (System.nanoTime() - startTime);
-		*/
-        long startTime = System.nanoTime();
-        double[] feature1_2 = Features.calculateFeature1_2(top, field);
-        featureTimeTaken[0] += (System.nanoTime() - startTime);
-
-        startTime = System.nanoTime();
-        double feature3 = Features.calculateFeature3(top, field);
-        featureTimeTaken[2] += (System.nanoTime() - startTime);
-
-        startTime = System.nanoTime();
-        double feature4 = Features.calculateFeature4(top, field);
-        featureTimeTaken[3] += (System.nanoTime() - startTime);
-
-//      startTime = System.nanoTime();
-//		double feature5 = Features.calculateFeature5(top, field);
-//      featureTimeTaken[4] += (System.nanoTime() - startTime);
-
-        startTime = System.nanoTime();
-        double feature6 = Features.calculateFeature6(top, field);
-        featureTimeTaken[5] += (System.nanoTime() - startTime);
-/*
-        startTime = System.nanoTime();
-		double feature7 = Features.calculateFeature7(top, field);
-        featureTimeTaken[6] += (System.nanoTime() - startTime);
-
-        startTime = System.nanoTime();
-		double feature8 = Features.calculateFeature8(top, field);
-        featureTimeTaken[7] += (System.nanoTime() - startTime);
-
-        startTime = System.nanoTime();
-		double feature9 = Features.calculateFeature9(top, field);
-        featureTimeTaken[8] += (System.nanoTime() - startTime);
-*/
-        startTime = System.nanoTime();
-        double feature8 = Features.calculateFeature8(top, field);
-        featureTimeTaken[7] += (System.nanoTime() - startTime);
-
-        startTime = System.nanoTime();
-        double[] feature7_9 = Features.calculateFeature7_9(top, field);
-        featureTimeTaken[8] += (System.nanoTime() - startTime);
-
-        startTime = System.nanoTime();
-        double feature10 = Features.calculateFeature10(top, field);
-        featureTimeTaken[9] += (System.nanoTime() - startTime);
-
-        startTime = System.nanoTime();
-        double feature11 = Features.calculateFeature11(top, field);
-        featureTimeTaken[10] += (System.nanoTime() - startTime);
-
-        startTime = System.nanoTime();
-        double feature12 = Features.calculateFeature12(top, field);
-        featureTimeTaken[11] += (System.nanoTime() - startTime);
-
-        startTime = System.nanoTime();
-        double feature13 = Features.calculateFeature13(top, field);
-        featureTimeTaken[12] += (System.nanoTime() - startTime);
-
-        startTime = System.nanoTime();
-        double[] feature14 = Features.calculateFeature14(top, field);
-        featureTimeTaken[13] += (System.nanoTime() - startTime);
-
-        startTime = System.nanoTime();
-        double[] feature15 = Features.calculateFeature15(top, field);
-        featureTimeTaken[14] += (System.nanoTime() - startTime);
-        featureTimesRunned++;
-
-
-        double[] columnHeightWeights = Arrays.copyOfRange(weights, 14, (14 + field[0].length));
-        double[] colDiffWeights = Arrays.copyOfRange(weights, (14 + field[0].length), (14 + field[0].length + field[0].length-1));
-
-        // apply weights
-        return weights[0]
-                + weights[1]*feature1_2[0]
-                + weights[2]*feature1_2[1]
-                + weights[3]*feature3
-                + weights[4]*feature4
-                + weights[5]*rowsCleared
-                + weights[6]*feature6
-                + weights[7]*feature7_9[0]
-                + weights[8]*feature8
-                + weights[9]*feature7_9[1]
-                + weights[10]*feature10
-                + weights[11]*feature11
-                + weights[12]*feature12
-                + weights[13]*feature13
-                + Features.dotProduct(columnHeightWeights, feature14)
-                + Features.dotProduct(colDiffWeights, feature15);
-    }
-
-    public static void printRuntimeStatistics(){
-        long [] timeTaken = featureTimeTaken;
-        long timeRan = featureTimesRunned;
-        long totalruntime  = 0;
-
-        for (long time: timeTaken){
-            totalruntime += time;
-        }
-
-        for (int i=0; i<timeTaken.length;i++){
-            try {
-                System.out.println("method " +(i + 1) + " - Avg time taken: " + timeTaken[i] / timeRan + "ns , % of runtime: " + timeTaken[i] * 100 / totalruntime + "%");
-            } catch (ArithmeticException e){
-                System.out.println("method " +(i + 1) + " - " + e.toString());
-            }
-        }
-    }
+//    static long[] featureTimeTaken = new long[15];
+//    static long featureTimesRunned = 0;
+//    public static double calculateOldUtility(int[][] field, int[] top, double[] weights, int rowsCleared) {
+//
+//        //calculate feature values
+//		/*
+//        long startTime = System.nanoTime();
+//		double feature1 = Features.calculateFeature1(top, field);
+//        featureTimeTaken[0] += (System.nanoTime() - startTime);
+//
+//        startTime = System.nanoTime();
+//        double feature2 = Features.calculateFeature2(top, field);
+//        featureTimeTaken[1] += (System.nanoTime() - startTime);
+//		*/
+//        long startTime = System.nanoTime();
+//        double[] feature1_2 = Features.calculateFeature1_2(top, field);
+//        featureTimeTaken[0] += (System.nanoTime() - startTime);
+//
+//        startTime = System.nanoTime();
+//        double feature3 = Features.calculateFeature3(top, field);
+//        featureTimeTaken[2] += (System.nanoTime() - startTime);
+//
+//        startTime = System.nanoTime();
+//        double feature4 = Features.calculateFeature4(top, field);
+//        featureTimeTaken[3] += (System.nanoTime() - startTime);
+//
+////      startTime = System.nanoTime();
+////		double feature5 = Features.calculateFeature5(top, field);
+////      featureTimeTaken[4] += (System.nanoTime() - startTime);
+//
+//        startTime = System.nanoTime();
+//        double feature6 = Features.calculateFeature6(top, field);
+//        featureTimeTaken[5] += (System.nanoTime() - startTime);
+///*
+//        startTime = System.nanoTime();
+//		double feature7 = Features.calculateFeature7(top, field);
+//        featureTimeTaken[6] += (System.nanoTime() - startTime);
+//
+//        startTime = System.nanoTime();
+//		double feature8 = Features.calculateFeature8(top, field);
+//        featureTimeTaken[7] += (System.nanoTime() - startTime);
+//
+//        startTime = System.nanoTime();
+//		double feature9 = Features.calculateFeature9(top, field);
+//        featureTimeTaken[8] += (System.nanoTime() - startTime);
+//*/
+//        startTime = System.nanoTime();
+//        double feature8 = Features.calculateFeature8(top, field);
+//        featureTimeTaken[7] += (System.nanoTime() - startTime);
+//
+//        startTime = System.nanoTime();
+//        double[] feature7_9 = Features.calculateFeature7_9(top, field);
+//        featureTimeTaken[8] += (System.nanoTime() - startTime);
+//
+//        startTime = System.nanoTime();
+//        double feature10 = Features.calculateFeature10(top, field);
+//        featureTimeTaken[9] += (System.nanoTime() - startTime);
+//
+//        startTime = System.nanoTime();
+//        double feature11 = Features.calculateFeature11(top, field);
+//        featureTimeTaken[10] += (System.nanoTime() - startTime);
+//
+//        startTime = System.nanoTime();
+//        double feature12 = Features.calculateFeature12(top, field);
+//        featureTimeTaken[11] += (System.nanoTime() - startTime);
+//
+//        startTime = System.nanoTime();
+//        double feature13 = Features.calculateFeature13(top, field);
+//        featureTimeTaken[12] += (System.nanoTime() - startTime);
+//
+//        startTime = System.nanoTime();
+//        double[] feature14 = Features.calculateFeature14(top, field);
+//        featureTimeTaken[13] += (System.nanoTime() - startTime);
+//
+//        startTime = System.nanoTime();
+//        double[] feature15 = Features.calculateFeature15(top, field);
+//        featureTimeTaken[14] += (System.nanoTime() - startTime);
+//        featureTimesRunned++;
+//
+//
+//        double[] columnHeightWeights = Arrays.copyOfRange(weights, 14, (14 + field[0].length));
+//        double[] colDiffWeights = Arrays.copyOfRange(weights, (14 + field[0].length), (14 + field[0].length + field[0].length-1));
+//
+//        // apply weights
+//        return weights[0]
+//                + weights[1]*feature1_2[0]
+//                + weights[2]*feature1_2[1]
+//                + weights[3]*feature3
+//                + weights[4]*feature4
+//                + weights[5]*rowsCleared
+//                + weights[6]*feature6
+//                + weights[7]*feature7_9[0]
+//                + weights[8]*feature8
+//                + weights[9]*feature7_9[1]
+//                + weights[10]*feature10
+//                + weights[11]*feature11
+//                + weights[12]*feature12
+//                + weights[13]*feature13
+//                + Features.dotProduct(columnHeightWeights, feature14)
+//                + Features.dotProduct(colDiffWeights, feature15);
+//    }
+//
+//    public static void printRuntimeStatistics(){
+//        long [] timeTaken = featureTimeTaken;
+//        long timeRan = featureTimesRunned;
+//        long totalruntime  = 0;
+//
+//        for (long time: timeTaken){
+//            totalruntime += time;
+//        }
+//
+//        for (int i=0; i<timeTaken.length;i++){
+//            try {
+//                System.out.println("method " +(i + 1) + " - Avg time taken: " + timeTaken[i] / timeRan + "ns , % of runtime: " + timeTaken[i] * 100 / totalruntime + "%");
+//            } catch (ArithmeticException e){
+//                System.out.println("method " +(i + 1) + " - " + e.toString());
+//            }
+//        }
+//    }
 
 
 

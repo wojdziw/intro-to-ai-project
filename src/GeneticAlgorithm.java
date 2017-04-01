@@ -16,6 +16,8 @@
 
 */
 
+import java.util.Random;
+
 public class GeneticAlgorithm {
 
     private int noWeights;
@@ -82,7 +84,7 @@ public class GeneticAlgorithm {
             if (Math.random() <= mutationRate) {
                 // Create random gene
                 int plusMinus = Math.random() > 0.5 ? -1 : 1;
-                double gene = plusMinus * maxWeight * Math.random();
+                double gene = plusMinus * maxWeight * Math.random();// * 1/Features.normalizer[i];
                 indiv.setGene(i, gene);
             }
         }
@@ -103,7 +105,7 @@ public class GeneticAlgorithm {
 
         Population myPop = new Population(populationSize, true, noWeights, maxWeight);
 
-        System.out.println("NrOfCores: " + myPop.getCores()); // Check if it finds all cores
+        //System.out.println("NrOfCores: " + myPop.getCores()); // Check if it finds all cores
 
         //double[][] generationsWeights = new double[noGenerations][noWeights];
         //int[][] generationsResults =  new int[noGenerations][2];
@@ -120,13 +122,13 @@ public class GeneticAlgorithm {
                 myPop.printStats(generation);
             }
 
-
+            myPop.printStats(generation);
             //generationsResults[generation][0] = myPop.getFittest().getFitness();
             //generationsWeights[generation]=myPop.getFittest().getGenes();
 
-            long iterTime = (System.nanoTime() - startTime)/1000000000;
-            System.out.println("Time for iteration: " + iterTime + "s");
-            startTime = System.nanoTime();
+            //long iterTime = (System.nanoTime() - startTime)/1000000000;
+            //System.out.println("Time for iteration: " + iterTime + "s");
+            //startTime = System.nanoTime();
 
             //System.out.println("------------------------------------------------");
         }
@@ -148,6 +150,18 @@ public class GeneticAlgorithm {
         for (int i=0; i<20; i++) {
             GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism);
             geneticAlgorithm.execute();
+
+            System.out.println("Maxes:");
+            for (int j=0; j<33; j++) {
+                System.out.print(Features.maxFeatures[j] + ", ");
+            }
+            System.out.println("");
+            System.out.println("Means:");
+            for (int j=0; j<33; j++) {
+                System.out.print(Features.meanFeatures[j] + ", ");
+            }
+            System.out.println("");
+
 
 
         }
