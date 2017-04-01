@@ -106,7 +106,7 @@ public class ParticleSwarmAlgorithm {
         }
         
         
-        for (int j=0; j<NO_FEATURES+1; j++) {
+        for (int j=0; j<NO_FEATURES; j++) {
             System.out.print(gBestLocation[j] + " ");
         }
         System.out.println("");
