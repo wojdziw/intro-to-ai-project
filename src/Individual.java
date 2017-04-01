@@ -13,6 +13,11 @@ public class Individual {
                 weights[i] = plusMinus * maxWeight * Math.random();
             }
     }
+    
+    //method to convert a particle (from PSO) back to an individual (for genetic algo)
+    public Individual(Particle particle) {
+    	this.weights = particle.getLocation();
+    }
 
     public double getGene(int index) {
         return weights[index];

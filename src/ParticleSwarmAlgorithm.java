@@ -7,10 +7,10 @@ import java.util.Vector;
 
 public class ParticleSwarmAlgorithm {
 
-    private int SWARM_SIZE = 30;
-    private int MAX_ITERATION = 300;
-    private int NO_FEATURES = 33;
-    private double RANGE = 10;
+    private int SWARM_SIZE;
+    private int MAX_ITERATION;
+    private int NO_FEATURES = Features.getNumberOfWeights();
+    private double RANGE = 2;
     private double VELOCITY_RANGE = 0.5;
 
     private double C1 = 2.0;
@@ -19,16 +19,30 @@ public class ParticleSwarmAlgorithm {
     private double W_LOWERBOUND = 0.0;
 
     private Vector<Particle> swarm = new Vector<>();
-    private double[] pBest = new double[SWARM_SIZE];
+    private double[] pBest;
     private Vector<double[]> pBestLocation = new Vector<>();
     private double gBest;
     private double[] gBestLocation;
-    private double[] fitnessValueList = new double[SWARM_SIZE];
+    private double[] fitnessValueList;
 
     Random generator = new Random();
+    
+    public ParticleSwarmAlgorithm (double[] weights, int swarmSize, int maxIterations) {
+    	
+    	//TEST
+    	System.out.println("Initializing PSO");
+    	
+    	this.SWARM_SIZE = swarmSize;
+    	this.MAX_ITERATION = maxIterations;
+    	pBest = new double[SWARM_SIZE];
+    	fitnessValueList = new double[SWARM_SIZE];
+    	
+    	initializeSwarm(weights);
+
+    }
 
     public void execute() {
-        initializeSwarm();
+        
         updateFitnessList();
 
         for(int i=0; i<SWARM_SIZE; i++) {
@@ -42,7 +56,7 @@ public class ParticleSwarmAlgorithm {
         while(t < MAX_ITERATION) {
             // step 1 - update personal best
             for(int i=0; i<SWARM_SIZE; i++) {
-                if(fitnessValueList[i] < pBest[i]) {
+                if(fitnessValueList[i] > pBest[i]) {
                     pBest[i] = fitnessValueList[i];
                     pBestLocation.set(i, swarm.get(i).getLocation());
                 }
@@ -73,7 +87,7 @@ public class ParticleSwarmAlgorithm {
                 p.setVelocity(newVel);
 
                 // step 4 - update location
-                double[] newLoc = new double[NO_FEATURES+1];
+                double[] newLoc = new double[NO_FEATURES];
                 for (int j=0; j<NO_FEATURES; j++) {
                     newLoc[j] = p.getLocation()[j] + newVel[j];
                 }
@@ -90,10 +104,18 @@ public class ParticleSwarmAlgorithm {
             t++;
             updateFitnessList();
         }
+        
+        
         for (int j=0; j<NO_FEATURES+1; j++) {
             System.out.print(gBestLocation[j] + " ");
         }
         System.out.println("");
+        
+        //TEST
+    	System.out.println("End of PSO execution");
+    	
+        
+        
     }
 
     public void initializeSwarm() {
@@ -112,6 +134,32 @@ public class ParticleSwarmAlgorithm {
             // randomize velocity in the range defined in Problem Set
             double[] vel = new double[NO_FEATURES+1];
             for (int j=0; j<NO_FEATURES+1; j++) { // +1 so we initialize the last weight as well
+                int plusMinus = Math.random() > 0.5 ? -1 : 1;
+                vel[j] = plusMinus * VELOCITY_RANGE * Math.random();
+            }
+
+            p.setLocation(loc);
+            p.setVelocity(vel);
+            swarm.add(p);
+        }
+    }
+    
+    public void initializeSwarm(double[] weights) {
+        Particle p;
+        for(int i=0; i<SWARM_SIZE; i++) {
+            p = new Particle();
+
+            // randomize location inside a space defined in Problem Set
+            double[] loc = new double[NO_FEATURES];
+
+            for (int j=0; j<NO_FEATURES; j++) { // +1 so we initialize the last weight as well
+                int plusMinus = Math.random() > 0.5 ? -1 : 1;
+                loc[j] = weights[j] + (plusMinus * RANGE * Math.random());
+            }
+
+            // randomize velocity in the range defined in Problem Set
+            double[] vel = new double[NO_FEATURES];
+            for (int j=0; j<NO_FEATURES; j++) { // +1 so we initialize the last weight as well
                 int plusMinus = Math.random() > 0.5 ? -1 : 1;
                 vel[j] = plusMinus * VELOCITY_RANGE * Math.random();
             }
@@ -141,8 +189,12 @@ public class ParticleSwarmAlgorithm {
 
         return pos;
     }
+    
+    public Vector<Particle> getSwarm() {
+    	return this.swarm;
+    }
 
     public static void main(String[] args) {
-        new ParticleSwarmAlgorithm().execute();
+        //new ParticleSwarmAlgorithm().execute();
     }
 }

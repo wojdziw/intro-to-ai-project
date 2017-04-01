@@ -1,0 +1,27 @@
+NrOfCores: 8
+0 Time for iteration: 3s -- Fitness: 6 -- Growth rate: 0.0
+1 Time for iteration: 2s -- Fitness: 10 -- Growth rate: 0.6666666666666666
+2 Time for iteration: 0s -- Fitness: 28 -- Growth rate: 3.6666666666666665
+3 Time for iteration: 0s -- Fitness: 56 -- Growth rate: 4.6
+4 Time for iteration: 0s -- Fitness: 56 -- Growth rate: 1.0
+5 Time for iteration: 1s -- Fitness: 122 -- Growth rate: 1.1785714285714286
+6 Time for iteration: 1s -- Fitness: 131 -- Growth rate: 1.3392857142857142
+7 Time for iteration: 2s -- Fitness: 224 -- Growth rate: 0.8360655737704918
+Entering PSO
+Initializing PSO
+ITERATION 0: 
+     Value: 350
+ITERATION 1: 
+     Value: 773
+ITERATION 2: 
+     Value: 3272
+ITERATION 3: 
+     Value: 2124
+ITERATION 4: 
+     Value: 2143
+ITERATION 5: 
+     Value: 3025
+ITERATION 6: 
+     Value: 2841
+ITERATION 7: 
+     Value: 2063
