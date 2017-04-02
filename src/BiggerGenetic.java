@@ -1,24 +1,6 @@
-
-/*
-
-    Credit: http://www.theprojectspot.com/tutorial-post/creating-a-genetic-algorithm-for-beginners/3
-
-    1. Initialization
-    2. Evaluation
-    3. Selection
-    4. Crossover
-    5. Mutation
-    6. Repeat!
-
-    Population - many different weight vectors
-    Individual - one weight vector
-    Fitness - number of cleared rows when a game is played
-
-*/
-
 import java.util.Random;
 
-public class GeneticAlgorithm {
+public class BiggerGenetic {
 
     private int noWeights;
     private double maxWeight;
@@ -33,7 +15,7 @@ public class GeneticAlgorithm {
 
     private static Random random = new Random();
 
-    public GeneticAlgorithm(int noWeights, double maxWeight, int populationSize, int noGenerations, double crossoverRate, double mutationRate, int tournamentSize, boolean elitism, Integer[] subsetArray) {
+    public BiggerGenetic(int noWeights, double maxWeight, int populationSize, int noGenerations, double crossoverRate, double mutationRate, int tournamentSize, boolean elitism, Integer[] subsetArray) {
         this.noWeights = noWeights;
         this.maxWeight = maxWeight;
         this.populationSize = populationSize;
@@ -45,8 +27,8 @@ public class GeneticAlgorithm {
         this.subsetArray = subsetArray;
     }
 
-    private Population evolvePopulation(Population pop) {
-        Population newPopulation = new Population(pop.size(), false, noWeights, maxWeight, subsetArray);
+    private BiggerPopulation evolvePopulation(BiggerPopulation pop) {
+        BiggerPopulation newPopulation = new BiggerPopulation(pop.size(), false, noWeights, maxWeight, subsetArray);
 
         if (elitism)
             newPopulation.setIndividual(0, pop.getFittest());
@@ -55,10 +37,10 @@ public class GeneticAlgorithm {
 
         // Loop over the population size and create new individuals with crossover
         for (int i = elitismOffset; i<pop.size(); i++) {
-            Individual indiv1 = tournamentSelection(pop); // Find the fittest among 5 random individuals
-            Individual indiv2 = tournamentSelection(pop);
+            BiggerIndividual indiv1 = tournamentSelection(pop); // Find the fittest among 5 random individuals
+            BiggerIndividual indiv2 = tournamentSelection(pop);
 
-            Individual newIndiv = crossover(indiv1, indiv2);
+            BiggerIndividual newIndiv = crossover(indiv1, indiv2);
             newPopulation.setIndividual(i, newIndiv);
         }
 
@@ -68,10 +50,10 @@ public class GeneticAlgorithm {
         return newPopulation;
     }
 
-    private Individual crossover(Individual indiv1, Individual indiv2) {
-        Individual newSol = new Individual(noWeights, maxWeight, subsetArray);
-        Individual stronger = indiv1;
-        Individual weaker = indiv2;
+    private BiggerIndividual crossover(BiggerIndividual indiv1, BiggerIndividual indiv2) {
+        BiggerIndividual newSol = new BiggerIndividual(noWeights, maxWeight, subsetArray);
+        BiggerIndividual stronger = indiv1;
+        BiggerIndividual weaker = indiv2;
         if (indiv1.getFitness() < indiv2.getFitness()) {
             stronger = indiv2;
             weaker = indiv1;
@@ -89,7 +71,7 @@ public class GeneticAlgorithm {
         return newSol;
     }
 
-    private void mutate(Individual indiv) {
+    private void mutate(BiggerIndividual indiv) {
         //Loop through genes
         for (int i = 0; i< noWeights; i++) {
             if (Math.random() <= mutationRate) {
@@ -101,9 +83,9 @@ public class GeneticAlgorithm {
     }
 
     // Tournament is picking a random sample of a chosen size and choosing the fittest out of that
-    private Individual tournamentSelection(Population pop) {
+    private BiggerIndividual tournamentSelection(BiggerPopulation pop) {
         // Create a tournament population
-        Population tournament = new Population(tournamentSize, false, noWeights, maxWeight, subsetArray);
+        BiggerPopulation tournament = new BiggerPopulation(tournamentSize, false, noWeights, maxWeight, subsetArray);
         for (int i = 0; i<tournamentSize; i++) {
             int randomId = (int) (Math.random() * pop.size());
             tournament.setIndividual(i, pop.getIndividual(randomId));
@@ -111,9 +93,9 @@ public class GeneticAlgorithm {
         return tournament.getFittest();
     }
 
-    public int execute() {
+    public void execute() {
 
-        Population myPop = new Population(populationSize, true, noWeights, maxWeight, subsetArray);
+        BiggerPopulation myPop = new BiggerPopulation(populationSize, true, noWeights, maxWeight, subsetArray);
 
         //System.out.println("NrOfCores: " + myPop.getCores()); // Check if it finds all cores
 
@@ -143,8 +125,8 @@ public class GeneticAlgorithm {
         System.out.println("------------------------------------------------");
 
         //saveToCsv.writeCsvFile("geneticRun", generationsResults, generationsWeights);
-        return myPop.getFittest().getFitness();
     }
+
 
     public static void main(String[] args) {
 
@@ -156,24 +138,10 @@ public class GeneticAlgorithm {
         double mutationRate = 0.015;
         int tournamentSize = 5;
         boolean elitism = true;
-        Integer[] subsetArray = {0,7,9,10,11,15};
+        Integer[] subsetArray = {0,7,9,11,15};
         int noWeights = Features.getNumberOfWeights(subsetArray);
 
-        for (int i=0; i<20; i++) {
-            GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism, subsetArray);
-            geneticAlgorithm.execute();
-
-
-        }
-
-
+        BiggerGenetic biggerGenetic = new BiggerGenetic(noWeights, maxWeight, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism, subsetArray);
+        biggerGenetic.execute();
     }
-
 }
-
-
-
-
-
-
-

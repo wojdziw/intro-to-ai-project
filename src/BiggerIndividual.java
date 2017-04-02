@@ -3,7 +3,7 @@
 
 import java.util.Random;
 
-public class Individual {
+public class BiggerIndividual {
 
     private double[] weights;
     private int fitness = 0;
@@ -11,12 +11,12 @@ public class Individual {
 
     public static Random random = new Random();
 
-    public Individual(int noWeights, double maxWeight, Integer[] subsetArray) {
+    public BiggerIndividual(int noWeights, double maxWeight, Integer[] subsetArray) {
         this.subsetArray = subsetArray;
         weights = new double[noWeights];
-            for (int i=0; i<noWeights; i++) {
-                weights[i] = random.nextGaussian()*maxWeight;
-            }
+        for (int i=0; i<noWeights; i++) {
+            weights[i] = random.nextGaussian()*maxWeight;
+        }
     }
 
     public double getGene(int index) {

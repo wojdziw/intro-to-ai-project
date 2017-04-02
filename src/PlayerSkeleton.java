@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class PlayerSkeleton{
 	
-	public int pickMove(State s, int[][] legalMoves, double[] weights) {
+	public int pickMove(State s, int[][] legalMoves, double[] weights, Integer[] subsetArray) {
 
 		int bestMove = 0;
 		double bestUtility = -Double.MAX_VALUE;
@@ -31,7 +31,7 @@ public class PlayerSkeleton{
 				int rowsCleared = simulatedState.getRowsCleared();
 
 				// Passed rowsCleared into calculateUtility to apply weight to it
-				double utility = Features.calculateUtility(newField, newTop, weights, rowsCleared);
+				double utility = Features.calculateUtility(newField, newTop, weights, rowsCleared, subsetArray);
 
 				// Find the move maximizing the utility
 				if (utility > bestUtility) {
@@ -46,7 +46,7 @@ public class PlayerSkeleton{
 	}
 
 	// Returns the score (number of rows cleared) based on the strategy i.e. the weights of the utility function
-	public static int playAGame(double[] weights, boolean drawing, boolean waitForEnter) {
+	public static int playAGame(double[] weights, boolean drawing, boolean waitForEnter, Integer[] subsetArray) {
 		State s = new State();
 		if (drawing)
 			new TFrame(s);
@@ -59,7 +59,7 @@ public class PlayerSkeleton{
 
 			if (waitForEnter)
 				scanner.nextLine();
-            int nextMove = p.pickMove(s,s.legalMoves(), weights);
+            int nextMove = p.pickMove(s,s.legalMoves(), weights, subsetArray);
 
 			s.makeMove(nextMove);
 
@@ -84,11 +84,11 @@ public class PlayerSkeleton{
 	}
 
 	// Returns the score (number of rows cleared) based on the strategy i.e. the weights of the utility function
-	public static int playNGames(double[] weights, boolean drawing, boolean waitForEnter, int N) {
+	public static int playNGames(double[] weights, boolean drawing, boolean waitForEnter, int N, Integer[] subsetArray) {
 		int fitness = 0;
 		// Averaging over N games to mitigate the impact of the random piece choice
 		for (int i=0; i<N; i++)
-			fitness += PlayerSkeleton.playAGame(weights, false, false);
+			fitness += PlayerSkeleton.playAGame(weights, false, false, subsetArray);
 
 		// Get average
 		return fitness/N;
@@ -96,24 +96,6 @@ public class PlayerSkeleton{
 
 	public static void main(String[] args) {
 
-		// Initialize the feature weight to something
-		// we have noFeatures+1 vector to have the extra bias term
-
-
-		int noFeatures = 15;
-		int noColumns = State.COLS;
-		double maxWeight = 3;
-		double[] weights = new double[noFeatures + 1 + (noColumns-1) + (noColumns-2)]; //noFeatures + bias + columnHeightWeights + columnDifferenceWeights
-		for (int i=0; i<weights.length; i++) {
-			int plusMinus = Math.random() > 0.5 ? -1 : 1;
-			weights[i] = plusMinus * maxWeight * Math.random();
-		}
-
-		// Play one game
-		int rowsCleared = playAGame(weights, true, false);
-
-		System.out.println("You have completed "+rowsCleared+" rows.");
-        Features.printRuntimeStatistics();
 	}
 
 }

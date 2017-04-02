@@ -33,31 +33,14 @@ public class Features {
         featureWeights.put(14, Arrays.asList(14,15,16,17,18,19,20,21,22,23));
         featureWeights.put(15, Arrays.asList(24,25,26,27,28,29,30,31,32));
     }
-    // HERE WE CHOOSE THE SUBSET OF FEATURES WE WANT TO TEST
-    // Add features by choosing appropriate lists in here
-    public static List<Integer> subset = new ArrayList<>();
-    static {
-        subset.addAll(featureWeights.get(0));
-        //subset.addAll(featureWeights.get(1));
-        //subset.addAll(featureWeights.get(2));
-        //subset.addAll(featureWeights.get(3));
-        //subset.addAll(featureWeights.get(4));
-        //subset.addAll(featureWeights.get(5));
-        //subset.addAll(featureWeights.get(6));
-        subset.addAll(featureWeights.get(7));
-        //subset.addAll(featureWeights.get(8));
-        subset.addAll(featureWeights.get(9));
-        subset.addAll(featureWeights.get(10));
-        subset.addAll(featureWeights.get(11));
-        //subset.addAll(featureWeights.get(12));
-        //subset.addAll(featureWeights.get(13));
-        //subset.addAll(featureWeights.get(14));
-        subset.addAll(featureWeights.get(15));
-    }
 
     // THIS INCLUDES THE BIAS
-    public static int getNumberOfWeights() {
-        return subset.size();
+    public static int getNumberOfWeights(Integer[] subsetArray) {
+        int noWeights = 0;
+        for (Integer featureNo : subsetArray) {
+            noWeights+=featureWeights.get(featureNo).size();
+        }
+        return noWeights;
     }
 
     // FEATURE 1 + 2
@@ -372,7 +355,12 @@ public class Features {
 
     // subset size should be the same as the number of weights
     // no time statistics sadly
-    public static double calculateUtility(int[][] field, int[] top, double[] weights, int rowsCleared) {
+    public static double calculateUtility(int[][] field, int[] top, double[] weights, int rowsCleared, Integer[] subsetArray) {
+
+        List<Integer> subset = new ArrayList<>();
+        for (Integer featureNo : subsetArray) {
+            subset.addAll(featureWeights.get(featureNo));
+        }
 
         // Here are all the features
         double[] feature1_2 = subset.contains(1) || subset.contains(2) ? Features.calculateFeature1_2(top, field) : new double[2];
