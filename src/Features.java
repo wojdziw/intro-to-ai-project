@@ -38,20 +38,20 @@ public class Features {
     public static List<Integer> subset = new ArrayList<>();
     static {
         subset.addAll(featureWeights.get(0));
-        subset.addAll(featureWeights.get(1));
-        subset.addAll(featureWeights.get(2));
-        subset.addAll(featureWeights.get(3));
-        subset.addAll(featureWeights.get(4));
-        subset.addAll(featureWeights.get(5));
-        subset.addAll(featureWeights.get(6));
+        //subset.addAll(featureWeights.get(1));
+        //subset.addAll(featureWeights.get(2));
+        //subset.addAll(featureWeights.get(3));
+        //subset.addAll(featureWeights.get(4));
+        //subset.addAll(featureWeights.get(5));
+        //subset.addAll(featureWeights.get(6));
         subset.addAll(featureWeights.get(7));
-        subset.addAll(featureWeights.get(8));
+        //subset.addAll(featureWeights.get(8));
         subset.addAll(featureWeights.get(9));
         subset.addAll(featureWeights.get(10));
         subset.addAll(featureWeights.get(11));
-        subset.addAll(featureWeights.get(12));
-        subset.addAll(featureWeights.get(13));
-        subset.addAll(featureWeights.get(14));
+        //subset.addAll(featureWeights.get(12));
+        //subset.addAll(featureWeights.get(13));
+        //subset.addAll(featureWeights.get(14));
         subset.addAll(featureWeights.get(15));
     }
 

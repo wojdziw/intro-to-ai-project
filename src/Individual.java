@@ -1,16 +1,19 @@
 // One individual = one weight vector
 // Gene = weight for a particular feature
 
+import java.util.Random;
+
 public class Individual {
 
     private double[] weights;
     private int fitness = 0;
 
+    public static Random random = new Random();
+
     public Individual(int noWeights, double maxWeight) {
         weights = new double[noWeights];
             for (int i=0; i<noWeights; i++) {
-                int plusMinus = Math.random() > 0.5 ? -1 : 1;
-                weights[i] = plusMinus * maxWeight * Math.random();
+                weights[i] = random.nextGaussian()*maxWeight;
             }
     }
 
@@ -37,13 +40,10 @@ public class Individual {
     }
 
     public void printGenes() {
-        int i = 0;
-        for (double gene : getGenes()) {
+        double[] genes = getGenes();
+        for (int i=0; i<genes.length; i++) {
+            double gene = genes[i];
             System.out.print(i + ": " + String.format("%.2f", gene) + " ");
-            i++;
-            if (i == 14) {
-                System.out.println();
-            }
         }
         System.out.println("");
     }
