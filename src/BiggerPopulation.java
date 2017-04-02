@@ -6,15 +6,14 @@ public class BiggerPopulation {
 
     //creating a pool for the number of available cores (or threads).
     static int cores = Runtime.getRuntime().availableProcessors();
-    private Integer[] subsetArray;
 
     private BiggerIndividual[] individuals;
-    public BiggerPopulation(int populationSize, boolean initialise, int noFeatures, double maxWeight, Integer[] subsetArray) {
+    public BiggerPopulation(int populationSize, boolean initialise, int noFeatures) {
         individuals = new BiggerIndividual[populationSize];
 
         if (initialise)
             for (int i=0; i<size(); i++) {
-                BiggerIndividual newIndividual = new BiggerIndividual(noFeatures, maxWeight, subsetArray);
+                BiggerIndividual newIndividual = new BiggerIndividual(noFeatures);
                 setIndividual(i, newIndividual);
             }
     }

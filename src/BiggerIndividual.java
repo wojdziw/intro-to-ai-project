@@ -5,49 +5,79 @@ import java.util.Random;
 
 public class BiggerIndividual {
 
-    private double[] weights;
+    private Integer[] weights;
     private int fitness = 0;
-    private Integer[] subsetArray;
+
+    double maxWeight = 5;
+    int populationSize = 50;
+    int noGenerations = 10;
+
+    double crossoverRate = 0.7;
+    double mutationRate = 0.015;
+    int tournamentSize = 5;
+    boolean elitism = true;
 
     public static Random random = new Random();
 
-    public BiggerIndividual(int noWeights, double maxWeight, Integer[] subsetArray) {
-        this.subsetArray = subsetArray;
-        weights = new double[noWeights];
-        for (int i=0; i<noWeights; i++) {
-            weights[i] = random.nextGaussian()*maxWeight;
+    public BiggerIndividual(int noWeights) {
+        weights = new Integer[noWeights];
+        for (int i=0; i<weights.length; i++)
+            weights[i] = -1;
+        int i=0;
+        while(i!=noWeights) {
+            int weight = 1+(int)(Math.random() * 15);
+            if (!alreadyIn(weight, weights)) {
+                weights[i] = weight;
+                i++;
+            }
         }
     }
 
-    public double getGene(int index) {
+    public int getGene(int index) {
         return weights[index];
     }
 
-    public void setGene(int index, double value) {
+    public void setGene(int index, int value) {
         weights[index] = value;
     }
 
     public int getFitness() {
 
         if (fitness==0) {
-            int N = 10;
-            fitness = PlayerSkeleton.playNGames(weights, false, false, N, subsetArray);
+            GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(Features.getNumberOfWeights(weights), maxWeight, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism, weights);
+            fitness = geneticAlgorithm.execute();
         }
 
         return fitness;
     }
 
-    public double[] getGenes() {
+    public Integer[] getGenes() {
         return weights;
     }
 
     public void printGenes() {
-        double[] genes = getGenes();
+        Integer[] genes = getGenes();
         for (int i=0; i<genes.length; i++) {
             double gene = genes[i];
             System.out.print(i + ": " + String.format("%.2f", gene) + " ");
         }
         System.out.println("");
+    }
+
+    public static boolean alreadyIn(int a, Integer[] array) {
+        for (int b: array) {
+            if (a==b)
+                return true;
+        }
+        return false;
+    }
+
+    public boolean alreadyInGenes(int a) {
+        for (int b: weights) {
+            if (a==b)
+                return true;
+        }
+        return false;
     }
 
 }
