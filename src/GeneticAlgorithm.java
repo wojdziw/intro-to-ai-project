@@ -16,6 +16,8 @@
 
 */
 
+import java.util.Random;
+
 public class GeneticAlgorithm {
 
     private int noWeights;
@@ -27,6 +29,8 @@ public class GeneticAlgorithm {
     private double mutationRate;
     private int tournamentSize;
     private boolean elitism;
+
+    private static Random random = new Random();
 
     public GeneticAlgorithm(int noWeights, double maxWeight, int populationSize, int noGenerations, double crossoverRate, double mutationRate, int tournamentSize, boolean elitism) {
         this.noWeights = noWeights;
@@ -64,13 +68,20 @@ public class GeneticAlgorithm {
 
     private Individual crossover(Individual indiv1, Individual indiv2) {
         Individual newSol = new Individual(noWeights, maxWeight);
+        Individual stronger = indiv1;
+        Individual weaker = indiv2;
+        if (indiv1.getFitness() < indiv2.getFitness()) {
+            stronger = indiv2;
+            weaker = indiv1;
+        }
         // Loop through genes
         for (int i = 0; i< noWeights; i++) {
             // Crossover
+            // probability>0.5 -> get more genes from the stronger parent
             if (Math.random() <= crossoverRate) {
-                newSol.setGene(i, indiv1.getGene(i));
+                newSol.setGene(i, stronger.getGene(i));
             } else {
-                newSol.setGene(i, indiv2.getGene(i));
+                newSol.setGene(i, weaker.getGene(i));
             }
         }
         return newSol;
@@ -81,8 +92,7 @@ public class GeneticAlgorithm {
         for (int i = 0; i< noWeights; i++) {
             if (Math.random() <= mutationRate) {
                 // Create random gene
-                int plusMinus = Math.random() > 0.5 ? -1 : 1;
-                double gene = plusMinus * maxWeight * Math.random();
+                double gene = random.nextGaussian()*maxWeight;
                 indiv.setGene(i, gene);
             }
         }
@@ -103,44 +113,55 @@ public class GeneticAlgorithm {
 
         Population myPop = new Population(populationSize, true, noWeights, maxWeight);
 
-        System.out.println("NrOfCores: " + myPop.getCores()); // Check if it finds all cores
+        //System.out.println("NrOfCores: " + myPop.getCores()); // Check if it finds all cores
 
         //double[][] generationsWeights = new double[noGenerations][noWeights];
         //int[][] generationsResults =  new int[noGenerations][2];
 
         long startTime = System.nanoTime();
 
-        for (int generation = 0; generation< noGenerations; generation++) {
+
+        for (int generation = 0; generation<noGenerations; generation++) {
 
             myPop = evolvePopulation(myPop);
-            myPop.printStats(generation);
 
             //generationsResults[generation][0] = myPop.getFittest().getFitness();
             //generationsWeights[generation]=myPop.getFittest().getGenes();
 
             long iterTime = (System.nanoTime() - startTime)/1000000000;
-            System.out.println("Time for iteration: " + iterTime + "s");
             startTime = System.nanoTime();
 
-            System.out.println("------------------------------------------------");
+            System.out.print(generation+1 + "(" + myPop.getFittest().getFitness() + "r," + iterTime+ "s), ");
+
+            if (generation==noGenerations-1) {
+                System.out.println("");
+                myPop.printStats(generation);
+            }
         }
+        System.out.println("------------------------------------------------");
 
         //saveToCsv.writeCsvFile("geneticRun", generationsResults, generationsWeights);
     }
 
     public static void main(String[] args) {
         int noWeights = Features.getNumberOfWeights();
-        double maxWeight = 10;
+        double maxWeight = 5;
         int populationSize = 50;
-        int noGenerations = 40;
+        int noGenerations = 10;
 
-        double crossoverRate = 0.5;
-        double mutationRate = 0.05;
+        double crossoverRate = 0.7;
+        double mutationRate = 0.015;
         int tournamentSize = 5;
         boolean elitism = true;
 
-        GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism);
-        geneticAlgorithm.execute();
+        for (int i=0; i<20; i++) {
+            GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism);
+            geneticAlgorithm.execute();
+
+
+        }
+
+
     }
 
 }

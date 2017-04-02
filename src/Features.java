@@ -6,6 +6,11 @@ import static java.lang.Math.min;
 
 public class Features {
 
+    public static double[] maxFeatures = new double[33];
+    public static double[] meanFeatures = new double[33];
+    public static double[] iterations = new double[33];
+
+
     //1 + 13 + (State.COLS) + (State.COLS-1) - this is the most weights we can have
     // These list down the weights related to each of the features
     public static Map<Integer, List<Integer>> featureWeights;
@@ -25,17 +30,28 @@ public class Features {
         featureWeights.put(11, Arrays.asList(11));
         featureWeights.put(12, Arrays.asList(12));
         featureWeights.put(13, Arrays.asList(13));
-        featureWeights.put(14, Arrays.asList(14,15,16,17,18,19,20,21,22));
-        featureWeights.put(15, Arrays.asList(23,24,25,26,27,28,29,30,31,32));
+        featureWeights.put(14, Arrays.asList(14,15,16,17,18,19,20,21,22,23));
+        featureWeights.put(15, Arrays.asList(24,25,26,27,28,29,30,31,32));
     }
     // HERE WE CHOOSE THE SUBSET OF FEATURES WE WANT TO TEST
     // Add features by choosing appropriate lists in here
     public static List<Integer> subset = new ArrayList<>();
     static {
+        subset.addAll(featureWeights.get(0));
+        //subset.addAll(featureWeights.get(1));
+        //subset.addAll(featureWeights.get(2));
+        //subset.addAll(featureWeights.get(3));
+        //subset.addAll(featureWeights.get(4));
+        //subset.addAll(featureWeights.get(5));
+        //subset.addAll(featureWeights.get(6));
         subset.addAll(featureWeights.get(7));
+        //subset.addAll(featureWeights.get(8));
         subset.addAll(featureWeights.get(9));
         subset.addAll(featureWeights.get(10));
         subset.addAll(featureWeights.get(11));
+        //subset.addAll(featureWeights.get(12));
+        //subset.addAll(featureWeights.get(13));
+        //subset.addAll(featureWeights.get(14));
         subset.addAll(featureWeights.get(15));
     }
 
@@ -66,6 +82,15 @@ public class Features {
         // TODO: decide if we should keep it!
         bothSums[0] = sum/State.COLS;
         bothSums[1] = weightedSum/State.COLS;
+
+        iterations[1]+=1;
+        maxFeatures[1] = Math.max(maxFeatures[1], bothSums[0]);
+        meanFeatures[1] = ((iterations[1]-1)/iterations[1])* meanFeatures[1]+bothSums[0]/iterations[1];
+
+        iterations[2]+=1;
+        maxFeatures[2] = Math.max(maxFeatures[2], bothSums[1]);
+        meanFeatures[2] = ((iterations[2]-1)/iterations[2])* meanFeatures[2]+bothSums[1]/iterations[2];
+
         return bothSums;
     }
 
@@ -76,6 +101,10 @@ public class Features {
 
         for (int height : top)
             maxHeight = Math.max(maxHeight, height);
+
+        iterations[3]+=1;
+        maxFeatures[3] = Math.max(maxFeatures[3], maxHeight);
+        meanFeatures[3] = ((iterations[3]-1)/iterations[3])* meanFeatures[3]+maxHeight/iterations[3];
 
         return maxHeight;
     }
@@ -89,6 +118,11 @@ public class Features {
                 minHeight = columnHeight;
             }
         }
+
+        iterations[4]+=1;
+        maxFeatures[4] = Math.max(maxFeatures[4], minHeight);
+        meanFeatures[4] = ((iterations[4]-1)/iterations[4])* meanFeatures[4]+minHeight/iterations[4];
+
         return minHeight;
     }
 
@@ -104,6 +138,10 @@ public class Features {
                 maxHeightDiff = diff;
         }
 
+        iterations[6]+=1;
+        maxFeatures[6] = Math.max(maxFeatures[6], maxHeightDiff);
+        meanFeatures[6] = ((iterations[6]-1)/iterations[6])* meanFeatures[6]+maxHeightDiff/iterations[6];
+
         return maxHeightDiff;
     }
 
@@ -111,14 +149,23 @@ public class Features {
     //Deepest Hole - The depth of the deepest hole (an unfillable spot = has at least a block above it)
     public static int calculateFeature8(int[] top, int[][] field) {
 
-        for(int r = 0; r < State.ROWS; r++) {
-            for(int c = 0; c < State.COLS; c++) {
-                if (field[r][c]==0 && top[c] > r)
-                    return r;
+        boolean found = false;
+        int deepestHole = 0;
+
+        for(int r = 0; r < State.ROWS && !found; r++) {
+            for(int c = 0; c < State.COLS && !found; c++) {
+                if (field[r][c]==0 && top[c] > r) {
+                    deepestHole = r;
+                    found = true;
+                }
             }
         }
 
-        return 0;
+        iterations[8]+=1;
+        maxFeatures[8] = Math.max(maxFeatures[8], deepestHole);
+        meanFeatures[8] = ((iterations[8]-1)/iterations[8])* meanFeatures[8]+deepestHole/iterations[8];
+
+        return deepestHole;
     }
 
     // FEATURE 9
@@ -147,6 +194,15 @@ public class Features {
         double [] result = new double[2];
         result[0] = nrOfHoleSpots;
         result[1] = clusterCount;
+
+        iterations[7]+=1;
+        maxFeatures[7] = Math.max(maxFeatures[7], result[0]);
+        meanFeatures[7] = ((iterations[7]-1)/iterations[7])* meanFeatures[7]+result[0]/iterations[7];
+
+        iterations[9]+=1;
+        maxFeatures[9] = Math.max(maxFeatures[9], result[1]);
+        meanFeatures[9] = ((iterations[9]-1)/iterations[9])* meanFeatures[9]+result[1]/iterations[9];
+
         return result;
     }
 
@@ -200,6 +256,10 @@ public class Features {
             }
         }
 
+        iterations[10]+=1;
+        maxFeatures[10] = Math.max(maxFeatures[10], numberOfWells);
+        meanFeatures[10] = ((iterations[10]-1)/iterations[10])* meanFeatures[10]+numberOfWells/iterations[10];
+
         return numberOfWells;
     }
 
@@ -219,18 +279,30 @@ public class Features {
             }
         }
 
+        iterations[11]+=1;
+        maxFeatures[11] = Math.max(maxFeatures[11], sumOfWells);
+        meanFeatures[11] = ((iterations[11]-1)/iterations[11])* meanFeatures[11]+sumOfWells/iterations[11];
+
         return sumOfWells;
     }
 
     // FEATURE 12
     // Game Status - Based on the game status, 1 for a losing state, 0 otherwise
     public static double calculateFeature12(int[] top, int[][] field) {
+        int result = 0;
+
         for(int i : top){
             if (i >= State.COLS){
-                return 1;
+                result = 1;
+                break;
             }
         }
-        return 0;
+
+        iterations[12]+=1;
+        maxFeatures[12] = Math.max(maxFeatures[12], result);
+        meanFeatures[12] = ((iterations[12]-1)/iterations[12])* meanFeatures[12]+result/iterations[12];
+
+        return result;
 
     }
 
@@ -241,6 +313,10 @@ public class Features {
 
         for (int height : top)
             columnSum += height;
+
+        iterations[13]+=1;
+        maxFeatures[13] = Math.max(maxFeatures[13], columnSum);
+        meanFeatures[13] = ((iterations[13]-1)/iterations[13])* meanFeatures[13]+columnSum/iterations[13];
 
         return columnSum;
     }
@@ -253,11 +329,22 @@ public class Features {
         for (int i = 0; i<top.length; i++ ){
             topDouble[i] = top[i];
         }
+
+        for (int i=0; i<top.length; i++) {
+            iterations[14+i]+=1;
+            maxFeatures[14+i] = Math.max(maxFeatures[14+i], topDouble[i]);
+            meanFeatures[14+i] = ((iterations[14+i]-1)/iterations[14+i])* meanFeatures[14+i]+topDouble[i]/iterations[14+i];
+        }
+
+
         return topDouble;
     }
 
     public static double dotProduct(double[] X, double[] Y){
         double sumOfWeightedHeights = 0;
+        if(X.length != Y.length){
+            System.out.println("Vector sizes in dotProduct doesn't match");
+        }
         for (int i=0; i <X.length; i++){
             sumOfWeightedHeights += X[i]*Y[i];
         }
@@ -272,6 +359,12 @@ public class Features {
 
         for (int i = 1; i<top.length; i++) {
             weightedSumHeightDiff[i-1] = Math.abs(top[i-1] - top[i]);
+        }
+
+        for (int i=0; i<top.length-1; i++) {
+            iterations[24+i]+=1;
+            maxFeatures[24+i] = Math.max(maxFeatures[24+i], weightedSumHeightDiff[i]);
+            meanFeatures[24+i] = ((iterations[24+i]-1)/iterations[24+i])* meanFeatures[24+i]+weightedSumHeightDiff[i]/iterations[24+i];
         }
 
         return weightedSumHeightDiff;
@@ -293,10 +386,10 @@ public class Features {
         double feature12 = subset.contains(12) ? Features.calculateFeature12(top, field) : 0.0;
         double feature13 = subset.contains(13) ? Features.calculateFeature13(top, field) : 0.0;
         double[] feature14 = subset.contains(14) ? Features.calculateFeature14(top, field) : new double[10];
-        double[] feature15 = subset.contains(23) ? Features.calculateFeature15(top, field) : new double[9];
+        double[] feature15 = subset.contains(24) ? Features.calculateFeature15(top, field) : new double[9];
 
         // Plus 1 for bias
-        int numberOfAllWeights = 1 + 13 + (State.COLS) + (State.COLS-1);
+        int numberOfAllWeights = 1 + 13 + (State.COLS) + (State.COLS-1); //=1+13+10+9=33
 
         // The weights inputted only refer to the subset
         // Need to convert that to a weight vector referring to all the features
@@ -315,7 +408,7 @@ public class Features {
         }
 
         double[] columnHeightWeights = Arrays.copyOfRange(allWeights, 14, (14 + field[0].length));
-        double[] colDiffWeights = Arrays.copyOfRange(allWeights, (14 + field[0].length + 1), (14 + 2*field[0].length));
+        double[] colDiffWeights = Arrays.copyOfRange(allWeights, (14 + field[0].length), (14 + 2*field[0].length-1));
 
         // apply weights
         return allWeights[0]
@@ -417,7 +510,7 @@ public class Features {
 
 
         double[] columnHeightWeights = Arrays.copyOfRange(weights, 14, (14 + field[0].length));
-        double[] colDiffWeights = Arrays.copyOfRange(weights, (14 + field[0].length + 1), (14 + 2*field[0].length));
+        double[] colDiffWeights = Arrays.copyOfRange(weights, (14 + field[0].length), (14 + field[0].length + field[0].length-1));
 
         // apply weights
         return weights[0]
