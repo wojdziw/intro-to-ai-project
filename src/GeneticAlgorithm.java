@@ -197,12 +197,11 @@ public class GeneticAlgorithm {
         boolean elitism = true;
         double growthRateThreshold = 0.9;
         int growthRange = 3;
-        int psoIterations = 30;
+        int psoIterations = 3;
 
         for (int i=0; i<20; i++) {
             GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism, growthRateThreshold, growthRange, psoIterations);
             geneticAlgorithm.execute();
-
 
         }
 
