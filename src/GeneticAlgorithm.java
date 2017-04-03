@@ -31,6 +31,8 @@ public class GeneticAlgorithm {
     private boolean elitism;
     private Integer[] subsetArray;
 
+    public static Object lock = new Object();
+
     private static Random random = new Random();
 
     public GeneticAlgorithm(int noWeights, double maxWeight, int populationSize, int noGenerations, double crossoverRate, double mutationRate, int tournamentSize, boolean elitism, Integer[] subsetArray) {
@@ -120,7 +122,6 @@ public class GeneticAlgorithm {
         //double[][] generationsWeights = new double[noGenerations][noWeights];
         //int[][] generationsResults =  new int[noGenerations][2];
 
-        long startTime = System.nanoTime();
 
 
         for (int generation = 0; generation<noGenerations; generation++) {
@@ -130,18 +131,21 @@ public class GeneticAlgorithm {
             //generationsResults[generation][0] = myPop.getFittest().getFitness();
             //generationsWeights[generation]=myPop.getFittest().getGenes();
 
-            long iterTime = (System.nanoTime() - startTime)/1000000000;
-            startTime = System.nanoTime();
+            synchronized(lock) {
+                System.out.print("[");
+                for (int i=0; i<subsetArray.length-1; i++)
+                    System.out.print(subsetArray[i]+",");
+                System.out.print(subsetArray[subsetArray.length-1]);
+                System.out.print("]");
 
-            System.out.print(generation+1 + "(" + myPop.getFittest().getFitness() + "r," + iterTime+ "s), ");
+                System.out.print("(g" + generation +","+ myPop.getFittest().getFitness() + "rows) ");
 
-            if (generation==noGenerations-1) {
+                if (generation==noGenerations-1)
+                    System.out.print(" - finished!");
+
                 System.out.println("");
-                myPop.printStats(generation);
             }
         }
-        System.out.println("------------------------------------------------");
-
         //saveToCsv.writeCsvFile("geneticRun", generationsResults, generationsWeights);
         return myPop.getFittest().getFitness();
     }

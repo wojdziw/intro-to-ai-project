@@ -24,12 +24,15 @@ public class BiggerGenetic {
     }
 
     private BiggerPopulation evolvePopulation(BiggerPopulation pop) {
+        System.out.println("Starting population");
         BiggerPopulation newPopulation = new BiggerPopulation(pop.size(), false, noWeights);
 
         if (elitism)
             newPopulation.setIndividual(0, pop.getFittest());
 
         int elitismOffset = elitism ? 1 : 0;
+
+        System.out.println("Starting crossover");
 
         // Loop over the population size and create new individuals with crossover
         for (int i = elitismOffset; i<pop.size(); i++) {
@@ -39,6 +42,8 @@ public class BiggerGenetic {
             BiggerIndividual newIndiv = crossover(indiv1, indiv2);
             newPopulation.setIndividual(i, newIndiv);
         }
+
+        System.out.println("Starting mutation");
 
         // Mutate population
         for (int i=elitismOffset; i<newPopulation.size(); i++)
@@ -82,12 +87,14 @@ public class BiggerGenetic {
 
     // Tournament is picking a random sample of a chosen size and choosing the fittest out of that
     private BiggerIndividual tournamentSelection(BiggerPopulation pop) {
+        System.out.println("Start tournament");
         // Create a tournament population
         BiggerPopulation tournament = new BiggerPopulation(tournamentSize, false, noWeights);
         for (int i = 0; i<tournamentSize; i++) {
             int randomId = (int) (Math.random() * pop.size());
             tournament.setIndividual(i, pop.getIndividual(randomId));
         }
+        System.out.println("End tournament");
         return tournament.getFittest();
     }
 
@@ -113,12 +120,9 @@ public class BiggerGenetic {
             long iterTime = (System.nanoTime() - startTime)/1000000000;
             startTime = System.nanoTime();
 
-            System.out.print(generation+1 + "(" + myPop.getFittest().getFitness() + "r," + iterTime+ "s), ");
 
-            if (generation==noGenerations-1) {
-                System.out.println("");
-                myPop.printStats(generation);
-            }
+            //System.out.println(generation+1 + "(" + myPop.getFittest().getFitness() + "r," + iterTime+ "s), ");
+            myPop.printStats(generation);
         }
         System.out.println("------------------------------------------------");
 
@@ -129,8 +133,8 @@ public class BiggerGenetic {
     public static void main(String[] args) {
 
         double maxWeight = 5;
-        int populationSize = 10;
-        int noGenerations = 10;
+        int populationSize = 20;
+        int noGenerations = 5;
 
         double crossoverRate = 0.7;
         double mutationRate = 0.015;

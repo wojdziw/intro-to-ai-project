@@ -10,7 +10,7 @@ public class BiggerIndividual {
 
     double maxWeight = 5;
     int populationSize = 50;
-    int noGenerations = 10;
+    int noGenerations = 5;
 
     double crossoverRate = 0.7;
     double mutationRate = 0.015;
@@ -44,6 +44,7 @@ public class BiggerIndividual {
     public int getFitness() {
 
         if (fitness==0) {
+            System.out.println("hah");
             GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(Features.getNumberOfWeights(weights), maxWeight, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism, weights);
             fitness = geneticAlgorithm.execute();
         }
@@ -57,9 +58,9 @@ public class BiggerIndividual {
 
     public void printGenes() {
         Integer[] genes = getGenes();
+        System.out.print(" features: [");
         for (int i=0; i<genes.length; i++) {
-            double gene = genes[i];
-            System.out.print(i + ": " + String.format("%.2f", gene) + " ");
+            System.out.print("["+ genes[i] + "]");
         }
         System.out.println("");
     }
