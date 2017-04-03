@@ -47,7 +47,7 @@ public class saveToCsv {
                 fileWriter.append(String.valueOf(run));
                 fileWriter.append(COMMA_DELIMITER);
                 }
-                for (double weight : weightMatrix[i]){
+                for (Integer weight : weightMatrix[i]){
                     fileWriter.append(String.valueOf(weight));
                     fileWriter.append(COMMA_DELIMITER);
                 }

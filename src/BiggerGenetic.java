@@ -141,8 +141,8 @@ public class BiggerGenetic {
     public static void main(String[] args) {
 
         double maxWeight = 5;
-        int populationSize = 5;
-        int noGenerations = 10;
+        int populationSize = 30;
+        int noGenerations = 30;
 
         double crossoverRate = 0.7;
         double mutationRate = 0.015;
