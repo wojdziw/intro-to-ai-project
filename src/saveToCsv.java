@@ -11,7 +11,7 @@ public class saveToCsv {
     private static final String COMMA_DELIMITER = ",";
     private static final String NEW_LINE_SEPARATOR = "\n";
 
-    public static void writeCsvFile(String fileName, int[][] fittnessMatrix, double[][] weightMatrix) {
+    public static void writeCsvFile(String fileName, int[][] fittnessMatrix, Integer[][] weightMatrix) {
 
         System.out.println("Writing over results and weights to csv");
 

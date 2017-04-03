@@ -110,8 +110,8 @@ public class BiggerGenetic {
 
         //System.out.println("NrOfCores: " + myPop.getCores()); // Check if it finds all cores
 
-        //double[][] generationsWeights = new double[noGenerations][noWeights];
-        //int[][] generationsResults =  new int[noGenerations][2];
+        Integer[][] generationsWeights = new Integer[noGenerations][noWeights];
+        int[][] generationsResults =  new int[noGenerations][2];
 
         long startTime = System.nanoTime();
 
@@ -120,8 +120,10 @@ public class BiggerGenetic {
 
             myPop = evolvePopulation(myPop);
 
-            //generationsResults[generation][0] = myPop.getFittest().getFitness();
-            //generationsWeights[generation]=myPop.getFittest().getGenes();
+            generationsResults[generation][0] = myPop.getFittest().getFitness();
+            generationsWeights[generation]=myPop.getFittest().getGenes();
+
+            saveToCsv.writeCsvFile("geneticRun", generationsResults, generationsWeights);
 
             long iterTime = (System.nanoTime() - startTime)/1000000000;
             startTime = System.nanoTime();
@@ -130,7 +132,7 @@ public class BiggerGenetic {
             //System.out.println(generation+1 + "(" + myPop.getFittest().getFitness() + "r," + iterTime+ "s), ");
             myPop.printStats(generation);
         }
-        System.out.println("------------------------------------------------");
+        //System.out.println("------------------------------------------------");
 
         //saveToCsv.writeCsvFile("geneticRun", generationsResults, generationsWeights);
     }
@@ -139,7 +141,7 @@ public class BiggerGenetic {
     public static void main(String[] args) {
 
         double maxWeight = 5;
-        int populationSize = 20;
+        int populationSize = 5;
         int noGenerations = 10;
 
         double crossoverRate = 0.7;
