@@ -34,7 +34,6 @@ public class Population {
             //add Future to the list, we can get return value using Future
             list.add(future);
         }
-
         for(Future<PairResult> fut : list){
             try {
                 //print the return value of Future
@@ -48,7 +47,6 @@ public class Population {
                 e.printStackTrace();
             }
         }
-
         //shut down the executor service now
         shutdownAndAwaitTermination(executor);
         return getIndividual(fittestIdx);
@@ -125,7 +123,6 @@ public class Population {
             this.individual = individual;
             this.order = order;
         }
-
         @Override
         public PairResult call() throws Exception {
             //return the thread name executing this callable task
@@ -151,8 +148,6 @@ public class Population {
             return this.order;
         }
     }
-
-
 
 
 

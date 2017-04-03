@@ -109,11 +109,6 @@ public class PlayerSkeleton{
 
 			s.makeMove(nextMove);
 
-			//double[] feature1_2 = Features.calculateFeature1_2(s.getTop(), s.getField());
-			//System.out.println("Feature1_2's values are: " + feature1_2[0] + " and: " + feature1_2[1]);
-			//double[] feature7_9 = Features.calculateFeature7_9(s.getTop(), s.getField());
-			//System.out.println("Feature7_9's values are: " + feature7_9[0] + " and: " + feature7_9[1]);
-
 			if (drawing) {
 				try {
 					Thread.sleep(30);
