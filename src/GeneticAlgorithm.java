@@ -18,6 +18,8 @@ import java.util.Vector;
 
 */
 
+import java.util.Random;
+
 public class GeneticAlgorithm {
 
     private int noWeights;
@@ -34,7 +36,10 @@ public class GeneticAlgorithm {
     private int growthRange; //number of fitness scores to use to calculate the growth rate
     private int psoIterations;
 
-    public GeneticAlgorithm(int noWeights, double maxWeight, int populationSize, int noGenerations, double crossoverRate, double mutationRate, int tournamentSize, boolean elitism, double growthRateThreshold, int growthRange, int psoIterations) {
+    private static Random random = new Random();
+
+    public GeneticAlgorithm(int noWeights, double maxWeight, int populationSize, int noGenerations, double crossoverRate, double mutationRate, int tournamentSize, boolean elitism) {
+
         this.noWeights = noWeights;
         this.maxWeight = maxWeight;
         this.populationSize = populationSize;
@@ -51,6 +56,7 @@ public class GeneticAlgorithm {
 
     private Population evolvePopulation(Population pop) {
         Population newPopulation = new Population(pop.size(), false, noWeights, maxWeight);
+
 
         
         //check if rate of growth has reached a plateau - if growth rate < growthRateThreshold
@@ -105,13 +111,20 @@ public class GeneticAlgorithm {
 
     private Individual crossover(Individual indiv1, Individual indiv2) {
         Individual newSol = new Individual(noWeights, maxWeight);
+        Individual stronger = indiv1;
+        Individual weaker = indiv2;
+        if (indiv1.getFitness() < indiv2.getFitness()) {
+            stronger = indiv2;
+            weaker = indiv1;
+        }
         // Loop through genes
         for (int i = 0; i< noWeights; i++) {
             // Crossover
+            // probability>0.5 -> get more genes from the stronger parent
             if (Math.random() <= crossoverRate) {
-                newSol.setGene(i, indiv1.getGene(i));
+                newSol.setGene(i, stronger.getGene(i));
             } else {
-                newSol.setGene(i, indiv2.getGene(i));
+                newSol.setGene(i, weaker.getGene(i));
             }
         }
         return newSol;
@@ -122,8 +135,7 @@ public class GeneticAlgorithm {
         for (int i = 0; i< noWeights; i++) {
             if (Math.random() <= mutationRate) {
                 // Create random gene
-                int plusMinus = Math.random() > 0.5 ? -1 : 1;
-                double gene = plusMinus * maxWeight * Math.random();
+                double gene = random.nextGaussian()*maxWeight;
                 indiv.setGene(i, gene);
             }
         }
@@ -144,7 +156,7 @@ public class GeneticAlgorithm {
 
         Population myPop = new Population(populationSize, true, noWeights, maxWeight);
 
-        System.out.println("NrOfCores: " + myPop.getCores()); // Check if it finds all cores
+        //System.out.println("NrOfCores: " + myPop.getCores()); // Check if it finds all cores
 
         //double[][] generationsWeights = new double[noGenerations][noWeights];
         //int[][] generationsResults =  new int[noGenerations][2];
@@ -155,6 +167,7 @@ public class GeneticAlgorithm {
         for (int generation = 0; generation<noGenerations; generation++) {
 
             myPop = evolvePopulation(myPop);
+
             System.out.print(generation + " ");
             if (generation==noGenerations-1) {
                 System.out.println("");
@@ -177,10 +190,17 @@ public class GeneticAlgorithm {
             System.out.print(" -- Fitness: " + generationFitness);
             System.out.println(" -- Growth rate: " + ((double)(fitnessOfGenerations.getLast() - (double)fitnessOfGenerations.getFirst())/(double)fitnessOfGenerations.getFirst()) );
             
+
             startTime = System.nanoTime();
 
-            //System.out.println("------------------------------------------------");
+            System.out.print(generation+1 + "(" + myPop.getFittest().getFitness() + "r," + iterTime+ "s), ");
+
+            if (generation==noGenerations-1) {
+                System.out.println("");
+                myPop.printStats(generation);
+            }
         }
+        System.out.println("------------------------------------------------");
 
         //saveToCsv.writeCsvFile("geneticRun", generationsResults, generationsWeights);
     }
@@ -189,18 +209,18 @@ public class GeneticAlgorithm {
         int noWeights = Features.getNumberOfWeights();
         double maxWeight = 5;
         int populationSize = 50;
-        int noGenerations = 40;
+        int noGenerations = 30;
 
-        double crossoverRate = 0.5;
-        double mutationRate = 0.015;
+        double crossoverRate = 0.7;
+        double mutationRate = 0.005;
         int tournamentSize = 5;
         boolean elitism = true;
         double growthRateThreshold = 0.9;
         int growthRange = 3;
         int psoIterations = 3;
 
-        for (int i=0; i<20; i++) {
-            GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism, growthRateThreshold, growthRange, psoIterations);
+        for (int i=0; i<2; i++) {
+            GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism);
             geneticAlgorithm.execute();
 
         }

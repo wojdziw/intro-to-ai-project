@@ -24,7 +24,6 @@ public class ParticleSwarm {
 	/*
 	 * Initialization
 	 */
-	empty_
 	
 	/*
 	 * Main Loop of PSO
