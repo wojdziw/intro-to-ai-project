@@ -38,8 +38,8 @@ public class GeneticAlgorithm {
 
     private static Random random = new Random();
 
-    public GeneticAlgorithm(int noWeights, double maxWeight, int populationSize, int noGenerations, double crossoverRate, double mutationRate, int tournamentSize, boolean elitism) {
-
+    //public GeneticAlgorithm(int noWeights, double maxWeight, int populationSize, int noGenerations, double crossoverRate, double mutationRate, int tournamentSize, boolean elitism) {
+     public GeneticAlgorithm(int noWeights, double maxWeight, int populationSize, int noGenerations, double crossoverRate, double mutationRate, int tournamentSize, boolean elitism, double growthRateThreshold, int growthRange, int psoIterations){
         this.noWeights = noWeights;
         this.maxWeight = maxWeight;
         this.populationSize = populationSize;
@@ -220,7 +220,8 @@ public class GeneticAlgorithm {
         int psoIterations = 3;
 
         for (int i=0; i<2; i++) {
-            GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism);
+        	GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism, growthRateThreshold, growthRange, psoIterations);
+            //GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism);
             geneticAlgorithm.execute();
 
         }
