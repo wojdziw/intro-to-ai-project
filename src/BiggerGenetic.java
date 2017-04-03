@@ -24,7 +24,6 @@ public class BiggerGenetic {
     }
 
     private BiggerPopulation evolvePopulation(BiggerPopulation pop) {
-        System.out.println("Starting population");
         BiggerPopulation newPopulation = new BiggerPopulation(pop.size(), false, noWeights);
 
         if (elitism)
@@ -32,7 +31,6 @@ public class BiggerGenetic {
 
         int elitismOffset = elitism ? 1 : 0;
 
-        System.out.println("Starting crossover");
 
         // Loop over the population size and create new individuals with crossover
         for (int i = elitismOffset; i<pop.size(); i++) {
@@ -43,7 +41,6 @@ public class BiggerGenetic {
             newPopulation.setIndividual(i, newIndiv);
         }
 
-        System.out.println("Starting mutation");
 
         // Mutate population
         for (int i=elitismOffset; i<newPopulation.size(); i++)
@@ -51,6 +48,7 @@ public class BiggerGenetic {
         return newPopulation;
     }
 
+    // THIS ISN"T RIGHT
     private BiggerIndividual crossover(BiggerIndividual indiv1, BiggerIndividual indiv2) {
         BiggerIndividual newSol = new BiggerIndividual(noWeights);
         BiggerIndividual stronger = indiv1;
@@ -87,14 +85,12 @@ public class BiggerGenetic {
 
     // Tournament is picking a random sample of a chosen size and choosing the fittest out of that
     private BiggerIndividual tournamentSelection(BiggerPopulation pop) {
-        System.out.println("Start tournament");
         // Create a tournament population
         BiggerPopulation tournament = new BiggerPopulation(tournamentSize, false, noWeights);
         for (int i = 0; i<tournamentSize; i++) {
             int randomId = (int) (Math.random() * pop.size());
             tournament.setIndividual(i, pop.getIndividual(randomId));
         }
-        System.out.println("End tournament");
         return tournament.getFittest();
     }
 
@@ -134,7 +130,7 @@ public class BiggerGenetic {
 
         double maxWeight = 5;
         int populationSize = 20;
-        int noGenerations = 5;
+        int noGenerations = 10;
 
         double crossoverRate = 0.7;
         double mutationRate = 0.015;

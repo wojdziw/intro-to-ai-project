@@ -78,7 +78,7 @@ public class BiggerPopulation {
             System.out.println("BIG LOOP FINISHED AN ITERATION!");
 
             int fitness=bestInd.getFitness();
-            System.out.println("Generation: " + (generation+1) + " Fittest: " + fitness);
+            System.out.print("Generation: " + (generation+1) + " Fittest: " + fitness);
             bestInd.printGenes();
 
 

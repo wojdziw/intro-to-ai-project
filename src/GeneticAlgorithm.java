@@ -130,21 +130,21 @@ public class GeneticAlgorithm {
 
             //generationsResults[generation][0] = myPop.getFittest().getFitness();
             //generationsWeights[generation]=myPop.getFittest().getGenes();
+            if (generation==noGenerations-1)
+                synchronized(lock) {
+                    System.out.print("[");
+                    for (int i=0; i<subsetArray.length-1; i++)
+                        System.out.print(subsetArray[i]+",");
+                    System.out.print(subsetArray[subsetArray.length-1]);
+                    System.out.print("]");
 
-            synchronized(lock) {
-                System.out.print("[");
-                for (int i=0; i<subsetArray.length-1; i++)
-                    System.out.print(subsetArray[i]+",");
-                System.out.print(subsetArray[subsetArray.length-1]);
-                System.out.print("]");
+                    System.out.print("(g" + generation +","+ myPop.getFittest().getFitness() + "rows) ");
 
-                System.out.print("(g" + generation +","+ myPop.getFittest().getFitness() + "rows) ");
 
-                if (generation==noGenerations-1)
-                    System.out.print(" - finished!");
+                        System.out.print(" - finished!");
 
-                System.out.println("");
-            }
+                    System.out.println("");
+                }
         }
         //saveToCsv.writeCsvFile("geneticRun", generationsResults, generationsWeights);
         return myPop.getFittest().getFitness();
