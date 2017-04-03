@@ -1,6 +1,7 @@
 // One individual = one weight vector
 // Gene = weight for a particular feature
 
+import java.util.Arrays;
 import java.util.Random;
 
 public class BiggerIndividual {
@@ -31,6 +32,7 @@ public class BiggerIndividual {
                 i++;
             }
         }
+        sortGenes();
     }
 
     public int getGene(int index) {
@@ -79,5 +81,10 @@ public class BiggerIndividual {
         }
         return false;
     }
+
+    public void sortGenes() {
+        Arrays.sort(weights);
+    }
+
 
 }

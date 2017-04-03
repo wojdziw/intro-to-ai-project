@@ -62,9 +62,18 @@ public class BiggerGenetic {
             // Crossover
             // probability>0.5 -> get more genes from the stronger parent
             if (Math.random() <= crossoverRate) {
-                newSol.setGene(i, stronger.getGene(i));
+                if (!newSol.alreadyInGenes(stronger.getGene(i))) {
+                    newSol.setGene(i, stronger.getGene(i));
+                } else {
+                    newSol.setGene(i, weaker.getGene(i));
+                }
+
             } else {
-                newSol.setGene(i, weaker.getGene(i));
+                if (!newSol.alreadyInGenes(stronger.getGene(i))) {
+                    newSol.setGene(i, weaker.getGene(i));
+                } else {
+                    newSol.setGene(i, stronger.getGene(i));
+                }
             }
         }
         return newSol;
@@ -81,6 +90,7 @@ public class BiggerGenetic {
                 }
             }
         }
+        indiv.sortGenes();
     }
 
     // Tournament is picking a random sample of a chosen size and choosing the fittest out of that

@@ -357,6 +357,7 @@ public class Features {
     // no time statistics sadly
     public static double calculateUtility(int[][] field, int[] top, double[] weights, int rowsCleared, Integer[] subsetArray) {
 
+        // HERE THEY ARE MESSED UP
         List<Integer> subset = new ArrayList<>();
         for (Integer featureNo : subsetArray) {
             subset.addAll(featureWeights.get(featureNo));
