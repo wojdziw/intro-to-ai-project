@@ -147,14 +147,14 @@ public class GeneticAlgorithm {
         int noWeights = Features.getNumberOfWeights();
         double maxWeight = 5;
         int populationSize = 50;
-        int noGenerations = 10;
+        int noGenerations = 30;
 
         double crossoverRate = 0.7;
-        double mutationRate = 0.015;
+        double mutationRate = 0.005;
         int tournamentSize = 5;
         boolean elitism = true;
 
-        for (int i=0; i<20; i++) {
+        for (int i=0; i<2; i++) {
             GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism);
             geneticAlgorithm.execute();
 

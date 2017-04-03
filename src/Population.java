@@ -48,7 +48,7 @@ public class Population {
             }
         }
         //shut down the executor service now
-        executor.shutdown();
+        shutdownAndAwaitTermination(executor);
         return getIndividual(fittestIdx);
     }
 
@@ -75,6 +75,26 @@ public class Population {
         int fitness=bestInd.getFitness();
         System.out.println("Generation: " + (generation+1) + " Fittest: " + fitness);
         bestInd.printGenes();
+    }
+
+    void shutdownAndAwaitTermination(ExecutorService pool) {
+        pool.shutdown(); // Disable new tasks from being submitted
+        try {
+            // Wait a while for existing tasks to terminate
+            if (!pool.awaitTermination(5, TimeUnit.SECONDS)) {
+                pool.shutdownNow();
+                System.out.println("Closed a pool before termination");// Cancel currently executing tasks
+                // Wait a while for tasks to respond to being cancelled
+                if (!pool.awaitTermination(5, TimeUnit.SECONDS))
+                    System.err.println("Pool did not terminate");
+            }
+        } catch (InterruptedException ie) {
+            // (Re-)Cancel if current thread also interrupted
+            System.out.println(ie.getMessage());
+            pool.shutdownNow();
+            // Preserve interrupt status
+            Thread.currentThread().interrupt();
+        }
     }
 
 }

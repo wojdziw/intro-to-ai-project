@@ -168,7 +168,7 @@ public class Features {
         return deepestHole;
     }
 
-    // FEATURE 9
+    // FEATURE 7 + 9
     //Amount of Holes - The number of enclosed clusters/caves of holes
     public static double[] calculateFeature7_9(int[] top, int[][] field) {
         boolean [][] visited = new boolean[State.ROWS][State.COLS]; //2d array of false values
@@ -208,21 +208,6 @@ public class Features {
 
     private static int localClusterSearch(int[][] field, int row, int col, boolean[][] visited, int[] top) {
 
-        /*
-        //Try 1:
-        //the we try to visit each of the four adjacent cells that are above, below, left, right.
-        int rowNbr[] = {1,-1,0,0};
-        int colNbr[] = {0,0,1,-1};
-        // Mark this cell as visited
-        visited[row][col] = true;
-        // Recur for all connected neighbours
-        for (int k = 0; k < rowNbr.length; ++k){
-            if (isSafe(field, row + rowNbr[k], col + colNbr[k], visited, top)){
-                localClusterSearch(field, row + rowNbr[k], col + colNbr[k], visited, top);
-            }
-        }
-        */
-        // Try 2:
         if (!isSafe(field, row, col, visited, top))
             return 0;
 
@@ -288,6 +273,7 @@ public class Features {
 
     // FEATURE 12
     // Game Status - Based on the game status, 1 for a losing state, 0 otherwise
+    // TODO; remove, will always return 0
     public static double calculateFeature12(int[] top, int[][] field) {
         int result = 0;
 
@@ -416,7 +402,7 @@ public class Features {
                 + allWeights[2]*feature1_2[1]
                 + allWeights[3]*feature3
                 + allWeights[4]*feature4
-                + allWeights[5]*rowsCleared
+                + rowsCleared*rowsCleared
                 + allWeights[6]*feature6
                 + allWeights[7]*feature7_9[0]
                 + allWeights[8]*feature8
@@ -434,15 +420,6 @@ public class Features {
     public static double calculateOldUtility(int[][] field, int[] top, double[] weights, int rowsCleared) {
 
         //calculate feature values
-		/*
-        long startTime = System.nanoTime();
-		double feature1 = Features.calculateFeature1(top, field);
-        featureTimeTaken[0] += (System.nanoTime() - startTime);
-
-        startTime = System.nanoTime();
-        double feature2 = Features.calculateFeature2(top, field);
-        featureTimeTaken[1] += (System.nanoTime() - startTime);
-		*/
         long startTime = System.nanoTime();
         double[] feature1_2 = Features.calculateFeature1_2(top, field);
         featureTimeTaken[0] += (System.nanoTime() - startTime);
@@ -455,26 +432,10 @@ public class Features {
         double feature4 = Features.calculateFeature4(top, field);
         featureTimeTaken[3] += (System.nanoTime() - startTime);
 
-//      startTime = System.nanoTime();
-//		double feature5 = Features.calculateFeature5(top, field);
-//      featureTimeTaken[4] += (System.nanoTime() - startTime);
-
         startTime = System.nanoTime();
         double feature6 = Features.calculateFeature6(top, field);
         featureTimeTaken[5] += (System.nanoTime() - startTime);
-/*
-        startTime = System.nanoTime();
-		double feature7 = Features.calculateFeature7(top, field);
-        featureTimeTaken[6] += (System.nanoTime() - startTime);
 
-        startTime = System.nanoTime();
-		double feature8 = Features.calculateFeature8(top, field);
-        featureTimeTaken[7] += (System.nanoTime() - startTime);
-
-        startTime = System.nanoTime();
-		double feature9 = Features.calculateFeature9(top, field);
-        featureTimeTaken[8] += (System.nanoTime() - startTime);
-*/
         startTime = System.nanoTime();
         double feature8 = Features.calculateFeature8(top, field);
         featureTimeTaken[7] += (System.nanoTime() - startTime);
