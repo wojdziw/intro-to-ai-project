@@ -2,8 +2,11 @@
 Credit: https://gandhim.wordpress.com/2010/04/04/particle-swarm-optimization-pso-sample-code-using-java/
 */
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Vector;
+import java.util.concurrent.*;
 
 public class ParticleSwarmAlgorithm {
 
@@ -60,7 +63,6 @@ public class ParticleSwarmAlgorithm {
             for(int i=0; i<SWARM_SIZE; i++) {
                 double r1 = generator.nextDouble();
                 double r2 = generator.nextDouble();
-
                 Particle p = swarm.get(i);
 
                 // step 3 - update velocity
@@ -122,12 +124,6 @@ public class ParticleSwarmAlgorithm {
         }
     }
 
-    public void updateFitnessList() {
-        for(int i=0; i<SWARM_SIZE; i++) {
-            fitnessValueList[i] = swarm.get(i).getFitnessValue();
-        }
-    }
-
     public static int getMaxPos(double[] list) {
         int pos = 0;
         double maxValue = list[0];
@@ -144,5 +140,81 @@ public class ParticleSwarmAlgorithm {
 
     public static void main(String[] args) {
         new ParticleSwarmAlgorithm().execute();
+    }
+
+    int cores = Runtime.getRuntime().availableProcessors();
+    public void updateFitnessList() {
+        ExecutorService executor = Executors.newFixedThreadPool(cores);
+        List<Future<PairResultPOS>> futureFitnessValueList = new ArrayList<>();
+
+        for(int i=0; i<SWARM_SIZE; i++) {
+            Callable<PairResultPOS> callable = new MyCallablePOS(swarm.get(i), i);
+            Future<PairResultPOS> future = executor.submit(callable);
+            futureFitnessValueList.add(future);
+        }
+
+        for(Future<PairResultPOS> fut : futureFitnessValueList){
+            try {
+                fitnessValueList[fut.get().getOrder()] = fut.get().getFitness();
+            } catch (InterruptedException | ExecutionException e) {
+                e.printStackTrace();
+            }
+        }
+        shutdownAndAwaitTermination(executor);
+    }
+
+    void shutdownAndAwaitTermination(ExecutorService pool) {
+        pool.shutdown(); // Disable new tasks from being submitted
+        try {
+            // Wait a while for existing tasks to terminate
+            if (!pool.awaitTermination(1, TimeUnit.SECONDS)) {
+                pool.shutdownNow();
+                System.out.println("Closed a pool before termination");// Cancel currently executing tasks
+                // Wait a while for tasks to respond to being cancelled
+                if (!pool.awaitTermination(1, TimeUnit.SECONDS))
+                    System.err.println("Pool did not terminate");
+            }
+        } catch (InterruptedException ie) {
+            // (Re-)Cancel if current thread also interrupted
+            System.out.println(ie.getMessage());
+            pool.shutdownNow();
+            // Preserve interrupt status
+            Thread.currentThread().interrupt();
+        }
+    }
+}
+
+class MyCallablePOS implements Callable<PairResultPOS> {
+    private final Particle particle;
+    private final int index;
+
+    MyCallablePOS(Particle particle, int index){
+        this.particle = particle;
+        this.index = index;
+
+    }
+    @Override
+    public PairResultPOS call() throws Exception {
+        //return the thread name executing this callable task
+        Double ret = particle.getFitnessValue();
+        return new PairResultPOS(this.index, ret);
+    }
+}
+
+class PairResultPOS{
+    private final int order;
+    private final Double fitness;
+
+    PairResultPOS(int order,Double fitness){
+        this.order = order;
+        this.fitness = fitness;
+    }
+
+    public Double getFitness(){
+        return this.fitness;
+    }
+
+    public int getOrder() {
+        return this.order;
     }
 }

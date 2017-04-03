@@ -52,7 +52,7 @@ public class Population {
         return getIndividual(fittestIdx);
     }
 
-    /*
+/*
     // A set of genes can be fit when testing, but not when it's actually used because the blocks are random as well
     public Individual getFittest() {
         int fittestIdx = 0;
@@ -66,7 +66,7 @@ public class Population {
         }
         return getIndividual(fittestIdx);
     }
-    */
+*/
 
     public int size() {
         return individuals.length;

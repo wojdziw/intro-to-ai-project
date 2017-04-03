@@ -48,7 +48,7 @@ public class PlayerSkeleton{
 		return bestMove;
 	}
 
-    /*
+/*
 	public int pickMove(State s, int[][] legalMoves, double[] weights) {
 
 		int bestMove = 0;

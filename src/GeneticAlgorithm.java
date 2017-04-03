@@ -55,7 +55,6 @@ public class GeneticAlgorithm {
         for (int i = elitismOffset; i<pop.size(); i++) {
             Individual indiv1 = tournamentSelection(pop); // Find the fittest among 5 random individuals
             Individual indiv2 = tournamentSelection(pop);
-
             Individual newIndiv = crossover(indiv1, indiv2);
             newPopulation.setIndividual(i, newIndiv);
         }
