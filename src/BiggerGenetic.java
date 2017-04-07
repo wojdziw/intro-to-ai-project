@@ -149,7 +149,7 @@ public class BiggerGenetic {
         int tournamentSize = 5;
         boolean elitism = true;
 
-        BiggerGenetic biggerGenetic = new BiggerGenetic(4, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism);
+        BiggerGenetic biggerGenetic = new BiggerGenetic(5, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism);
         biggerGenetic.execute();
 
     }

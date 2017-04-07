@@ -11,7 +11,7 @@ public class BiggerIndividual {
 
     double maxWeight = 5;
     int populationSize = 50;
-    int noGenerations = 50;
+    int noGenerations = 60;
 
     double crossoverRate = 0.7;
     double mutationRate = 0.015;

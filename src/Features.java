@@ -357,7 +357,6 @@ public class Features {
     // no time statistics sadly
     public static double calculateUtility(int[][] field, int[] top, double[] weights, int rowsCleared, Integer[] subsetArray) {
 
-        // HERE THEY ARE MESSED UP
         List<Integer> subset = new ArrayList<>();
         for (Integer featureNo : subsetArray) {
             subset.addAll(featureWeights.get(featureNo));
@@ -398,6 +397,8 @@ public class Features {
 
         double[] columnHeightWeights = Arrays.copyOfRange(allWeights, 14, (14 + field[0].length));
         double[] colDiffWeights = Arrays.copyOfRange(allWeights, (14 + field[0].length), (14 + 2*field[0].length-1));
+	
+	allWeights[5] = allWeights[5]==0 ? 0 : 1;
 
         // apply weights
         return allWeights[0]
@@ -405,7 +406,7 @@ public class Features {
                 + allWeights[2]*feature1_2[1]
                 + allWeights[3]*feature3
                 + allWeights[4]*feature4
-                + allWeights[5]*rowsCleared
+                + allWeights[5]*rowsCleared*rowsCleared
                 + allWeights[6]*feature6
                 + allWeights[7]*feature7_9[0]
                 + allWeights[8]*feature8
