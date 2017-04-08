@@ -43,7 +43,7 @@ public class GeneticAlgorithm {
         this.elitism = elitism;
     }
 
-    private Population evolvePopulation(Population pop) {
+    private Population evolvePopulation(Population pop, int globalCols, int globalCores) {
         Population newPopulation = new Population(pop.size(), false, noWeights, maxWeight);
 
         if (elitism)
@@ -56,7 +56,7 @@ public class GeneticAlgorithm {
             Individual indiv1 = tournamentSelection(pop); // Find the fittest among 5 random individuals
             Individual indiv2 = tournamentSelection(pop);
 
-            Individual newIndiv = crossover(indiv1, indiv2);
+            Individual newIndiv = crossover(indiv1, indiv2, globalCols, globalCores);
             newPopulation.setIndividual(i, newIndiv);
         }
 
@@ -66,11 +66,11 @@ public class GeneticAlgorithm {
         return newPopulation;
     }
 
-    private Individual crossover(Individual indiv1, Individual indiv2) {
+    private Individual crossover(Individual indiv1, Individual indiv2, int globalCols, int globalCores) {
         Individual newSol = new Individual(noWeights, maxWeight);
         Individual stronger = indiv1;
         Individual weaker = indiv2;
-        if (indiv1.getFitness() < indiv2.getFitness()) {
+        if (indiv1.getFitness(globalCols, globalCores) < indiv2.getFitness(globalCols, globalCores)) {
             stronger = indiv2;
             weaker = indiv1;
         }
@@ -109,9 +109,10 @@ public class GeneticAlgorithm {
         return tournament.getFittest();
     }
 
-    public void execute() {
+    public void execute(int globalCols, int globalCores) {
 
         Population myPop = new Population(populationSize, true, noWeights, maxWeight);
+        myPop.setCC(globalCols, globalCores);
 
         System.out.println("NrOfCores: " + myPop.getCores()); // Check if it finds all cores
 
@@ -123,17 +124,17 @@ public class GeneticAlgorithm {
 
         for (int generation = 0; generation<noGenerations; generation++) {
 
-            myPop = evolvePopulation(myPop);
+            myPop = evolvePopulation(myPop, globalCols, globalCores);
             Individual bestInd = myPop.getFittest();
 
-            generationsResults[generation] = bestInd.getFitness();
+            generationsResults[generation] = bestInd.getFitness(globalCols, globalCores);
             generationsWeights[generation] = bestInd.getGenes();
 
             long iterTime = (System.nanoTime() - startTime)/1000000000;
             startTime = System.nanoTime();
 
             generationsTime[generation] = iterTime;
-            System.out.print(generation+1 + "(" + bestInd.getFitness() + "r," + iterTime+ "s), ");
+            System.out.print(generation+1 + "(" + bestInd.getFitness(globalCols, globalCores) + "r," + iterTime+ "s), ");
 
             if (generation==noGenerations-1) {
                 System.out.println("");
@@ -149,7 +150,7 @@ public class GeneticAlgorithm {
         int noWeights = Features.getNumberOfWeights();
         double maxWeight = 5;
         int populationSize = 50;
-        int noGenerations = 30;
+        int noGenerations = 40;
 
         double crossoverRate = 0.7;
         double mutationRate = 0.02;
@@ -159,11 +160,27 @@ public class GeneticAlgorithm {
         long globalStartTime = System.nanoTime();
         long minInMs = 60000000000L;
 
-        for (int i=0; i<1; i++) {
-            GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism);
-            geneticAlgorithm.execute();
+        // Test for Big Data
+        int[] columns = {10, 40, 120};
+        int[] cores = {1, 4, 12};
+        int idxCols = 0;
+        int idxCores = 0;
 
-            System.out.print("Total evolution time: " + ((System.nanoTime() - globalStartTime)/minInMs) + " minutes");
+        int nr_iterations = columns.length*cores.length*5;
+        for (int i=1; i<=nr_iterations; i++) {
+
+            int globalCol = columns[idxCols]; // TODO: change
+            int globalCores = cores[idxCores]; // TODO: change
+            GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism);
+            geneticAlgorithm.execute(globalCol, globalCores);
+
+            if(i%5 == 0) idxCols++;
+            if(i%15 == 0){
+                idxCols = 0;
+                idxCores++;
+            }
+
+            System.out.print("Total evolution time: " + ((System.nanoTime() - globalStartTime)/minInMs) + " minutes \n");
         }
 
 

@@ -5,8 +5,9 @@ import java.util.concurrent.*;
 public class Population {
 
     //creating a pool for the number of available cores (or threads).
-    static int cores = Runtime.getRuntime().availableProcessors();
-    //static int cores = 1;
+    //static int cores = Runtime.getRuntime().availableProcessors();
+    static int cores;
+    static int cols;
 
     private Individual[] individuals;
     public Population(int populationSize, boolean initialise, int noFeatures, double maxWeight) {
@@ -29,7 +30,7 @@ public class Population {
         List<Future<PairResult>> list = new ArrayList<Future<PairResult>>();
         //Create MyCallable instance
         for (int i=0; i<size(); i++) {
-            Callable<PairResult> callable = new MyCallable(getIndividual(i), i);
+            Callable<PairResult> callable = new MyCallable(getIndividual(i), i, cols, cores);
             //submit Callable tasks to be executed by thread pool
             Future<PairResult> future = executor.submit(callable);
             //add Future to the list, we can get return value using Future
@@ -58,6 +59,12 @@ public class Population {
         return individuals.length;
     }
 
+    public void setCC(int globalCols, int globalCores) {
+        cols = globalCols;
+        cores = globalCores;
+
+    }
+
     public int getCores() {
         return cores;
     }
@@ -74,7 +81,7 @@ public class Population {
 
         Individual bestInd = getFittest();
 
-        int fitness=bestInd.getFitness();
+        int fitness=bestInd.getFitness(cols, cores);
         System.out.println("Generation: " + (generation+1) + " Fittest: " + fitness);
         bestInd.printGenes();
     }
@@ -104,15 +111,19 @@ public class Population {
     class MyCallable implements Callable<PairResult> {
         private final Individual individual ;
         private final int order;
+        private final int cores;
+        private final int columns;
 
-        MyCallable(Individual individual, int order) {
+        MyCallable(Individual individual, int order, int cols, int cores) {
             this.individual = individual;
             this.order = order;
+            this.columns = cols;
+            this.cores = cores;
         }
         @Override
         public PairResult call() throws Exception {
             //return the thread name executing this callable task
-            int score = individual.getFitness();
+            int score = individual.getFitness(columns, cores);
             return new PairResult(order,score);
         }
     }

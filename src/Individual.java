@@ -25,11 +25,11 @@ public class Individual {
         weights[index] = value;
     }
 
-    public int getFitness() {
+    public int getFitness(int globalCol, int globalCores) {
 
         if (fitness==0) {
             int N = 10;
-            fitness = PlayerSkeleton.playNGames(weights, false, false, N);
+            fitness = PlayerSkeleton.playNGames(globalCol, globalCores, weights, false, false, N);
         }
 
         return fitness;

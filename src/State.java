@@ -4,7 +4,7 @@ import java.awt.Color;
 
 
 public class State {
-	public static final int COLS = 10;
+	public static int COLS;
 	public static final int ROWS = 21;
 	public static final int N_PIECES = 7;
 	public boolean lost = false;
@@ -151,8 +151,9 @@ public class State {
 	
 	
 	//constructor
-	public State() {
+	public State(int globalCol) {
 		nextPiece = randomPiece();
+		COLS = globalCol;
 
 	}
 	
