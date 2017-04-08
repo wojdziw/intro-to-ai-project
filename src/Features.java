@@ -78,10 +78,6 @@ public class Features {
                 }
             }
         }
-        // Example of a normalization
-        // TODO: decide if we should keep it!
-        bothSums[0] = sum/State.COLS;
-        bothSums[1] = weightedSum/State.COLS;
 
         iterations[1]+=1;
         maxFeatures[1] = Math.max(maxFeatures[1], bothSums[0]);
@@ -169,7 +165,8 @@ public class Features {
     }
 
     // FEATURE 7 + 9
-    //Amount of Holes - The number of enclosed clusters/caves of holes
+    // 7: Nr of spots in holes
+    // 9: Amount of Holes - The number of enclosed clusters/caves of holes
     public static double[] calculateFeature7_9(int[] top, int[][] field) {
         boolean [][] visited = new boolean[State.ROWS][State.COLS]; //2d array of false values
         int clusterCount = 0; // we start at cluster #0
@@ -402,7 +399,7 @@ public class Features {
                 + allWeights[2]*feature1_2[1]
                 + allWeights[3]*feature3
                 + allWeights[4]*feature4
-                + rowsCleared*rowsCleared
+                + allWeights[5]*rowsCleared
                 + allWeights[6]*feature6
                 + allWeights[7]*feature7_9[0]
                 + allWeights[8]*feature8
