@@ -92,7 +92,7 @@ public class Population {
 
         int fitness=bestInd.getFitness();
         System.out.println("Generation: " + (generation+1) + " Fittest: " + fitness);
-        bestInd.printGenes();
+        //bestInd.printGenes();
     }
 
     void shutdownAndAwaitTermination(ExecutorService pool) {

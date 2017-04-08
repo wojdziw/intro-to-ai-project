@@ -145,14 +145,14 @@ public class GeneticAlgorithm {
                 myPop.printStats(generation);
             }
         }
-        System.out.println("------------------------------------------------");
+        //System.out.println("------------------------------------------------");
         //saveToCsv.writeCsvFile("geneticRun", generationsResults, generationsWeights, generationsTime);
     }
 
     public static void main(String[] args) {
         int noWeights = Features.getNumberOfWeights();
         double maxWeight = 5;
-        int populationSize = 50;
+        //int populationSize = 50;
         int noGenerations = 50;
 
         double crossoverRate = 0.7;
@@ -163,13 +163,13 @@ public class GeneticAlgorithm {
         long globalStartTime = System.nanoTime();
         long minInMs = 60000000000L;
 
-        int cores = Runtime.getRuntime().availableProcessors();
+        //int cores = Runtime.getRuntime().availableProcessors();
 
         ListOfResults resultDump = new ListOfResults();
         int [] numberOfCores={1,4,12};
-        int [] numberOfPop={20,30,40};
+        int [] numberOfPop={10,30,50};
 
-        for (int i=0; i<10; i++) {
+        for (int i=0; i<4; i++) {
             //GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism, cores);
             //parallell..
             for (int core : numberOfCores){
@@ -181,7 +181,8 @@ public class GeneticAlgorithm {
                     for (int j=0; j<5; j++) {
                         GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, pop, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism, core);
                         geneticAlgorithm.execute(resultDump);
-                        System.out.print("Total evolution time: " + ((System.nanoTime() - globalStartTime) / minInMs) + " minutes");
+                        System.out.println("Total evolution time: " + ((System.nanoTime() - globalStartTime) / minInMs) + " minutes");
+                        System.out.println("------------------------------------------------");
                     }
                     //saving a csv dump every 5th call.
                     saveToCsvParalellEvaluation.writeCsvFile("geneticRun-50gen", resultDump);
