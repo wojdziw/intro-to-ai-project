@@ -6,6 +6,7 @@ public class Population {
 
     //creating a pool for the number of available cores (or threads).
     static int cores = Runtime.getRuntime().availableProcessors();
+    //static int cores = 1;
 
     private Individual[] individuals;
     public Population(int populationSize, boolean initialise, int noFeatures, double maxWeight) {
@@ -48,6 +49,7 @@ public class Population {
             }
         }
         //shut down the executor service now
+        //executor.shutdown();
         shutdownAndAwaitTermination(executor);
         return getIndividual(fittestIdx);
     }

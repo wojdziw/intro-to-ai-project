@@ -11,7 +11,7 @@ public class saveToCsv {
     private static final String COMMA_DELIMITER = ",";
     private static final String NEW_LINE_SEPARATOR = "\n";
 
-    public static void writeCsvFile(String fileName, int[][] fittnessMatrix, double[][] weightMatrix) {
+    public static void writeCsvFile(String fileName, int[] fittnessVector, double[][] weightMatrix, long[] timeVector) {
 
         System.out.println("Writing over results and weights to csv");
 
@@ -20,9 +20,10 @@ public class saveToCsv {
         //CSV file header
         String FILE_HEADER = "";
 
-        for (int i = 0; i<fittnessMatrix[0].length;i++ ){
-                FILE_HEADER += "Fitness" + String.valueOf(i+1) + ',';
-        }
+
+        FILE_HEADER += "Fitness,";
+        FILE_HEADER += "Time,";
+
         for (int i = 0; i<weightMatrix[0].length;i++ ){
             if (i<weightMatrix[0].length-1) {
                 FILE_HEADER += "Weight" + String.valueOf(i+1) + ',';
@@ -42,12 +43,12 @@ public class saveToCsv {
             fileWriter.append(NEW_LINE_SEPARATOR);
 
             //Write a new student object list to the CSV file
-            for (int i = 0; i<fittnessMatrix.length;i++) {
-                for (int run : fittnessMatrix[i]){
-                fileWriter.append(String.valueOf(run));
+            for (int i = 0; i<fittnessVector.length;i++) {
+                fileWriter.append(String.valueOf(fittnessVector[i]));
                 fileWriter.append(COMMA_DELIMITER);
-                }
-                for (double weight : weightMatrix[i]){
+                fileWriter.append(String.valueOf(timeVector[i]));
+                fileWriter.append(COMMA_DELIMITER);
+                for (double weight : weightMatrix[i]) {
                     fileWriter.append(String.valueOf(weight));
                     fileWriter.append(COMMA_DELIMITER);
                 }

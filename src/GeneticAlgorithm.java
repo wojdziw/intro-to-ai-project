@@ -113,25 +113,27 @@ public class GeneticAlgorithm {
 
         Population myPop = new Population(populationSize, true, noWeights, maxWeight);
 
-        //System.out.println("NrOfCores: " + myPop.getCores()); // Check if it finds all cores
+        System.out.println("NrOfCores: " + myPop.getCores()); // Check if it finds all cores
 
-        //double[][] generationsWeights = new double[noGenerations][noWeights];
-        //int[][] generationsResults =  new int[noGenerations][2];
+        double[][] generationsWeights = new double[noGenerations][noWeights];
+        int[] generationsResults =  new int[noGenerations];
+        long[] generationsTime = new long[noGenerations];
 
         long startTime = System.nanoTime();
-
 
         for (int generation = 0; generation<noGenerations; generation++) {
 
             myPop = evolvePopulation(myPop);
+            Individual bestInd = myPop.getFittest();
 
-            //generationsResults[generation][0] = myPop.getFittest().getFitness();
-            //generationsWeights[generation]=myPop.getFittest().getGenes();
+            generationsResults[generation] = bestInd.getFitness();
+            generationsWeights[generation] = bestInd.getGenes();
 
             long iterTime = (System.nanoTime() - startTime)/1000000000;
             startTime = System.nanoTime();
 
-            System.out.print(generation+1 + "(" + myPop.getFittest().getFitness() + "r," + iterTime+ "s), ");
+            generationsTime[generation] = iterTime;
+            System.out.print(generation+1 + "(" + bestInd.getFitness() + "r," + iterTime+ "s), ");
 
             if (generation==noGenerations-1) {
                 System.out.println("");
@@ -140,7 +142,7 @@ public class GeneticAlgorithm {
         }
         System.out.println("------------------------------------------------");
 
-        //saveToCsv.writeCsvFile("geneticRun", generationsResults, generationsWeights);
+        saveToCsv.writeCsvFile("geneticRun", generationsResults, generationsWeights, generationsTime);
     }
 
     public static void main(String[] args) {
@@ -150,16 +152,20 @@ public class GeneticAlgorithm {
         int noGenerations = 30;
 
         double crossoverRate = 0.7;
-        double mutationRate = 0.005;
+        double mutationRate = 0.02;
         int tournamentSize = 5;
         boolean elitism = true;
 
-        for (int i=0; i<2; i++) {
+        long globalStartTime = System.nanoTime();
+        long minInMs = 60000000000L;
+
+        for (int i=0; i<1; i++) {
             GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism);
             geneticAlgorithm.execute();
 
-
+            System.out.print("Total evolution time: " + ((System.nanoTime() - globalStartTime)/minInMs) + " minutes");
         }
+
 
 
     }
