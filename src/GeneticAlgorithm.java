@@ -16,6 +16,8 @@
 
 */
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class GeneticAlgorithm {
@@ -31,8 +33,9 @@ public class GeneticAlgorithm {
     private boolean elitism;
 
     private static Random random = new Random();
+    int cores;
 
-    public GeneticAlgorithm(int noWeights, double maxWeight, int populationSize, int noGenerations, double crossoverRate, double mutationRate, int tournamentSize, boolean elitism) {
+    public GeneticAlgorithm(int noWeights, double maxWeight, int populationSize, int noGenerations, double crossoverRate, double mutationRate, int tournamentSize, boolean elitism, int cores) {
         this.noWeights = noWeights;
         this.maxWeight = maxWeight;
         this.populationSize = populationSize;
@@ -41,10 +44,11 @@ public class GeneticAlgorithm {
         this.mutationRate = mutationRate;
         this.tournamentSize = tournamentSize;
         this.elitism = elitism;
+        this.cores = cores;
     }
 
     private Population evolvePopulation(Population pop) {
-        Population newPopulation = new Population(pop.size(), false, noWeights, maxWeight);
+        Population newPopulation = new Population(pop.size(), false, noWeights, maxWeight, cores);
 
         if (elitism)
             newPopulation.setIndividual(0, pop.getFittest());
@@ -100,7 +104,7 @@ public class GeneticAlgorithm {
     // Tournament is picking a random sample of a chosen size and choosing the fittest out of that
     private Individual tournamentSelection(Population pop) {
         // Create a tournament population
-        Population tournament = new Population(tournamentSize, false, noWeights, maxWeight);
+        Population tournament = new Population(tournamentSize, false, noWeights, maxWeight,cores);
         for (int i = 0; i<tournamentSize; i++) {
             int randomId = (int) (Math.random() * pop.size());
             tournament.setIndividual(i, pop.getIndividual(randomId));
@@ -108,16 +112,13 @@ public class GeneticAlgorithm {
         return tournament.getFittest();
     }
 
-    public void execute() {
+    public void execute(ListOfResults resultList) {
 
-        Population myPop = new Population(populationSize, true, noWeights, maxWeight);
+        Population myPop = new Population(populationSize, true, noWeights, maxWeight, cores);
 
-        System.out.println("NrOfCores: " + myPop.getCores()); // Check if it finds all cores
-
-        double[][] generationsWeights = new double[noGenerations][noWeights];
-        int[] generationsResults =  new int[noGenerations];
-        long[] generationsTime = new long[noGenerations];
-
+        //double[][] generationsWeights = new double[noGenerations][noWeights];
+        //int[] generationsResults =  new int[noGenerations];
+        //long[] generationsTime = new long[noGenerations];
         long startTime = System.nanoTime();
 
         for (int generation = 0; generation<noGenerations; generation++) {
@@ -125,13 +126,18 @@ public class GeneticAlgorithm {
             myPop = evolvePopulation(myPop);
             Individual bestInd = myPop.getFittest();
 
-            generationsResults[generation] = bestInd.getFitness();
-            generationsWeights[generation] = bestInd.getGenes();
+            //generationsResults[generation] = bestInd.getFitness();
+            //generationsWeights[generation] = bestInd.getGenes();
+            //Extra info for parallellization eval.
+            resultList.generationsResults.add(bestInd.getFitness());
+            resultList.generationsPopulation.add(populationSize);
+            resultList.generationsNumberOfCores.add(cores);
+            resultList.generationCount.add(generation+1);
 
             long iterTime = (System.nanoTime() - startTime)/1000000000;
             startTime = System.nanoTime();
+            resultList.generationsTime.add(iterTime);
 
-            generationsTime[generation] = iterTime;
             System.out.print(generation+1 + "(" + bestInd.getFitness() + "r," + iterTime+ "s), ");
 
             if (generation==noGenerations-1) {
@@ -140,15 +146,14 @@ public class GeneticAlgorithm {
             }
         }
         System.out.println("------------------------------------------------");
-
-        saveToCsv.writeCsvFile("geneticRun", generationsResults, generationsWeights, generationsTime);
+        //saveToCsv.writeCsvFile("geneticRun", generationsResults, generationsWeights, generationsTime);
     }
 
     public static void main(String[] args) {
         int noWeights = Features.getNumberOfWeights();
         double maxWeight = 5;
         int populationSize = 50;
-        int noGenerations = 30;
+        int noGenerations = 50;
 
         double crossoverRate = 0.7;
         double mutationRate = 0.02;
@@ -158,22 +163,48 @@ public class GeneticAlgorithm {
         long globalStartTime = System.nanoTime();
         long minInMs = 60000000000L;
 
+        int cores = Runtime.getRuntime().availableProcessors();
+
+        ListOfResults resultDump = new ListOfResults();
+        int [] numberOfCores={1,4,12};
+        int [] numberOfPop={20,30,40};
+
         for (int i=0; i<10; i++) {
-            GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism);
-            geneticAlgorithm.execute();
-
-            System.out.print("Total evolution time: " + ((System.nanoTime() - globalStartTime)/minInMs) + " minutes");
+            //GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism, cores);
+            //parallell..
+            for (int core : numberOfCores){
+                for (int pop : numberOfPop){
+                    System.out.println("coreCount - " + core);
+                    System.out.println("populationCount - " + pop);
+                    System.out.println();
+                    //Run it for 5 times so that we can get an average.
+                    for (int j=0; j<5; j++) {
+                        GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, pop, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism, core);
+                        geneticAlgorithm.execute(resultDump);
+                        System.out.print("Total evolution time: " + ((System.nanoTime() - globalStartTime) / minInMs) + " minutes");
+                    }
+                    //saving a csv dump every 5th call.
+                    saveToCsvParalellEvaluation.writeCsvFile("geneticRun-50gen", resultDump);
+                }
+            }
         }
-
-
-
     }
-
 }
 
 
+class ListOfResults{
+    List<Integer> generationsResults;
+    List<Long> generationsTime;
+    List<Integer> generationsNumberOfCores;
+    List<Integer> generationsPopulation;
+    List<Integer> generationCount;
 
+    ListOfResults(){
+        this.generationsResults =  new ArrayList<Integer>();
+        this.generationsTime = new ArrayList<Long>();
+        this.generationsNumberOfCores = new ArrayList<Integer>();
+        this.generationsPopulation = new ArrayList<Integer>();
+        this.generationCount = new ArrayList<Integer>();
+    }
 
-
-
-
+}

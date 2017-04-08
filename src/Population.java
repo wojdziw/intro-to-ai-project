@@ -5,12 +5,14 @@ import java.util.concurrent.*;
 public class Population {
 
     //creating a pool for the number of available cores (or threads).
-    static int cores = Runtime.getRuntime().availableProcessors();
+    //static int cores = Runtime.getRuntime().availableProcessors();
     //static int cores = 1;
 
     private Individual[] individuals;
-    public Population(int populationSize, boolean initialise, int noFeatures, double maxWeight) {
+    private int cores;
+    public Population(int populationSize, boolean initialise, int noFeatures, double maxWeight, int cores) {
         individuals = new Individual[populationSize];
+        this.cores = cores;
 
         if (initialise)
             for (int i=0; i<size(); i++) {
@@ -23,7 +25,6 @@ public class Population {
     public Individual getFittest() {
         int fittestIdx = 0;
         int bestFitness = 0;
-
         ExecutorService executor = Executors.newFixedThreadPool(cores);
         //create a list to hold the Future object associated with Callable
         List<Future<PairResult>> list = new ArrayList<Future<PairResult>>();
