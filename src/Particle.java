@@ -38,7 +38,7 @@ public class Particle {
     public double getFitnessValue() {
         double[] weights = location;
         double fitness = 0;
-        int n = 10;
+        int n = 50;
         // Averaging over N games to mitigate the impact of the random piece choice
             fitness = PlayerSkeleton.playNGames(weights, false, false, n);
         // Get average

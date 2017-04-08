@@ -49,7 +49,6 @@ public class Population {
             }
         }
         //shut down the executor service now
-        //executor.shutdown();
         shutdownAndAwaitTermination(executor);
         return getIndividual(fittestIdx);
     }

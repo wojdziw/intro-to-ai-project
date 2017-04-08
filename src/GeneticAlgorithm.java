@@ -158,7 +158,7 @@ public class GeneticAlgorithm {
         long globalStartTime = System.nanoTime();
         long minInMs = 60000000000L;
 
-        for (int i=0; i<1; i++) {
+        for (int i=0; i<10; i++) {
             GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism);
             geneticAlgorithm.execute();
 

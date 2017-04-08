@@ -84,12 +84,9 @@ public class ParticleSwarmAlgorithm {
 
             int N = 10;
             int fitness = PlayerSkeleton.playNGames(gBestLocation, false, false, N);
-            System.out.println(fitness);
-            System.out.println(PlayerSkeleton.playNGames(gBestLocation, false, false, 50));
-            System.out.println("");
 
-            //System.out.println("ITERATION " + t + ": ");
-            //System.out.println("     Value: " + fitness);
+            System.out.println("ITERATION " + t + ": ");
+            System.out.println("     Value: " + fitness);
 
             t++;
             updateFitnessList();
