@@ -73,6 +73,9 @@ public class GeneticAlgorithm {
             stronger = indiv2;
             weaker = indiv1;
         }
+        if (!(indiv1.getFitness() + indiv2.getFitness() ==0)) {
+            crossoverRate = stronger.getFitness() / (stronger.getFitness() + weaker.getFitness());
+        }
         // Loop through genes
         for (int i = 0; i< noWeights; i++) {
             // Crossover
@@ -112,7 +115,7 @@ public class GeneticAlgorithm {
 
         Population myPop = new Population(populationSize, true, noWeights, maxWeight);
 
-        System.out.println("NrOfCores: " + myPop.getCores()); // Check if it finds all cores
+        System.out.println("\nNrOfCores: " + myPop.getCores()); // Check if it finds all cores
 
         double[][] generationsWeights = new double[noGenerations][noWeights];
         int[] generationsResults =  new int[noGenerations];
@@ -148,10 +151,10 @@ public class GeneticAlgorithm {
         int noWeights = Features.getNumberOfWeights();
         double maxWeight = 5;
         int populationSize = 50;
-        int noGenerations = 30;
+        int noGenerations = 50;
 
         double crossoverRate = 0.7;
-        double mutationRate = 0.02;
+        double mutationRate = 0.05;
         int tournamentSize = 5;
         boolean elitism = true;
 
