@@ -155,8 +155,8 @@ public class GeneticAlgorithm {
     public static void main(String[] args) {
         int noWeights = Features.getNumberOfWeights();
         double maxWeight = 5;
-        int populationSize = 10;
-        int noGenerations = 2;
+        int populationSize = 30;
+        int noGenerations = 30;
 
         double crossoverRate = 0.7;
         double mutationRate = 0.02;
@@ -177,7 +177,7 @@ public class GeneticAlgorithm {
                 System.out.println("Columns - " + col);
                 System.out.println();
 
-                for(int i = 0; i<5; i++){
+                for(int i = 0; i<3; i++){
                     GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism);
                     geneticAlgorithm.execute(resultDump, col, core);
 
@@ -185,7 +185,7 @@ public class GeneticAlgorithm {
                     globalStartTime = System.nanoTime();
                     System.out.println("------------------------------------------------");
                 }
-                saveToCsvBidDataEvaluation.writeCsvFile("geneticRun-50gen", resultDump);
+                saveToCsvBidDataEvaluation.writeCsvFile("geneticRun-BigData", resultDump);
             }
         }
     }
