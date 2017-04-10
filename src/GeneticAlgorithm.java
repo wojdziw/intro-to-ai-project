@@ -75,6 +75,7 @@ public class GeneticAlgorithm {
         }
         if (!(indiv1.getFitness() + indiv2.getFitness() ==0)) {
             crossoverRate = (double) stronger.getFitness() / (double) (stronger.getFitness() + weaker.getFitness());
+            //System.out.println("crossover" + crossoverRate);
         }
         // Loop through genes
         for (int i = 0; i< noWeights; i++) {
@@ -115,13 +116,14 @@ public class GeneticAlgorithm {
 
         Population myPop = new Population(populationSize, true, noWeights, maxWeight);
 
-        System.out.println("\nNrOfCores: " + myPop.getCores()); // Check if it finds all cores
+        System.out.println("\n NrOfCores: " + myPop.getCores()); // Check if it finds all cores
 
         double[][] generationsWeights = new double[noGenerations][noWeights];
         int[] generationsResults =  new int[noGenerations];
         long[] generationsTime = new long[noGenerations];
 
         long startTime = System.nanoTime();
+        int oldBestFitness = 0;
 
         for (int generation = 0; generation<noGenerations; generation++) {
 
@@ -133,18 +135,27 @@ public class GeneticAlgorithm {
 
             long iterTime = (System.nanoTime() - startTime)/1000000000;
             startTime = System.nanoTime();
-
             generationsTime[generation] = iterTime;
+
             int bestFitness = bestInd.getFitness(); 
-            System.out.println(generation+1 + "(" + bestFitness + "r," + iterTime+ "s) ");
+            System.out.print(generation+1 + "(" + bestFitness + "r," + iterTime+ "s), ");
+
+            if((generation+1)%10 == 0){
+                System.out.println();
+            }
+
             
-            //print weights if fitness > 10,000
-            if (bestFitness > 10000) {
-            	System.out.print(" - Weights: ");
+            //print weights if fitness > 50,000
+            if (bestFitness > 50000 && bestFitness > oldBestFitness) {
+                oldBestFitness = bestFitness;
+                saveToCsv.writeCsvFile("intermediateSave", generationsResults, generationsWeights, generationsTime);
+                /*System.out.print(" - Weights: ");
+            	bestInd.printGenes();
             	for(int i = 0; i<bestInd.getGenes().length; i++) {
             		System.out.print("[" + i + "]" + bestInd.getGene(i) + " ");
             	}
             	System.out.println();
+            	*/
             }
 
             if (generation==noGenerations-1) {
@@ -154,28 +165,29 @@ public class GeneticAlgorithm {
         }
         System.out.println("------------------------------------------------");
 
-        saveToCsv.writeCsvFile("geneticRun", generationsResults, generationsWeights, generationsTime);
+        saveToCsv.writeCsvFile("finishedRun", generationsResults, generationsWeights, generationsTime);
     }
 
     public static void main(String[] args) {
         int noWeights = Features.getNumberOfWeights();
         double maxWeight = 5;
         int populationSize = 50;
-        int noGenerations = 50;
+        int noGenerations = 500;
 
         double crossoverRate = 0.7;
-        double mutationRate = 0.05;
+        double mutationRate = 0.02;
         int tournamentSize = 5;
         boolean elitism = true;
 
         long globalStartTime = System.nanoTime();
         long minInMs = 60000000000L;
 
-        for (int i=0; i<10; i++) {
+        for (int i=0; i<1; i++) {
             GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism);
             geneticAlgorithm.execute();
 
             System.out.print("Total evolution time: " + ((System.nanoTime() - globalStartTime)/minInMs) + " minutes");
+            globalStartTime = System.nanoTime();
         }
 
 
