@@ -20,6 +20,7 @@ public class Population {
             }
     }
 
+    /*
     // A set of genes can be fit when testing, but not when it's actually used because the blocks are random as well
     public Individual getFittest() {
         int fittestIdx = 0;
@@ -54,19 +55,37 @@ public class Population {
         shutdownAndAwaitTermination(executor);
         return getIndividual(fittestIdx);
     }
+    */
+
+    public Individual getFittest() {
+        int fittestIdx = 0;
+        int bestFitness = 0;
+        for (int i=0; i<size(); i++) {
+            int currentFitness = getIndividual(i).getFitness(cols, cores);
+            if (currentFitness > bestFitness) {
+                fittestIdx = i;
+                bestFitness = currentFitness;
+            }
+        }
+        return getIndividual(fittestIdx);
+    }
 
     public int size() {
         return individuals.length;
     }
 
     public void setCC(int globalCols, int globalCores) {
-        cols = globalCols;
-        cores = globalCores;
+        this.cols = globalCols;
+        this.cores = globalCores;
 
     }
 
     public int getCores() {
         return cores;
+    }
+
+    public int getColumns() {
+        return cols;
     }
 
     public Individual getIndividual(int index) {

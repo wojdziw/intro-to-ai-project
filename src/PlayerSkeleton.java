@@ -6,17 +6,21 @@ import java.util.Scanner;
 import java.util.concurrent.*;
 
 public class PlayerSkeleton{
-	static int columns;
-	static int cores; // = Runtime.getRuntime().availableProcessors();
+	private static int columns;
+	private static int cores; // = Runtime.getRuntime().availableProcessors();
 
 	
 
-	public int pickMove(State s, int[][] legalMoves, double[] weights) {
+	private int pickMove(State s, int[][] legalMoves, double[] weights) {
 		int bestMove = 0;
 		double bestUtility = -Double.MAX_VALUE;
 		int nextPiece = s.nextPiece;
 
 		ExecutorService executor = Executors.newFixedThreadPool(cores);
+		//System.out.println("NrOfCores: " + cores);
+		//System.out.println("NrOfColumns: " + columns + " State.COLS: " + State.COLS);
+		//System.out.println("Field: " + s.getField().length + s.getField()[0].length + " Top: " + s.getTop().length);
+
 		//create a list to hold the Future object associated with Callable
 		List<Future<PairResultMove>> list = new ArrayList<Future<PairResultMove>>();
 		//Create MyCallable instance
@@ -27,6 +31,7 @@ public class PlayerSkeleton{
 			//add Future to the list, we can get return value using Future
 			list.add(future);
 		}
+		//System.out.println("List size: : " + list.size());
 		for(Future<PairResultMove> fut : list){
 			try {
 				//print the return value of Future
@@ -50,6 +55,7 @@ public class PlayerSkeleton{
 	// Returns the score (number of rows cleared) based on the strategy i.e. the weights of the utility function
 	public static int playAGame(double[] weights, boolean drawing, boolean waitForEnter) {
 		State s = new State(columns);
+		//System.out.println("playAGame cols: " + columns);
 		if (drawing)
 			new TFrame(s);
 		PlayerSkeleton p = new PlayerSkeleton();
@@ -83,8 +89,8 @@ public class PlayerSkeleton{
 	// Returns the score (number of rows cleared) based on the strategy i.e. the weights of the utility function
 	public static int playNGames(int globalCol, int globalCores, double[] weights, boolean drawing, boolean waitForEnter, int N) {
 		int fitness = 0;
-		columns = globalCol;
-		cores = globalCores;
+		PlayerSkeleton.columns = globalCol;
+		PlayerSkeleton.cores = globalCores;
 		// Averaging over N games to mitigate the impact of the random piece choice
 		for (int i=0; i<N; i++)
 			fitness += PlayerSkeleton.playAGame(weights, false, false);
@@ -115,7 +121,7 @@ public class PlayerSkeleton{
         Features.printRuntimeStatistics();
 	}
 
-	void shutdownAndAwaitTermination(ExecutorService pool) {
+	private void shutdownAndAwaitTermination(ExecutorService pool) {
 		pool.shutdown(); // Disable new tasks from being submitted
 		try {
 			// Wait a while for existing tasks to terminate
@@ -138,11 +144,11 @@ public class PlayerSkeleton{
 }
 
 class MyCallableMove implements Callable<PairResultMove> {
-	State s;
-	int[] move;
-	int nextPiece;
-	double[] weights;
-	int order;
+	private State s;
+	private int[] move;
+	private int nextPiece;
+	private double[] weights;
+	private int order;
 
 	MyCallableMove(State s, int[] move, int nextpiece, double[] weights, int order) {
 		this.s = s;

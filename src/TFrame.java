@@ -143,7 +143,7 @@ public class TFrame extends JFrame implements KeyListener{
     }
 	
 	public static void main(String[] args) {
-		State s = new State();
+		State s = new State(10);
 		TFrame t = new TFrame(s);
 		s.draw();
 		s.drawNext(0,0);

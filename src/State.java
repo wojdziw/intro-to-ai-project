@@ -4,7 +4,7 @@ import java.awt.Color;
 
 
 public class State {
-	public static int COLS;
+	public static int COLS = 10;
 	public static final int ROWS = 21;
 	public static final int N_PIECES = 7;
 	public boolean lost = false;
@@ -15,10 +15,10 @@ public class State {
 	private int cleared = 0;
 	
 	//each square in the grid - int means empty - other values mean the turn it was placed
-	private int[][] field = new int[ROWS][COLS];
+	private int[][] field; // = new int[ROWS][COLS];
 	//top row+1 of each column
 	//0 means empty
-	private int[] top = new int[COLS];
+	private int[] top; // = new int[COLS];
 	
 	
 	//number of next piece
@@ -76,7 +76,7 @@ public class State {
 		{{2,2,1},{2,3}}
 	};
 	
-	//initialize legalMoves
+	private void initializeLegalMoves()
 	{
 		//for each piece type
 		for(int i = 0; i < N_PIECES; i++) {
@@ -107,9 +107,15 @@ public class State {
 		return field;
 	}
 
+	private void setField() { field = new int[ROWS][COLS]; }
+
 	public int[] getTop() {
 		return top;
 	}
+
+	private void setTop() { top = new int[COLS]; }
+
+	private void setCOLS(int globalColumns) { COLS = globalColumns; }
 
     public static int[] getpOrients() {
         return pOrients;
@@ -155,6 +161,9 @@ public class State {
 		nextPiece = randomPiece();
 		COLS = globalCol;
 
+		initializeLegalMoves();
+		setField();
+		setTop();
 	}
 	
 	//random integer, returns 0-6
