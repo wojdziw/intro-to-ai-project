@@ -57,8 +57,6 @@ public class GeneticAlgorithm {
     private Population evolvePopulation(Population pop) {
         Population newPopulation = new Population(pop.size(), false, noWeights, maxWeight);
 
-
-        
         //check if rate of growth has reached a plateau - if growth rate < growthRateThreshold
         //if yes, apply particle swarm to get new set of weights
         
@@ -162,7 +160,7 @@ public class GeneticAlgorithm {
         //int[][] generationsResults =  new int[noGenerations][2];
 
         long startTime = System.nanoTime();
-
+        int oldBestFitness = 0;
 
         for (int generation = 0; generation<noGenerations; generation++) {
 
@@ -190,6 +188,18 @@ public class GeneticAlgorithm {
             System.out.print(" -- Fitness: " + generationFitness);
             System.out.println(" -- Growth rate: " + ((double)(fitnessOfGenerations.getLast() - (double)fitnessOfGenerations.getFirst())/(double)fitnessOfGenerations.getFirst()) );
             
+            //print weights if fitness > 50,000
+            if (generationFitness > 50000 && generationFitness > oldBestFitness) {
+                oldBestFitness = generationFitness;
+                
+                System.out.print(" - Weights: ");
+                myPop.getFittest().printGenes();
+            	for(int i = 0; i<myPop.getFittest().getGenes().length; i++) {
+            		System.out.print("[" + i + "]" + myPop.getFittest().getGene(i) + " ");
+            	}
+            	System.out.println();
+            	
+            }
 
             startTime = System.nanoTime();
 
@@ -215,7 +225,7 @@ public class GeneticAlgorithm {
         double mutationRate = 0.005;
         int tournamentSize = 5;
         boolean elitism = true;
-        double growthRateThreshold = 0.9;
+        double growthRateThreshold = 0.2;
         int growthRange = 3;
         int psoIterations = 3;
 

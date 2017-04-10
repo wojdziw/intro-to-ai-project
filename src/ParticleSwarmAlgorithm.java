@@ -148,6 +148,7 @@ public class ParticleSwarmAlgorithm {
     
     public void initializeSwarm(double[] weights) {
         Particle p;
+        
         for(int i=0; i<SWARM_SIZE; i++) {
             p = new Particle();
 
@@ -155,8 +156,14 @@ public class ParticleSwarmAlgorithm {
             double[] loc = new double[NO_FEATURES];
 
             for (int j=0; j<NO_FEATURES; j++) { // +1 so we initialize the last weight as well
-                int plusMinus = Math.random() > 0.5 ? -1 : 1;
-                loc[j] = weights[j] + (plusMinus * RANGE * Math.random());
+                
+            	//applying "elitism" by setting particle 0 with the fittest gene set from the genetic algorithm  
+            	if(i == 0) {
+            		loc[j] = weights[j];
+            	} else {
+            		int plusMinus = Math.random() > 0.5 ? -1 : 1;
+                    loc[j] = weights[j] + (plusMinus * RANGE * Math.random());
+            	}
             }
 
             // randomize velocity in the range defined in Problem Set
