@@ -153,7 +153,7 @@ public class GeneticAlgorithm {
         int noWeights = Features.getNumberOfWeights();
         double maxWeight = 5;
         //int populationSize = 50;
-        int noGenerations = 50;
+        int noGenerations = 30;
 
         double crossoverRate = 0.7;
         double mutationRate = 0.02;
@@ -169,7 +169,7 @@ public class GeneticAlgorithm {
         int [] numberOfCores={1,4,12};
         int [] numberOfPop={10,30,50};
 
-        for (int i=0; i<4; i++) {
+        for (int i=0; i<2; i++) {
             //GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism, cores);
             //parallell..
             for (int core : numberOfCores){
