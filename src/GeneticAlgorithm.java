@@ -74,7 +74,7 @@ public class GeneticAlgorithm {
             weaker = indiv1;
         }
         if (!(indiv1.getFitness() + indiv2.getFitness() ==0)) {
-            crossoverRate = stronger.getFitness() / (stronger.getFitness() + weaker.getFitness());
+            crossoverRate = (double) stronger.getFitness() / (double) (stronger.getFitness() + weaker.getFitness());
         }
         // Loop through genes
         for (int i = 0; i< noWeights; i++) {
@@ -135,7 +135,17 @@ public class GeneticAlgorithm {
             startTime = System.nanoTime();
 
             generationsTime[generation] = iterTime;
-            System.out.print(generation+1 + "(" + bestInd.getFitness() + "r," + iterTime+ "s), ");
+            int bestFitness = bestInd.getFitness(); 
+            System.out.println(generation+1 + "(" + bestFitness + "r," + iterTime+ "s) ");
+            
+            //print weights if fitness > 10,000
+            if (bestFitness > 10000) {
+            	System.out.print(" - Weights: ");
+            	for(int i = 0; i<bestInd.getGenes().length; i++) {
+            		System.out.print("[" + i + "]" + bestInd.getGene(i) + " ");
+            	}
+            	System.out.println();
+            }
 
             if (generation==noGenerations-1) {
                 System.out.println("");

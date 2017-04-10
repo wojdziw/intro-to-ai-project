@@ -5,8 +5,8 @@ import java.util.concurrent.*;
 public class Population {
 
     //creating a pool for the number of available cores (or threads).
-    //static int cores = Runtime.getRuntime().availableProcessors();
-    static int cores = 1;
+    static int cores = Runtime.getRuntime().availableProcessors();
+    //static int cores = 1;
 
     private Individual[] individuals;
     public Population(int populationSize, boolean initialise, int noFeatures, double maxWeight) {
