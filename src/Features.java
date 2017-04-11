@@ -1,6 +1,4 @@
 
-import org.jenetics.util.IntRange;
-
 import java.util.*;
 
 import static java.lang.Math.min;

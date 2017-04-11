@@ -153,8 +153,7 @@ public class GeneticAlgorithm {
     }
 
     public static void main(String[] args) {
-        int noWeights = Features.getNumberOfWeights();
-        double maxWeight = 5;
+	double maxWeight = 5;
         int populationSize = 30;
         int noGenerations = 30;
 
@@ -170,12 +169,15 @@ public class GeneticAlgorithm {
         ListOfResults resultDump = new ListOfResults();
         int[] columns = {10, 40, 120};
         int[] cores = {12, 4, 1};
-
-        for (int core : cores){
+        
+	for (int core : cores){
             for (int col : columns){
                 System.out.println("Cores - " + core);
                 System.out.println("Columns - " + col);
                 System.out.println();
+ 
+        	int noWeights = 4 + col-1;
+        	System.out.println("No_weights: " + noWeights);
 
                 for(int i = 0; i<3; i++){
                     GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism);
