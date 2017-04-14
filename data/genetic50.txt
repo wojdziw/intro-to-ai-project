@@ -1,0 +1,58 @@
+Increasing mutation rate
+0 Time for iteration: 12s -- Fitness: 73 -- Growth rate: 0.0
+1(73r,12s), 1 Time for iteration: 8s -- Fitness: 98 -- Growth rate: 0.3424657534246575
+2(98r,8s), 2 Time for iteration: 6s -- Fitness: 120 -- Growth rate: 0.6438356164383562
+3(120r,6s), 3 Time for iteration: 5s -- Fitness: 207 -- Growth rate: 1.1122448979591837
+4(207r,5s), 4 Time for iteration: 8s -- Fitness: 352 -- Growth rate: 1.9333333333333333
+5(352r,8s), 5 Time for iteration: 22s -- Fitness: 2532 -- Growth rate: 11.231884057971014
+6(2532r,22s), 6 Time for iteration: 40s -- Fitness: 4241 -- Growth rate: 11.048295454545455
+7(4241r,40s), 7 Time for iteration: 83s -- Fitness: 7262 -- Growth rate: 1.868088467614534
+8(7262r,83s), 8 Time for iteration: 141s -- Fitness: 7262 -- Growth rate: 0.7123319971704787
+9(7262r,141s), 9 Time for iteration: 192s -- Fitness: 7551 -- Growth rate: 0.03979619939410631
+10(7551r,192s), 10 Time for iteration: 189s -- Fitness: 7832 -- Growth rate: 0.07849077389148995
+11(7832r,189s), 11 Time for iteration: 250s -- Fitness: 15801 -- Growth rate: 1.092570520460866
+12(15801r,250s), 12 Time for iteration: 330s -- Fitness: 17831 -- Growth rate: 1.276685393258427
+13(17831r,330s), 13 Time for iteration: 233s -- Fitness: 25946 -- Growth rate: 0.642047971647364
+14(25946r,233s), 14 Time for iteration: 566s -- Fitness: 44988 -- Growth rate: 1.5230217037743257
+15(44988r,566s), 15 Time for iteration: 775s -- Fitness: 55293 -- Growth rate: 1.1310799352501348
+16(55293r,775s), 16 Time for iteration: 1137s -- Fitness: 64346 -- Growth rate: 0.4302925224504312
+17(64346r,1137s), 17 Time for iteration: 1302s -- Fitness: 68113 -- Growth rate: 0.23185575027580343
+18(68113r,1302s), 18 Time for iteration: 1353s -- Fitness: 68113 -- Growth rate: 0.0585428775681472
+19(68113r,1353s), 19 Time for iteration: 1348s -- Fitness: 68113 -- Growth rate: 0.0
+20(68113r,1348s), 20 Time for iteration: 1275s -- Fitness: 68113 -- Growth rate: 0.0
+21(68113r,1275s), 21 Time for iteration: 1292s -- Fitness: 68113 -- Growth rate: 0.0
+22(68113r,1292s), 22 Time for iteration: 1160s -- Fitness: 76801 -- Growth rate: 0.1275527432355057
+23(76801r,1160s), 23 Time for iteration: 1558s -- Fitness: 76801 -- Growth rate: 0.1275527432355057
+24(76801r,1558s), 24 Time for iteration: 1628s -- Fitness: 79321 -- Growth rate: 0.03281207275946928
+25(79321r,1628s), 25 Time for iteration: 2057s -- Fitness: 89559 -- Growth rate: 0.16611762867670993
+26(89559r,2057s), 26 Time for iteration: 1738s -- Fitness: 89559 -- Growth rate: 0.12907048574778432
+27(89559r,1738s), 27 Time for iteration: 1924s -- Fitness: 89559 -- Growth rate: 0.0
+28(89559r,1924s), 28 Time for iteration: 1709s -- Fitness: 89559 -- Growth rate: 0.0
+29(89559r,1709s), 29 Time for iteration: 1793s -- Fitness: 89559 -- Growth rate: 0.0
+30(89559r,1793s), 30 Time for iteration: 1422s -- Fitness: 89559 -- Growth rate: 0.0
+31(89559r,1422s), 31 Time for iteration: 1470s -- Fitness: 89559 -- Growth rate: 0.0
+32(89559r,1470s), 32 Time for iteration: 1635s -- Fitness: 89559 -- Growth rate: 0.0
+33(89559r,1635s), 33 Time for iteration: 1752s -- Fitness: 102837 -- Growth rate: 0.14825980638461797
+34(102837r,1752s), 34 Time for iteration: 1544s -- Fitness: 102837 -- Growth rate: 0.14825980638461797
+35(102837r,1544s), 35 Time for iteration: 1911s -- Fitness: 102837 -- Growth rate: 0.0
+36(102837r,1911s), 36 Time for iteration: 2093s -- Fitness: 102837 -- Growth rate: 0.0
+37(102837r,2093s), 37 Time for iteration: 1581s -- Fitness: 102837 -- Growth rate: 0.0
+38(102837r,1581s), 38 Time for iteration: 1760s -- Fitness: 102837 -- Growth rate: 0.0
+39(102837r,1760s), 39 Time for iteration: 2544s -- Fitness: 102837 -- Growth rate: 0.0
+40(102837r,2544s), 40 Time for iteration: 1759s -- Fitness: 102837 -- Growth rate: 0.0
+41(102837r,1759s), 41 Time for iteration: 1481s -- Fitness: 102837 -- Growth rate: 0.0
+42(102837r,1481s), 42 Time for iteration: 2495s -- Fitness: 102837 -- Growth rate: 0.0
+43(102837r,2495s), 43 Time for iteration: 1851s -- Fitness: 102837 -- Growth rate: 0.0
+44(102837r,1851s), 44 Time for iteration: 2053s -- Fitness: 102837 -- Growth rate: 0.0
+45(102837r,2053s), 45 Time for iteration: 1983s -- Fitness: 102837 -- Growth rate: 0.0
+46(102837r,1983s), 46 Time for iteration: 1535s -- Fitness: 102837 -- Growth rate: 0.0
+47(102837r,1535s), 47 Time for iteration: 2070s -- Fitness: 102837 -- Growth rate: 0.0
+48(102837r,2070s), 48 Time for iteration: 3494s -- Fitness: 102837 -- Growth rate: 0.0
+49(102837r,3494s), 49 
+Generation: 50 Fittest: 102837
+0: 5.69 1: -12.66 2: -12.83 3: -6.07 4: -2.26 5: -3.68 6: -0.78 7: -3.86 8: -4.00 9: -4.21 10: -3.34 11: -4.48 12: -3.14 13: -4.72 
+Time for iteration: 3404s -- Fitness: 102837 -- Growth rate: 0.0
+50(102837r,3404s), 
+Generation: 50 Fittest: 102837
+0: 5.69 1: -12.66 2: -12.83 3: -6.07 4: -2.26 5: -3.68 6: -0.78 7: -3.86 8: -4.00 9: -4.21 10: -3.34 11: -4.48 12: -3.14 13: -4.72 
+------------------------------------------------

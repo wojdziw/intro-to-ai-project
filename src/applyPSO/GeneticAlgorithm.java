@@ -213,10 +213,10 @@ public class GeneticAlgorithm {
         int noGenerations = 30;
 
         double crossoverRate = 0.7;
-        double mutationRate = 0.005;
+        double mutationRate = 0.05;
         int tournamentSize = 5;
         boolean elitism = true;
-        double growthRateThreshold = 0.9;
+        double growthRateThreshold = 0.2;
         int growthRange = 3;
         int psoIterations = 3;
 

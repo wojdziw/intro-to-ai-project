@@ -188,18 +188,25 @@ public class GeneticAlgorithm {
             System.out.print(" -- Fitness: " + generationFitness);
             System.out.println(" -- Growth rate: " + ((double)(fitnessOfGenerations.getLast() - (double)fitnessOfGenerations.getFirst())/(double)fitnessOfGenerations.getFirst()) );
             
-            //print weights if fitness > 50,000
-            if (generationFitness > 50000 && generationFitness > oldBestFitness) {
-                oldBestFitness = generationFitness;
-                
-                System.out.print(" - Weights: ");
-                myPop.getFittest().printGenes();
-            	for(int i = 0; i<myPop.getFittest().getGenes().length; i++) {
-            		System.out.print("[" + i + "]" + myPop.getFittest().getGene(i) + " ");
-            	}
-            	System.out.println();
-            	
-            }
+//            //print weights if fitness > 50,000
+//            if (generationFitness > 50000 && generationFitness > oldBestFitness) {
+//                oldBestFitness = generationFitness;
+//                
+//                System.out.print(" - Weights: ");
+//                myPop.getFittest().printGenes();
+//            	for(int i = 0; i<myPop.getFittest().getGenes().length; i++) {
+//            		System.out.print("[" + i + "]" + myPop.getFittest().getGene(i) + " ");
+//            	}
+//            	System.out.println();
+//            	
+//            }
+            
+            System.out.print(" - Weights: ");
+            myPop.getFittest().printGenes();
+        	for(int i = 0; i<myPop.getFittest().getGenes().length; i++) {
+        		System.out.print("[" + i + "]" + myPop.getFittest().getGene(i) + " ");
+        	}
+        	System.out.println();
 
             startTime = System.nanoTime();
 
@@ -219,17 +226,19 @@ public class GeneticAlgorithm {
         int noWeights = Features.getNumberOfWeights();
         double maxWeight = 5;
         int populationSize = 50;
-        int noGenerations = 30;
+        int noGenerations = 50;
 
         double crossoverRate = 0.7;
-        double mutationRate = 0.005;
+        double mutationRate = 0.05;
         int tournamentSize = 5;
         boolean elitism = true;
         double growthRateThreshold = 0.2;
         int growthRange = 3;
         int psoIterations = 3;
 
-        for (int i=0; i<2; i++) {
+        System.out.println("Genetic + PSO");
+        
+        for (int i=0; i<1; i++) {
         	GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism, growthRateThreshold, growthRange, psoIterations);
             //GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism);
             geneticAlgorithm.execute();

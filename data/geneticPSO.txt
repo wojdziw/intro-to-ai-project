@@ -1,0 +1,146 @@
+genetic + PSO
+0 Time for iteration: 8s -- Fitness: 10 -- Growth rate: 0.0
+1(10r,8s), 1 Time for iteration: 3s -- Fitness: 18 -- Growth rate: 0.8
+2(18r,3s), 2 Time for iteration: 1s -- Fitness: 21 -- Growth rate: 1.1
+3(21r,1s), 3 Time for iteration: 1s -- Fitness: 36 -- Growth rate: 1.0
+4(36r,1s), 4 Time for iteration: 2s -- Fitness: 80 -- Growth rate: 2.8095238095238093
+5(80r,2s), 5 Time for iteration: 3s -- Fitness: 360 -- Growth rate: 9.0
+6(360r,3s), 6 Time for iteration: 5s -- Fitness: 399 -- Growth rate: 3.9875
+7(399r,5s), 7 Time for iteration: 15s -- Fitness: 1370 -- Growth rate: 2.8055555555555554
+8(1370r,15s), 8 Time for iteration: 22s -- Fitness: 1370 -- Growth rate: 2.4335839598997495
+9(1370r,22s), 9 Time for iteration: 32s -- Fitness: 3809 -- Growth rate: 1.7802919708029197
+10(3809r,32s), 10 Time for iteration: 34s -- Fitness: 3809 -- Growth rate: 1.7802919708029197
+11(3809r,34s), 11 Time for iteration: 70s -- Fitness: 3809 -- Growth rate: 0.0
+12(3809r,70s), 
+Entering PSO
+Initializing PSO
+ITERATION 0: 
+     Value: 7645
+ITERATION 1: 
+     Value: 17400
+ITERATION 2: 
+     Value: 20452
+1.1498896949032387 -10.185933789323434 -13.969208298387798 5.379189809466253 -3.913767712392669 -1.946325282578118 -3.2928336132207283 -4.46816941154146 -5.204366123161287 -4.442845808096508 -3.2109328877116123 -4.596871589727042 -3.5808764081479585 -4.647294229481369 
+End of PSO execution
+
+Back to genetic algorithm
+12 Time for iteration: 3390s -- Fitness: 46829 -- Growth rate: 11.294302966657915
+13(46829r,3390s), 13 Time for iteration: 826s -- Fitness: 46829 -- Growth rate: 11.294302966657915
+14(46829r,826s), 14 Time for iteration: 907s -- Fitness: 46829 -- Growth rate: 0.0
+15(46829r,907s), 
+Entering PSO
+Initializing PSO
+ITERATION 0: 
+     Value: 13359
+ITERATION 1: 
+     Value: 23177
+ITERATION 2: 
+     Value: 29302
+2.4880802383770537 -12.010883799425137 -13.884639527635986 4.215043538926723 -4.492491759132148 -2.5899426957196603 -4.110984648655641 -3.4304117511763232 -5.161218520968341 -4.652672468533256 -4.330500300913196 -5.564022976019109 -2.2198564816712687 -3.9514022654110734 
+End of PSO execution
+
+Back to genetic algorithm
+15 Time for iteration: 3409s -- Fitness: 59039 -- Growth rate: 0.2607358687992483
+16(59039r,3409s), 16 Time for iteration: 887s -- Fitness: 59039 -- Growth rate: 0.2607358687992483
+17(59039r,887s), 17 Time for iteration: 765s -- Fitness: 59039 -- Growth rate: 0.0
+18(59039r,765s), 
+Entering PSO
+Initializing PSO
+ITERATION 0: 
+     Value: 16318
+ITERATION 1: 
+     Value: 22610
+ITERATION 2: 
+     Value: 11926
+2.2296249484456165 -11.365054964871042 -12.291453913523126 7.033569638634416 -3.6127042052123506 -3.1805417370087152 -4.526198041607226 -3.3381074895026748 -4.581147529764164 -3.536941962397294 -4.0395213638093805 -4.315610913010296 -2.2218826153042164 -5.372758560387872 
+End of PSO execution
+
+Back to genetic algorithm
+18 Time for iteration: 2398s -- Fitness: 33947 -- Growth rate: -0.4250071986314131
+19(33947r,2398s), 
+Entering PSO
+Initializing PSO
+ITERATION 0: 
+     Value: 13247
+ITERATION 1: 
+     Value: 17656
+ITERATION 2: 
+     Value: 34861
+0.21213897400231796 -13.998658798466899 -10.150961590137069 6.455984829583212 -3.3858368844176314 -5.251087873471528 -3.952427369171759 -4.539752156734876 -3.352971616727373 -3.8412214277661865 -4.4842882442296395 -4.079042884877487 -1.9937322824127497 -4.327867601145323 
+End of PSO execution
+
+Back to genetic algorithm
+19 Time for iteration: 2166s -- Fitness: 40836 -- Growth rate: -0.30832161791358254
+20(40836r,2166s), 
+Entering PSO
+Initializing PSO
+ITERATION 0: 
+     Value: 38788
+ITERATION 1: 
+     Value: 36460
+ITERATION 2: 
+     Value: 39301
+2.467842442560834 -13.801007539171593 -11.867322014538054 5.468793371080583 -3.6414594463752428 -3.449577311672983 -2.4317679237328234 -4.936706663709306 -3.0092953572647696 -3.908442874524225 -3.490292734328739 -4.05484217950358 -2.8840188217567513 -4.4169664056875675 
+End of PSO execution
+
+Back to genetic algorithm
+20 Time for iteration: 2807s -- Fitness: 53469 -- Growth rate: 0.5750729077679912
+21(53469r,2807s), 21 Time for iteration: 723s -- Fitness: 61910 -- Growth rate: 0.5160642570281124
+22(61910r,723s), 22 Time for iteration: 793s -- Fitness: 74464 -- Growth rate: 0.3926574276683686
+23(74464r,793s), 23 Time for iteration: 785s -- Fitness: 105224 -- Growth rate: 0.6996284929736715
+24(105224r,785s), 24 Time for iteration: 860s -- Fitness: 105224 -- Growth rate: 0.4130855178341212
+25(105224r,860s), 25 Time for iteration: 932s -- Fitness: 140612 -- Growth rate: 0.33631110773207634
+26(140612r,932s), 26 Time for iteration: 1187s -- Fitness: 140612 -- Growth rate: 0.33631110773207634
+27(140612r,1187s), 27 Time for iteration: 1215s -- Fitness: 140612 -- Growth rate: 0.0
+28(140612r,1215s), 
+Entering PSO
+Initializing PSO
+ITERATION 0: 
+     Value: 17272
+ITERATION 1: 
+     Value: 38885
+ITERATION 2: 
+     Value: 26089
+5.806676835618934 -14.5299474587021 -11.331070615737977 0.5021760756605727 -2.9518053062596743 -3.3176819060474845 -2.8282153890873225 -4.610411728718392 -2.743974158188528 -4.283859786358116 -2.7336014352256477 -3.2449706355938157 -2.3444364938495115 -5.890134280535995 
+End of PSO execution
+
+Back to genetic algorithm
+28 Time for iteration: 2583s -- Fitness: 66018 -- Growth rate: -0.5304952635621426
+29(66018r,2583s), 
+Entering PSO
+Initializing PSO
+ITERATION 0: 
+     Value: 27720
+ITERATION 1: 
+     Value: 44349
+ITERATION 2: 
+     Value: 61063
+4.185997127109109 -13.856018061211383 -12.09933033538606 1.9522982148576375 -4.044755194543842 -2.16941403261884 -2.3652343088639842 -3.6612393946011563 -2.603642225925272 -4.43754407392976 -3.8077015958102964 -3.419690882168597 -2.5697718795512836 -4.794103840500165 
+End of PSO execution
+
+Back to genetic algorithm
+29 
+Generation: 30 Fittest: 76845
+0: 4.05 1: -14.28 2: -11.98 3: 1.97 4: -4.14 5: -2.31 6: -2.37 7: -3.51 8: -2.89 9: -4.27 10: -3.77 11: -3.59 12: -2.28 13: -4.70 
+Time for iteration: 3398s -- Fitness: 76845 -- Growth rate: -0.4534961454214434
+30(76845r,3398s), 
+Generation: 30 Fittest: 76845
+0: 4.05 1: -14.28 2: -11.98 3: 1.97 4: -4.14 5: -2.31 6: -2.37 7: -3.51 8: -2.89 9: -4.27 10: -3.77 11: -3.59 12: -2.28 13: -4.70 
+------------------------------------------------
+0 Time for iteration: 4s -- Fitness: 13 -- Growth rate: 0.0
+1(13r,4s), 1 Time for iteration: 3s -- Fitness: 23 -- Growth rate: 0.7692307692307693
+2(23r,3s), 2 Time for iteration: 1s -- Fitness: 60 -- Growth rate: 3.6153846153846154
+3(60r,1s), 3 Time for iteration: 1s -- Fitness: 87 -- Growth rate: 2.782608695652174
+4(87r,1s), 4 Time for iteration: 2s -- Fitness: 305 -- Growth rate: 4.083333333333333
+5(305r,2s), 5 Time for iteration: 3s -- Fitness: 335 -- Growth rate: 2.8505747126436782
+6(335r,3s), 6 Time for iteration: 6s -- Fitness: 487 -- Growth rate: 0.5967213114754099
+7(487r,6s), 7 Time for iteration: 7s -- Fitness: 487 -- Growth rate: 0.4537313432835821
+8(487r,7s), 8 Time for iteration: 8s -- Fitness: 840 -- Growth rate: 0.7248459958932238
+9(840r,8s), 9 Time for iteration: 10s -- Fitness: 1079 -- Growth rate: 1.215605749486653
+10(1079r,10s), 10 Time for iteration: 15s -- Fitness: 1338 -- Growth rate: 0.5928571428571429
+11(1338r,15s), 11 Time for iteration: 26s -- Fitness: 4697 -- Growth rate: 3.3531047265987026
+12(4697r,26s), 12 Time for iteration: 36s -- Fitness: 8435 -- Growth rate: 5.3041853512705535
+13(8435r,36s), 13 Time for iteration: 59s -- Fitness: 10550 -- Growth rate: 1.2461145411965084
+14(10550r,59s), 14 Time for iteration: 85s -- Fitness: 14079 -- Growth rate: 0.6691167753408417
+15(14079r,85s), 15 Time for iteration: 152s -- Fitness: 16117 -- Growth rate: 0.5276777251184834
+16(16117r,152s), 16 

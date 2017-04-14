@@ -17,6 +17,13 @@ public class Individual {
             }
     }
     
+    public Individual(int noWeights, double maxWeight, double[] inputWeights) {
+        weights = new double[noWeights];
+            for (int i=0; i<noWeights; i++) {
+                weights[i] = random.nextGaussian()*maxWeight;
+            }
+    }
+    
     //method to convert a particle (from PSO) back to an individual (for genetic algo)
     public Individual(Particle particle) {
     	this.weights = particle.getLocation();

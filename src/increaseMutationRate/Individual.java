@@ -17,6 +17,15 @@ public class Individual {
                 weights[i] = random.nextGaussian()*maxWeight;
             }
     }
+    
+    public Individual(int noWeights, double maxWeight, double[] inputWeights) {
+        weights = new double[noWeights];
+  
+        for (int i=1; i<noWeights; i++) {
+        	weights[i] = random.nextGaussian()+inputWeights[i];
+        }
+        
+    }
 
     public double getGene(int index) {
         return weights[index];

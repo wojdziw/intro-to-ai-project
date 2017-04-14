@@ -61,13 +61,13 @@ public class GeneticAlgorithm {
         //check if rate of growth has reached a plateau - if growth rate < growthRateThreshold
         //if yes, apply particle swarm to get new set of weights
         
-        if(fitnessOfGenerations.size() == growthRange && (((double)fitnessOfGenerations.getLast() - (double)fitnessOfGenerations.getFirst())/(double)fitnessOfGenerations.getFirst()) < growthRateThreshold) {
-        	// increase mutation rate
-        	System.out.println("Increasing mutation rate:");
-        	System.out.print("Old mutation rate: " + this.mutationRate);
-        	increaseMutationRate();		     
-        	System.out.println("New mutation rate: " + this.mutationRate);
-        } 
+//        if(fitnessOfGenerations.size() == growthRange && (((double)fitnessOfGenerations.getLast() - (double)fitnessOfGenerations.getFirst())/(double)fitnessOfGenerations.getFirst()) < growthRateThreshold) {
+//        	// increase mutation rate
+//        	System.out.println("Increasing mutation rate:");
+//        	System.out.print("Old mutation rate: " + this.mutationRate);
+//        	increaseMutationRate();		     
+//        	System.out.println("New mutation rate: " + this.mutationRate);
+//        } 
     	// keep using genetic algorithm
         	
     	if (elitism)
@@ -189,7 +189,7 @@ public class GeneticAlgorithm {
     }
     
     public void increaseMutationRate() {
-    	this.mutationRate = this.mutationRate * 1.5;
+    	this.mutationRate = this.mutationRate * 1.15;
     }
     
     public void decreaseMutationRate() {
@@ -200,17 +200,19 @@ public class GeneticAlgorithm {
         int noWeights = Features.getNumberOfWeights();
         double maxWeight = 5;
         int populationSize = 50;
-        int noGenerations = 30;
+        int noGenerations = 50;
 
         double crossoverRate = 0.7;
-        double mutationRate = 0.005;
+        double mutationRate = 0.05;
         int tournamentSize = 5;
         boolean elitism = true;
-        double growthRateThreshold = 0.9;
+        double growthRateThreshold = 0.2;
         int growthRange = 3;
         int psoIterations = 3;
 
-        for (int i=0; i<2; i++) {
+        System.out.println("Increasing mutation rate");
+        
+        for (int i=0; i<1; i++) {
         	GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism, growthRateThreshold, growthRange, psoIterations);
             //GeneticAlgorithm geneticAlgorithm = new GeneticAlgorithm(noWeights, maxWeight, populationSize, noGenerations, crossoverRate, mutationRate, tournamentSize, elitism);
             geneticAlgorithm.execute();

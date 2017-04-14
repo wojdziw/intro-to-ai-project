@@ -1,0 +1,127 @@
+Increasing mutation rate
+0 Time for iteration: 11s -- Fitness: 12 -- Growth rate: 0.0
+1(12r,11s), 1 Time for iteration: 7s -- Fitness: 45 -- Growth rate: 2.75
+2(45r,7s), 2 Time for iteration: 4s -- Fitness: 308 -- Growth rate: 24.666666666666668
+3(308r,4s), 3 Time for iteration: 9s -- Fitness: 478 -- Growth rate: 9.622222222222222
+4(478r,9s), 4 Time for iteration: 24s -- Fitness: 1608 -- Growth rate: 4.220779220779221
+5(1608r,24s), 5 Time for iteration: 39s -- Fitness: 2096 -- Growth rate: 3.3849372384937237
+6(2096r,39s), 6 Time for iteration: 85s -- Fitness: 3197 -- Growth rate: 0.9881840796019901
+7(3197r,85s), 7 Time for iteration: 114s -- Fitness: 3197 -- Growth rate: 0.5252862595419847
+8(3197r,114s), 8 Time for iteration: 113s -- Fitness: 3965 -- Growth rate: 0.2402252111354395
+9(3965r,113s), 9 Time for iteration: 111s -- Fitness: 3965 -- Growth rate: 0.2402252111354395
+10(3965r,111s), 10 Time for iteration: 145s -- Fitness: 4601 -- Growth rate: 0.16040353089533418
+11(4601r,145s), Increasing mutation rate:
+Old mutation rate: 0.005New mutation rate: 0.00575
+11 Time for iteration: 119s -- Fitness: 4601 -- Growth rate: 0.16040353089533418
+12(4601r,119s), Increasing mutation rate:
+Old mutation rate: 0.00575New mutation rate: 0.0066124999999999995
+12 Time for iteration: 138s -- Fitness: 4601 -- Growth rate: 0.0
+13(4601r,138s), Increasing mutation rate:
+Old mutation rate: 0.0066124999999999995New mutation rate: 0.007604374999999999
+13 Time for iteration: 170s -- Fitness: 5354 -- Growth rate: 0.16366007389697892
+14(5354r,170s), Increasing mutation rate:
+Old mutation rate: 0.007604374999999999New mutation rate: 0.008745031249999998
+14 Time for iteration: 166s -- Fitness: 5354 -- Growth rate: 0.16366007389697892
+15(5354r,166s), Increasing mutation rate:
+Old mutation rate: 0.008745031249999998New mutation rate: 0.010056785937499998
+15 Time for iteration: 149s -- Fitness: 5354 -- Growth rate: 0.0
+16(5354r,149s), Increasing mutation rate:
+Old mutation rate: 0.010056785937499998New mutation rate: 0.011565303828124996
+16 Time for iteration: 150s -- Fitness: 5354 -- Growth rate: 0.0
+17(5354r,150s), Increasing mutation rate:
+Old mutation rate: 0.011565303828124996New mutation rate: 0.013300099402343744
+17 Time for iteration: 110s -- Fitness: 5354 -- Growth rate: 0.0
+18(5354r,110s), Increasing mutation rate:
+Old mutation rate: 0.013300099402343744New mutation rate: 0.015295114312695306
+18 Time for iteration: 159s -- Fitness: 5354 -- Growth rate: 0.0
+19(5354r,159s), Increasing mutation rate:
+Old mutation rate: 0.015295114312695306New mutation rate: 0.0175893814595996
+19 Time for iteration: 159s -- Fitness: 5354 -- Growth rate: 0.0
+20(5354r,159s), Increasing mutation rate:
+Old mutation rate: 0.0175893814595996New mutation rate: 0.020227788678539537
+20 Time for iteration: 158s -- Fitness: 5354 -- Growth rate: 0.0
+21(5354r,158s), Increasing mutation rate:
+Old mutation rate: 0.020227788678539537New mutation rate: 0.023261956980320467
+21 Time for iteration: 132s -- Fitness: 5354 -- Growth rate: 0.0
+22(5354r,132s), Increasing mutation rate:
+Old mutation rate: 0.023261956980320467New mutation rate: 0.026751250527368535
+22 Time for iteration: 139s -- Fitness: 5354 -- Growth rate: 0.0
+23(5354r,139s), Increasing mutation rate:
+Old mutation rate: 0.026751250527368535New mutation rate: 0.030763938106473813
+23 Time for iteration: 89s -- Fitness: 5354 -- Growth rate: 0.0
+24(5354r,89s), Increasing mutation rate:
+Old mutation rate: 0.030763938106473813New mutation rate: 0.03537852882244488
+24 Time for iteration: 162s -- Fitness: 10628 -- Growth rate: 0.9850579006350392
+25(10628r,162s), 25 Time for iteration: 180s -- Fitness: 12017 -- Growth rate: 1.2444901008591707
+26(12017r,180s), 26 Time for iteration: 281s -- Fitness: 12017 -- Growth rate: 0.13069251035001883
+27(12017r,281s), Increasing mutation rate:
+Old mutation rate: 0.03537852882244488New mutation rate: 0.04068530814581161
+27 Time for iteration: 259s -- Fitness: 12017 -- Growth rate: 0.0
+28(12017r,259s), Increasing mutation rate:
+Old mutation rate: 0.04068530814581161New mutation rate: 0.046788104367683346
+28 Time for iteration: 143s -- Fitness: 14740 -- Growth rate: 0.22659565615378213
+29(14740r,143s), 29 
+Generation: 30 Fittest: 14740
+0: 1.70 1: -7.44 2: -15.46 3: -1.76 4: -2.95 5: -0.35 6: -0.85 7: -1.55 8: -1.52 9: -2.92 10: -1.60 11: -1.66 12: -0.85 13: -2.69 
+Time for iteration: 292s -- Fitness: 14740 -- Growth rate: 0.22659565615378213
+30(14740r,292s), 
+Generation: 30 Fittest: 14740
+0: 1.70 1: -7.44 2: -15.46 3: -1.76 4: -2.95 5: -0.35 6: -0.85 7: -1.55 8: -1.52 9: -2.92 10: -1.60 11: -1.66 12: -0.85 13: -2.69 
+------------------------------------------------
+0 Time for iteration: 8s -- Fitness: 15 -- Growth rate: 0.0
+1(15r,8s), 1 Time for iteration: 7s -- Fitness: 25 -- Growth rate: 0.6666666666666666
+2(25r,7s), 2 Time for iteration: 2s -- Fitness: 44 -- Growth rate: 1.9333333333333333
+3(44r,2s), 3 Time for iteration: 5s -- Fitness: 366 -- Growth rate: 13.64
+4(366r,5s), 4 Time for iteration: 12s -- Fitness: 659 -- Growth rate: 13.977272727272727
+5(659r,12s), 5 Time for iteration: 23s -- Fitness: 851 -- Growth rate: 1.325136612021858
+6(851r,23s), 6 Time for iteration: 30s -- Fitness: 1806 -- Growth rate: 1.74051593323217
+7(1806r,30s), 7 Time for iteration: 40s -- Fitness: 2283 -- Growth rate: 1.6827262044653348
+8(2283r,40s), 8 Time for iteration: 54s -- Fitness: 3694 -- Growth rate: 1.0454042081949058
+9(3694r,54s), 9 Time for iteration: 67s -- Fitness: 3694 -- Growth rate: 0.6180464301357862
+10(3694r,67s), 10 Time for iteration: 66s -- Fitness: 3694 -- Growth rate: 0.0
+11(3694r,66s), Increasing mutation rate:
+Old mutation rate: 0.005New mutation rate: 0.00575
+11 Time for iteration: 68s -- Fitness: 3694 -- Growth rate: 0.0
+12(3694r,68s), Increasing mutation rate:
+Old mutation rate: 0.00575New mutation rate: 0.0066124999999999995
+12 Time for iteration: 115s -- Fitness: 3694 -- Growth rate: 0.0
+13(3694r,115s), Increasing mutation rate:
+Old mutation rate: 0.0066124999999999995New mutation rate: 0.007604374999999999
+13 Time for iteration: 129s -- Fitness: 3694 -- Growth rate: 0.0
+14(3694r,129s), Increasing mutation rate:
+Old mutation rate: 0.007604374999999999New mutation rate: 0.008745031249999998
+14 Time for iteration: 129s -- Fitness: 3694 -- Growth rate: 0.0
+15(3694r,129s), Increasing mutation rate:
+Old mutation rate: 0.008745031249999998New mutation rate: 0.010056785937499998
+15 Time for iteration: 115s -- Fitness: 4673 -- Growth rate: 0.26502436383324307
+16(4673r,115s), 16 Time for iteration: 133s -- Fitness: 4673 -- Growth rate: 0.26502436383324307
+17(4673r,133s), 17 Time for iteration: 109s -- Fitness: 4673 -- Growth rate: 0.0
+18(4673r,109s), Increasing mutation rate:
+Old mutation rate: 0.010056785937499998New mutation rate: 0.011565303828124996
+18 Time for iteration: 83s -- Fitness: 4673 -- Growth rate: 0.0
+19(4673r,83s), Increasing mutation rate:
+Old mutation rate: 0.011565303828124996New mutation rate: 0.013300099402343744
+19 Time for iteration: 122s -- Fitness: 4673 -- Growth rate: 0.0
+20(4673r,122s), Increasing mutation rate:
+Old mutation rate: 0.013300099402343744New mutation rate: 0.015295114312695306
+20 Time for iteration: 146s -- Fitness: 5425 -- Growth rate: 0.16092445966188743
+21(5425r,146s), Increasing mutation rate:
+Old mutation rate: 0.015295114312695306New mutation rate: 0.0175893814595996
+21 Time for iteration: 159s -- Fitness: 6132 -- Growth rate: 0.31221913117911404
+22(6132r,159s), 22 Time for iteration: 229s -- Fitness: 8419 -- Growth rate: 0.551889400921659
+23(8419r,229s), 23 Time for iteration: 185s -- Fitness: 14353 -- Growth rate: 1.340671885192433
+24(14353r,185s), 24 Time for iteration: 358s -- Fitness: 17075 -- Growth rate: 1.0281506117116046
+25(17075r,358s), 25 Time for iteration: 473s -- Fitness: 17969 -- Growth rate: 0.25193339371559953
+26(17969r,473s), 26 Time for iteration: 526s -- Fitness: 17969 -- Growth rate: 0.05235724743777453
+27(17969r,526s), Increasing mutation rate:
+Old mutation rate: 0.0175893814595996New mutation rate: 0.020227788678539537
+27 Time for iteration: 657s -- Fitness: 25877 -- Growth rate: 0.44009126829539763
+28(25877r,657s), 28 Time for iteration: 534s -- Fitness: 25877 -- Growth rate: 0.44009126829539763
+29(25877r,534s), 29 
+Generation: 30 Fittest: 25877
+0: 9.95 1: -8.45 2: -14.60 3: 2.35 4: -3.81 5: -2.23 6: -2.26 7: -3.27 8: -3.46 9: -1.37 10: -2.67 11: -2.26 12: -3.39 13: -2.68 
+Time for iteration: 524s -- Fitness: 25877 -- Growth rate: 0.0
+30(25877r,524s), 
+Generation: 30 Fittest: 25877
+0: 9.95 1: -8.45 2: -14.60 3: 2.35 4: -3.81 5: -2.23 6: -2.26 7: -3.27 8: -3.46 9: -1.37 10: -2.67 11: -2.26 12: -3.39 13: -2.68 
+------------------------------------------------

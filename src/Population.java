@@ -11,11 +11,14 @@ public class Population {
     public Population(int populationSize, boolean initialise, int noFeatures, double maxWeight) {
         individuals = new Individual[populationSize];
 
+        double[] weights = {-3.78, -9.39, -6.00, 0.65, -2.19, -2.43, -1.68, -2.25, -2.02, -3.27, -2.07, -3.13, -1.65, -2.73 };
+        
         if (initialise)
             for (int i=0; i<size(); i++) {
-                Individual newIndividual = new Individual(noFeatures, maxWeight);
+                Individual newIndividual = new Individual(noFeatures, maxWeight, weights);
                 setIndividual(i, newIndividual);
             }
+        
     }
 
     // A set of genes can be fit when testing, but not when it's actually used because the blocks are random as well
